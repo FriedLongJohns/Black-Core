@@ -64,3 +64,29 @@ def filePrint(text,file="output.txt"):
         else:
             fl.write(pre+"\n"+str(text))
             fl.close()
+
+def digDex(thing,path):
+    if type(thing) == string or len(path)==0:
+        return thing
+    try:
+        return digDex(thing[path[0]],path[1:])
+    except:
+        return thing
+
+def map(lst,depth=False):
+    out = []
+    deep = 0
+    for item in lst:
+        if type(item)==list:
+            ret = map(item,depth=depth)
+            out.append(ret[0])
+            if depth:
+                deep+=ret[1]
+        else:
+            deep = 1
+            out.append(item)
+    
+    if depth:
+        return [out,deep]
+        
+    return [out]
