@@ -59,6 +59,7 @@ class Unit:
     
     def move(pos,cursedGrid):
         cursedGrid.cellSwap(self.pos,pos)
+        self.pos = pos
         self.wait_time = self.act_time
     
     def attack(enemy,weapon):

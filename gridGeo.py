@@ -1,5 +1,5 @@
 import time as t
-from gridHelpers import *
+from helpers import *
 
 def circleGrid(radius,start_coords=[0,0],bordersOnly=False):
     assert type(radius)==int and -1<radius<101 #stored squares only go from 0-100
