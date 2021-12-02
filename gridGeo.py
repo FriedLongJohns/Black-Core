@@ -118,7 +118,6 @@ def pathGrid(steps,canGoFunc,grid,startPos):
     dupe = grid
 
     while len(options)!=0:
-
         curr = options[0]
 
         if curr[2]>0:
@@ -130,7 +129,6 @@ def pathGrid(steps,canGoFunc,grid,startPos):
                     continue
 
                 cell = dupe[chk[1]][chk[0]]
-
                 if not chk[:-1] in moves and canGoFunc(cell):
                     moves.append(chk[:-1])
                     options.append(chk)
@@ -146,6 +144,16 @@ def rayCircle(startPos,grid,radius,checkFunc,method="stop",diags=True):
         points+=rayCast([startPos,end],checkFunc=checkFunc,diags=diags,method=method)
 
     return points
+
+def tryPathFind(steps,canGoFunc,grid,startPos,endPos):#horribly slow, DEFINETLY can be optimized.
+    poss = pathGrid(steps,canGoFunc,grid,startPos)
+    least=999999
+    ls=startPos
+    for pos in poss:
+        if dist(endPos,pos) < least:
+            least = dist(endPos,pos)
+            ls=pos
+    return ls
 
 def dist(pos1,pos2):
     return sqrt(square[abs(pos1[0]-pos2[0])],square[abs(pos1[1]-pos2[1])])

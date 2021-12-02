@@ -59,7 +59,7 @@ def filePrint(text,file="output.txt"):
         pre=s.read()
     with open(file,"w") as fl:
         if type(text) == list:
-            fl.write(pre+"\n"+" ".join([str(e) for e in text]))
+            fl.write(pre+"\n"+", ".join([str(e) for e in text]))
             fl.close()
         else:
             fl.write(pre+"\n"+str(text))
@@ -73,20 +73,24 @@ def digDex(thing,path):
     except:
         return thing
 
-def map(lst,depth=False):
+def mapl(lst,depth=False):
     out = []
     deep = 0
+    if type(lst)!=list:
+        return lst
     for item in lst:
         if type(item)==list:
-            ret = map(item,depth=depth)
-            out.append(ret[0])
+            ret = mapl(item,depth=depth)
             if depth:
+                out.append(ret[0])
                 deep+=ret[1]
+            else:
+                out.append(ret)
         else:
             deep = 1
             out.append(item)
-    
+
     if depth:
         return [out,deep]
-        
-    return [out]
+
+    return out

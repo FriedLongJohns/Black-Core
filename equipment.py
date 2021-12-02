@@ -48,7 +48,7 @@ ARMORS = {
         "damage_multiplier": 1.1,
     },
     "Fiber Skeletals": {
-        "hp": 10,
+        "hp": -5,
         "act_time_multiplier": 1,
         "damage_multiplier": .9,
     },
@@ -58,8 +58,3 @@ ARMORS = {
         "damage_multiplier": .8,
     }
 }
-
-
-
-
-
