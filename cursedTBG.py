@@ -2,6 +2,7 @@ from gridView import *
 from gridClasses import *
 from equipment import *
 from gridGeo import *
+from time import sleep
 
 if __name__ == "__main__":
     filePrint("______NEW______")
@@ -23,7 +24,8 @@ if __name__ == "__main__":
         camsize=(10,10)
         cam = cursedcam(camsize,stdscr,cg)
         from random import randint
-        for cell in [[randint(0,29),randint(0,29)] for i in range(200)]:
+        za = [[1,1],[1,0],[1,2],[0,4],[1,4]]
+        for cell in za:
             cg.grid[cell[1]][cell[0]][0]="#"
 
         cg.rollText("started")
@@ -41,6 +43,7 @@ if __name__ == "__main__":
             if gc[0]==".":
                 return True
             return False
+        units=[player]
 
         block = ClassCell([3,3],"terrain",health=1000,name="Jonesy")
 
@@ -84,6 +87,8 @@ if __name__ == "__main__":
             if state==0:
                 if key=="m":
                     state=1
+                    time=player.act_time
+                    player.wait_time=player.act_time
                 # elif key=="1":
                 #     state=2
                 # elif key=="2":
@@ -122,5 +127,7 @@ if __name__ == "__main__":
 
             cam.push_view()
             cg.push_text()
+
+            cg.rollText("")
 
     curses.wrapper(main)
