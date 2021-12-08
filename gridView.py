@@ -9,17 +9,13 @@ def gf(cell):
 #END CUSTOMS
 
 class cursedgrid():
-    def __init__(self,size,screen,textSize=5,defaultCell=" ",defaultColor=1,resize=True):#textboxes[height,height,height]
+    def __init__(self,crdRang,screen,defaultCell=" ",defaultColor=1):
         #speed vars
-        self.gridSize=size
-        self.screenSize=[size[0]*2+2,size[1]+1]
-        self.textbox={"size":textSize,"text":[" " for j in range(textSize)]}
-        self.textSize=textSize
+        self.range=crdRang
+        self.gridSize=[crdRang[1][0]-crdRang[0][0],crdRang[1][1]-crdRang[0][1]]
+        self.bigSize=[self.gridSize[0]*2+2,self.gridSize[1]+1]
         self.defColor=defaultColor
         self.defCell=defaultCell
-
-        if resize:
-            screen.resize(self.screenSize[1]+self.textSize,self.screenSize[0])
 
         self.grid = [[[mapl(defaultCell),defaultColor] for j in range(self.gridSize[0]+1)] for i in range(self.gridSize[1]+1)]
         self.scr=screen
@@ -27,28 +23,25 @@ class cursedgrid():
     def __str__(self):
         return "\n".join([str(i) for i in self.grid])
 
-    def initScr(size,screen,defaultCell=[" ",1],resize=False):
+    def initScr(self,crdRang,screen,defaultCell=" ",defaultColor=1):
         #speed vars
+        self.rang=crdRang
+        self.bigSize=[crdRang[1][0]-crdRang[0][0]+1,crdRang[1][1]-crdRang[0][1]+1]
+        self.gridSize=[int(self.gridSize[0]/2)+self.gridSize[0]%2,self.gridSize[1]]
+        self.defColor=defaultColor
         self.defCell=defaultCell
-        self.gridSize=size
-        self.screenSize=[size[0]*2+2,size[1]+1]
-        self.textbox={"size":textSize,"text":[" " for j in range(textSize)]}
-        self.textSize=textSize
-
-        if resize:
-            screen.resize(self.screenSize[1]+self.textSize,self.screenSize[0])
 
         self.grid = [[[mapl(defaultCell),defaultColor] for j in range(self.gridSize[0]+1)] for i in range(self.gridSize[1]+1)]
         self.scr=screen
 
-    def repRange(self,borders,clearCell="˜¨¬¬"):#˜¨¬¬ is null but holding option down >:)
+    def repRange(self,rang,clearCell="˜¨¬¬"):#˜¨¬¬ is null but holding option down >:)
         repCell=clearCell
 
         if clearCell=="˜¨¬¬":
             repCell=self.defCell
 
-        for x in range(borders[0][0],borders[1][0]+1):
-            for y in range(borders[0][1],borders[1][1]+1):
+        for x in range(rang[0][0],rang[1][0]+1):
+            for y in range(rang[0][1],rang[1][1]+1):
                 self.grid[y][x]=repCell
 
     def cellSwap(self,poso,post,way=0):#ways: 0-all 1-no color 2-only colors
@@ -63,30 +56,13 @@ class cursedgrid():
             self.grid[poso[1]][poso[0]][1] = self.grid[post[1]][post[0]][1]
             self.grid[post[1]][post[0]][1] = temp[1]
 
-
-    def rollText(self,text):
-        self.textbox["text"].append(str(text))
-        if len(self.textbox["text"])>self.textbox["size"]:
-            del self.textbox["text"][0]
-
-    def push_text(self,getFunc=gf):
-        for i in range(self.screenSize[1],self.screenSize[1]+self.textSize-1):
-            index=i-self.screenSize[1]+1
-            if index<self.textbox["size"]:
-                text = self.textbox["text"][index]
-                self.scr.addstr(i,0," "+forcefit(text,self.screenSize[0]-1,pos="r"))
-            else:
-                self.scr.addstr(i,0," "+forcefit("",self.screenSize[0]-1,pos="r"))
-        self.scr.refresh()
-
-    def push_grid(self,getFunc=gf):
-        for y in range(self.screenSize[1]):
-            for x in range(self.screenSize[0]):
+    def push(self,getFunc=gf):
+        for y in range(self.gridSize[1]):
+            for x in range(self.gridSize[0]):
                 self.scr.addch(y,x," ")
                 if x%2==0:
                     cell = self.grid[y][x//2]
                     self.scr.addch(y,x,getFunc(cell[0]),curses.color_pair(cell[1]))
-        self.scr.refresh()
 
 class cursedcam():
     def __init__(self,viewSize,screen,cgrid,viewportOffset=[0,0],pos=[0,0]):
@@ -102,7 +78,7 @@ class cursedcam():
         self.colclears=[]
         self.celclears=[]
 
-    def push_view(self,getFunc=gf):
+    def push(self,getFunc=gf):
         for y in range(self.pos[1],self.pos[1]+self.viewSize[1]):
             for x in range(self.pos[0],self.pos[0]+self.viewSize[0]):
                 if -1<y<len(self.grid) and -1<x<len(self.grid[0]):
@@ -115,3 +91,28 @@ class cursedcam():
                 else:
                     self.scr.addch(y-self.pos[1]+self.viewportOffset[1],(x-self.pos[0]+self.viewportOffset[0])*2," ")
         self.colclears=[]
+
+class cursedtext():
+    def __init__(self,posrang,screen,text=[],rolling=True):
+        self.rang=posrang
+        self.size=[posrang[1][0]-posrang[0][0]+1,posrang[1][1]-posrang[0][1]+1]
+        self.rolling=rolling
+        self.text=text
+        self.scref=screen
+        if not rolling and text==[]:
+            self.text=[""*self.size[0] for i in range(self.size[1])]
+
+    def addText(self,text):
+        self.text.append(str(text))
+        if len(self.text)>self.size[1]:
+            del self.text[0]
+
+    def push(self):
+        
+        for i in range(self.rang[1][0],self.rang[1][1]+1):
+            index=i-self.rang[1][0]
+            if index<len(self.text):
+                text = self.text[index]
+                self.scref.addstr(i,self.rang[0][0]," "+forcefit(self.text[index],self.size[0],pos="r"))
+            else:
+                self.scref.addstr(i,self.rang[0][0]," "+forcefit("",self.size[0],pos="r"))

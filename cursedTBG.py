@@ -20,22 +20,23 @@ if __name__ == "__main__":
         curses.curs_set(0)# Hide the cursor
         stdscr.keypad(True)#make arrow keys not be escape sequences
 
-        cg = cursedgrid([30,30],stdscr,defaultCell=".")
+        stdscr.resize(100,100)
+        cg = cursedgrid([[0,0],[50,50]],stdscr,defaultCell=".")
         camsize=(10,10)
         cam = cursedcam(camsize,stdscr,cg)
-        from random import randint
+        tex=cursedtext([[0,51],[50,61]],stdscr,rolling=True)
+
+        # filePrint(cg.grid)
+
         za = [[1,1],[1,0],[1,2],[0,4],[1,4]]
         for cell in za:
             cg.grid[cell[1]][cell[0]][0]="#"
 
-        cg.rollText("started")
+        tex.addText("started")
 
         cursorPos = [0,0]
         def wcp():
             return [cam.pos[0]+cursorPos[0],cam.pos[1]+cursorPos[1]]
-
-        cam.push_view()
-        cg.push_text()
 
         player = Unit([0,0],"Talus",["Hammer","Burst Rifle"],"Fiber Skeletals",kind="player",gridSize=[30,30])
         def cangf(gc):
@@ -43,23 +44,28 @@ if __name__ == "__main__":
             if gc[0]==".":
                 return True
             return False
+        def canff(gc):
+            # filePrint(gc)
+            if gc[0] in "#":
+                return False
+            return True
+        def getwt(unit):
+            return unit.wait_time
         units=[player]
 
         block = ClassCell([3,3],"terrain",health=1000,name="Jonesy")
 
-        #[filePrint(str(i)+": "+str(getattr(player,i))) for i in dir(player)]
-
         time=0
-        state=0#0: selecting 1: moving 2: shooting
+        state=0#0: selecting 1: moving 2: shooting first weapon 3: shooting second weapon
         okays=[]
-        #__init__(self,coords,frame,weapons,armor,kind="enemy",gridSize=[99999,99999]):
 
         #initial render
         cg.grid[player.pos[1]][player.pos[0]][0]="o"
         cam.celclears.append(player.pos)
 
-        cam.push_view()
-        cg.push_text()
+        cam.push()
+        # cg.push()
+        tex.push()
 
         while True:
             # Wait for a keystroke before doing anything
@@ -87,19 +93,31 @@ if __name__ == "__main__":
             if state==0:
                 if key=="m":
                     state=1
-                    time=player.act_time
-                    player.wait_time=player.act_time
-                # elif key=="1":
-                #     state=2
-                # elif key=="2":
-                #     state=2
+                elif key=="1":
+                    state=2
+                elif key=="2":
+                    state=3
 
-            if state==1 and key=="\n":
+            tex.addText("state: {} cursorPos: {}".format(state,wcp()))
+
+            if key=="\n" and state!=0:
                 cusp=wcp()
-                if cusp!=player.pos and cusp in okays:
+                if cusp in okays:
+                    if state==1:
+                        time=player.act_time
+                        player.wait_time=time
+                        player.pos=cusp
+                    elif state==2:
+                        time=player.wps[0][2]#the use time of the weapon is autocalculated already
+                        player.wait_time=time
+                    elif state==3:
+                        time=player.wps[1][2]#the use time of the weapon is autocalculated already
+                        player.wait_time=time
                     state=0
                     okays=[]
-                    player.pos=cusp
+
+                    tex.addText("did action, taking {} time".format(str(time)))
+
 
             if key =="q":
                 if state==0:
@@ -107,6 +125,17 @@ if __name__ == "__main__":
                 else:
                     state=0
 
+            #GAME CORE
+            if time!=0:
+                # cg.rollText("time passed: {}".format(time))
+                for un in units:
+                    un.wait_time-=time
+                    # if un.wait_time<=0 and un.kind!="player":
+                    #     #do ai stuff
+                time=0
+
+
+            #EFFECTS
             #colors
             if state==1:
                 for p in pathGrid(player.move_max,cangf,cg.grid,player.pos):
@@ -116,18 +145,25 @@ if __name__ == "__main__":
                 pos = wcp()
                 cg.grid[pos[1]][pos[0]][1]=4
                 cam.colclears.append(pos)
-            # if state==2:
-            #     pos = wcp()
-            #     cg.grid[pos[1]][pos[0]][1]=3
-            #     cam.colclears.append(pos)
+
+            elif state in [2,3]:
+                filePrint(player.wps[0][1]["range"])
+                for p in rayCircle(player.pos,player.wps[0][1]["range"],cg.grid,canff):
+                    okays.append(p)
+                    cg.grid[p[1]][p[0]][1]=5
+                    cam.colclears.append(p)
+                pos = wcp()
+                cg.grid[pos[1]][pos[0]][1]=3
+                cam.colclears.append(pos)
 
             #objects
             cg.grid[player.pos[1]][player.pos[0]][0]="o"
             cam.celclears.append(player.pos)
 
-            cam.push_view()
-            cg.push_text()
+            cam.push()
+            # cg.push()
+            tex.push()
 
-            cg.rollText("")
+            stdscr.refresh()
 
     curses.wrapper(main)

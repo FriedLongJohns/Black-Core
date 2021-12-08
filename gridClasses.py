@@ -62,6 +62,8 @@ class Unit:
         self.pos = pos
         self.wait_time = self.act_time
 
+    # def aiDynamicMove(player=None)
+
     def attack(enemy,weapon):
         assert weapon in [i[0] for i in self.wps]
         chosen = 0
