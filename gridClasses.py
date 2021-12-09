@@ -5,10 +5,8 @@ gridJects = []
 # dex = [re.compile("\{name\}"),re.compile("\{pos\}"),re.compile("\{kind\}"),re.compile("\{health\}")]
 
 class ClassCell:
-    def __init__(self,coords,kind,health=-1,gridSize=[99999,99999],name=""):
+    def __init__(self,coords,kind,health=-1,name=""):
         assert kind in ["terrain","enemy","player","ignoreKind"]
-        assert -1<coords[0]<gridSize[0]
-        assert -1<coords[1]<gridSize[1]
         self.pos = coords
         self.health = health
         self.kind = kind
@@ -26,10 +24,8 @@ class ClassCell:
         return mess
 
 class Unit:
-    def __init__(self,coords,frame,weapons,armor,kind="enemy",gridSize=[99999,99999]):
+    def __init__(self,coords,frame,weapons,armor,kind="enemy"):
         assert kind in ["enemy","player","ignoreKind"]
-        assert -1<coords[0]<gridSize[0]
-        assert -1<coords[1]<gridSize[1]
 
         assert frame in FRAMES
         assert armor in ARMORS
@@ -56,11 +52,6 @@ class Unit:
             self.name+=str(hash(frame+armor+str(coords)))
 
         gridJects.append(self)
-
-    def move(pos,cursedGrid):
-        cursedGrid.cellSwap(self.pos,pos)
-        self.pos = pos
-        self.wait_time = self.act_time
 
     # def aiDynamicMove(player=None)
 

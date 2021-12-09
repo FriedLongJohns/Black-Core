@@ -1,177 +1,2667 @@
 
 ______NEW______
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+______NEW______
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+______NEW______
+______NEW______
+______NEW______
+______NEW______
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+______NEW______
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+______NEW______
+______NEW______
+______NEW______
+______NEW______
+______NEW______
+______NEW______
+______NEW______
+______NEW______
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+______NEW______
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+______NEW______
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+______NEW______
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+______NEW______
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+______NEW______
+______NEW______
+______NEW______
+______NEW______
+______NEW______
+______NEW______
+______NEW______
+______NEW______
+______NEW______
+______NEW______
+______NEW______
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+______NEW______
+______NEW______
+______NEW______
+______NEW______
 ______NEW______
 started
-started, state: 0 cursorPos: [1, 0]
+0, True
+1, False
+2, False
+3, False
+4, False
+5, False
+last turn time: .0s, , , , , , , , , , 
+0, True
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+last turn time: .0s, , , , , , , , , , 
+0, True
+started, state: 2 cursorPos: [0, 0], 2
+0, True
+1, True
+2, True
+3, False
+4, False
+5, False
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+last turn time: .0s, , , , , , , , , , 
+0, True
+started, state: 2 cursorPos: [0, 0], 2, state: 2 cursorPos: [0, 1], 2
+0, True
+1, True
+2, True
+3, True
+4, True
+5, False
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+last turn time: .0s, , , , , , , , , , 
+0, True
+state: 2 cursorPos: [0, 0], 2, state: 2 cursorPos: [0, 1], 2, state: 2 cursorPos: [0, 2], 2
+0, True
+1, True
+2, True
+3, True
+4, True
+5, True
+last turn time: .3.0s, , , , , , , , , , 
+0, True
+state: 2 cursorPos: [0, 1], 2, state: 2 cursorPos: [0, 2], 2, state: 2 cursorPos: [0, 2], did action, taking 3.0 time
+0, True
+1, True
+2, True
+3, True
+4, True
+5, True
+______NEW______
+started
+30, 0, True
+31, 1, False
+32, 2, False
+33, 3, False
+34, 4, False
+35, 5, False
+last turn time: .0s, , , , , , , , , , 
+40, 0, True
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+last turn time: .0s, , , , , , , , , , 
+40, 0, True
+started, state: 2 cursorPos: [0, 0], 2
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, False
+34, 4, False
+35, 5, False
+______NEW______
+started
+last turn time: .0s, , , , , , , , , , 
+40, 0, True
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+last turn time: .0s, , , , , , , , , , 
+40, 0, True
+started, state: 2 cursorPos: [0, 0], 2
+______NEW______
+[0, 20], [30, 25]
+[11, 30], [40, 40]
+40, 0, True
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+[11, 30], [40, 40]
+40, 0, True
+[0, 20], [30, 25]
+______NEW______
+[0, 20], [30, 25]
+30, 0, True
+31, 1, False
+32, 2, False
+33, 3, False
+34, 4, False
+35, 5, False
+[11, 30], [40, 40]
+40, 0, True
+41, 1, True
+42, 2, True
+43, 3, True
+44, 4, True
+45, 5, True
+46, 6, True
+47, 7, True
+48, 8, True
+49, 9, True
+50, 10, True
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+[11, 30], [40, 40]
+40, 0, True
+41, 1, True
+42, 2, True
+43, 3, True
+44, 4, True
+45, 5, True
+46, 6, True
+47, 7, True
+48, 8, True
+49, 9, True
+50, 10, True
+[0, 20], [30, 25]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, False
+34, 4, False
+35, 5, False
+______NEW______
+[0, 20], [30, 25]
+30, 0, True
+31, 1, False
+32, 2, False
+33, 3, False
+34, 4, False
+35, 5, False
+[11, 30], [40, 40]
+40, 0, True
+41, 1, True
+42, 2, True
+43, 3, True
+44, 4, True
+45, 5, True
+46, 6, True
+47, 7, True
+48, 8, True
+49, 9, True
+50, 10, True
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+[11, 30], [40, 40]
+40, 0, True
+41, 1, True
+42, 2, True
+43, 3, True
+44, 4, True
+45, 5, True
+46, 6, True
+47, 7, True
+48, 8, True
+49, 9, True
+50, 10, True
+[0, 20], [30, 25]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, False
+34, 4, False
+35, 5, False
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+[11, 30], [40, 40]
+40, 0, True
+41, 1, True
+42, 2, True
+43, 3, True
+44, 4, True
+45, 5, True
+46, 6, True
+47, 7, True
+48, 8, True
+49, 9, True
+50, 10, True
+[0, 20], [30, 25]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, False
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+[11, 30], [40, 40]
+40, 0, True
+41, 1, True
+42, 2, True
+43, 3, True
+44, 4, True
+45, 5, True
+46, 6, True
+47, 7, True
+48, 8, True
+49, 9, True
+50, 10, True
+[0, 20], [30, 25]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+______NEW______
+[0, 20], [30, 25]
+30, 0, True
+31, 1, False
+32, 2, False
+33, 3, False
+34, 4, False
+35, 5, False
+[11, 30], [40, 40]
+40, 0, True
+41, 1, True
+42, 2, True
+43, 3, True
+44, 4, True
+45, 5, True
+46, 6, True
+47, 7, True
+48, 8, True
+49, 9, True
+50, 10, True
+______NEW______
+[0, 20], [30, 25]
+[11, 30], [40, 40]
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+[11, 30], [40, 40]
+[0, 20], [30, 25]
+______NEW______
+[0, 20], [30, 25]
+20, -10, True
+______NEW______
+[0, 20], [30, 25]
+20, 0, True
+21, 1, False
+22, 2, False
+23, 3, False
+24, 4, False
+25, 5, False
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 20], [30, 25]
+20, 0, True
+21, 1, True
+22, 2, False
+23, 3, False
+24, 4, False
+25, 5, False
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 20], [30, 25]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, False
+24, 4, False
+25, 5, False
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 20], [30, 25]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, False
+25, 5, False
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 20], [30, 25]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, False
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 20], [30, 25]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 20], [30, 25]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 20], [30, 25]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 20], [30, 25]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 20], [30, 25]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 20], [30, 25]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+______NEW______
+[0, 11], [30, 20]
+11, 0, True
+12, 1, False
+13, 2, False
+14, 3, False
+15, 4, False
+16, 5, False
+17, 6, False
+18, 7, False
+19, 8, False
+20, 9, False
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 11], [30, 20]
+11, 0, True
+12, 1, True
+13, 2, False
+14, 3, False
+15, 4, False
+16, 5, False
+17, 6, False
+18, 7, False
+19, 8, False
+20, 9, False
+______NEW______
+[0, 10], [30, 20]
+10, 0, True
+11, 1, False
+12, 2, False
+13, 3, False
+14, 4, False
+15, 5, False
+16, 6, False
+17, 7, False
+18, 8, False
+19, 9, False
+20, 10, False
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 10], [30, 20]
+10, 0, True
+11, 1, True
+12, 2, False
+13, 3, False
+14, 4, False
+15, 5, False
+16, 6, False
+17, 7, False
+18, 8, False
+19, 9, False
+20, 10, False
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 10], [30, 20]
+10, 0, True
+11, 1, True
+12, 2, True
+13, 3, False
+14, 4, False
+15, 5, False
+16, 6, False
+17, 7, False
+18, 8, False
+19, 9, False
+20, 10, False
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 10], [30, 20]
+10, 0, True
+11, 1, True
+12, 2, True
+13, 3, True
+14, 4, False
+15, 5, False
+16, 6, False
+17, 7, False
+18, 8, False
+19, 9, False
+20, 10, False
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 10], [30, 20]
+10, 0, True
+11, 1, True
+12, 2, True
+13, 3, True
+14, 4, True
+15, 5, False
+16, 6, False
+17, 7, False
+18, 8, False
+19, 9, False
+20, 10, False
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 10], [30, 20]
+10, 0, True
+11, 1, True
+12, 2, True
+13, 3, True
+14, 4, True
+15, 5, True
+16, 6, False
+17, 7, False
+18, 8, False
+19, 9, False
+20, 10, False
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 10], [30, 20]
+10, 0, True
+11, 1, True
+12, 2, True
+13, 3, True
+14, 4, True
+15, 5, True
+16, 6, True
+17, 7, False
+18, 8, False
+19, 9, False
+20, 10, False
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 10], [30, 20]
+10, 0, True
+11, 1, True
+12, 2, True
+13, 3, True
+14, 4, True
+15, 5, True
+16, 6, True
+17, 7, True
+18, 8, False
+19, 9, False
+20, 10, False
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 10], [30, 20]
+10, 0, True
+11, 1, True
+12, 2, True
+13, 3, True
+14, 4, True
+15, 5, True
+16, 6, True
+17, 7, True
+18, 8, True
+19, 9, False
+20, 10, False
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 10], [30, 20]
+10, 0, True
+11, 1, True
+12, 2, True
+13, 3, True
+14, 4, True
+15, 5, True
+16, 6, True
+17, 7, True
+18, 8, True
+19, 9, True
+20, 10, False
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 10], [30, 20]
+10, 0, True
+11, 1, True
+12, 2, True
+13, 3, True
+14, 4, True
+15, 5, True
+16, 6, True
+17, 7, True
+18, 8, True
+19, 9, True
+20, 10, True
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 10], [30, 20]
+10, 0, True
+11, 1, True
+12, 2, True
+13, 3, True
+14, 4, True
+15, 5, True
+16, 6, True
+17, 7, True
+18, 8, True
+19, 9, True
+20, 10, True
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 10], [30, 20]
+10, 0, True
+11, 1, True
+12, 2, True
+13, 3, True
+14, 4, True
+15, 5, True
+16, 6, True
+17, 7, True
+18, 8, True
+19, 9, True
+20, 10, True
+______NEW______
+[0, 10], [30, 14]
+10, 0, True
+11, 1, False
+12, 2, False
+13, 3, False
+14, 4, False
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 10], [30, 14]
+10, 0, True
+11, 1, True
+12, 2, False
+13, 3, False
+14, 4, False
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 10], [30, 14]
+10, 0, True
+11, 1, True
+12, 2, True
+13, 3, False
+14, 4, False
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 10], [30, 14]
+10, 0, True
+11, 1, True
+12, 2, True
+13, 3, True
+14, 4, False
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 10], [30, 14]
+10, 0, True
+11, 1, True
+12, 2, True
+13, 3, True
+14, 4, True
+[11, 30], [40, 40]
+30, 0, True
+31, 1, True
+32, 2, True
+33, 3, True
+34, 4, True
+35, 5, True
+36, 6, True
+37, 7, True
+38, 8, True
+39, 9, True
+40, 10, True
+[0, 10], [30, 14]
+10, 0, True
+11, 1, True
+12, 2, True
+13, 3, True
+14, 4, True
+______NEW______
+[0, 10], [30, 14]
+10, 0, True
+11, 1, False
+12, 2, False
+13, 3, False
+14, 4, False
+[11, 0], [30, 11]
+0, 0, True
+1, 1, True
+2, 2, True
+3, 3, True
+4, 4, True
+5, 5, True
+6, 6, True
+7, 7, True
+8, 8, True
+9, 9, True
+10, 10, True
+11, 11, True
+______NEW______
+[0, 10], [30, 14]
+10, 0, True
+11, 1, False
+12, 2, False
+13, 3, False
+14, 4, False
+[21, 0], [30, 11]
+0, 0, True
+1, 1, True
+2, 2, True
+3, 3, True
+4, 4, True
+5, 5, True
+6, 6, True
+7, 7, True
+8, 8, True
+9, 9, True
+10, 10, True
+11, 11, True
+______NEW______
+[5, 16], [35, 19]
+16, 0, True
+17, 1, False
+18, 2, False
+19, 3, False
+[26, 5], [35, 16]
+5, 0, True
+6, 1, True
+7, 2, True
+8, 3, True
+9, 4, True
+10, 5, True
+11, 6, True
+12, 7, True
+13, 8, True
+14, 9, True
+15, 10, True
+16, 11, True
+______NEW______
+[5, 16], [35, 19]
+16, 0, True
+17, 1, False
+18, 2, False
+19, 3, False
+[26, 5], [35, 16]
+5, 0, True
+6, 1, True
+7, 2, True
+8, 3, True
+9, 4, True
+10, 5, True
+11, 6, True
+12, 7, True
+13, 8, True
+14, 9, True
+15, 10, True
+16, 11, True
+[26, 5], [35, 16]
+5, 0, True
+6, 1, True
+7, 2, True
+8, 3, True
+9, 4, True
+10, 5, True
+11, 6, True
+12, 7, True
+13, 8, True
+14, 9, True
+15, 10, True
+16, 11, True
+[5, 16], [35, 19]
+16, 0, True
+17, 1, True
+18, 2, False
+19, 3, False
+[26, 5], [35, 16]
+5, 0, True
+6, 1, True
+7, 2, True
+8, 3, True
+9, 4, True
+10, 5, True
+11, 6, True
+12, 7, True
+13, 8, True
+14, 9, True
+15, 10, True
+16, 11, True
+[5, 16], [35, 19]
+16, 0, True
+17, 1, True
+18, 2, True
+19, 3, False
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+[26, 5], [35, 16]
+5, 0, True
+6, 1, True
+7, 2, True
+8, 3, True
+9, 4, True
+10, 5, True
+11, 6, True
+12, 7, True
+13, 8, True
+14, 9, True
+15, 10, True
+16, 11, True
+[5, 16], [35, 19]
+16, 0, True
+17, 1, True
+18, 2, True
+19, 3, True
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+[26, 5], [35, 16]
+5, 0, True
+6, 1, True
+7, 2, True
+8, 3, True
+9, 4, True
+10, 5, True
+11, 6, True
+12, 7, True
+13, 8, True
+14, 9, True
+15, 10, True
+16, 11, True
+[5, 16], [35, 19]
+16, 0, True
+17, 1, True
+18, 2, True
+19, 3, True
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+[26, 5], [35, 16]
+5, 0, True
+6, 1, True
+7, 2, True
+8, 3, True
+9, 4, True
+10, 5, True
+11, 6, True
+12, 7, True
+13, 8, True
+14, 9, True
+15, 10, True
+16, 11, True
+[5, 16], [35, 19]
+16, 0, True
+17, 1, True
+18, 2, True
+19, 3, True
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+[26, 5], [35, 16]
+5, 0, True
+6, 1, True
+7, 2, True
+8, 3, True
+9, 4, True
+10, 5, True
+11, 6, True
+12, 7, True
+13, 8, True
+14, 9, True
+15, 10, True
+16, 11, True
+[5, 16], [35, 19]
+16, 0, True
+17, 1, True
+18, 2, True
+19, 3, True
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+[26, 5], [35, 16]
+5, 0, True
+6, 1, True
+7, 2, True
+8, 3, True
+9, 4, True
+10, 5, True
+11, 6, True
+12, 7, True
+13, 8, True
+14, 9, True
+15, 10, True
+16, 11, True
+[5, 16], [35, 19]
+16, 0, True
+17, 1, True
+18, 2, True
+19, 3, True
+[26, 5], [35, 16]
+5, 0, True
+6, 1, True
+7, 2, True
+8, 3, True
+9, 4, True
+10, 5, True
+11, 6, True
+12, 7, True
+13, 8, True
+14, 9, True
+15, 10, True
+16, 11, True
+[5, 16], [35, 19]
+16, 0, True
+17, 1, True
+18, 2, True
+19, 3, True
+______NEW______
+[5, 16], [35, 19]
+16, 0, True
+17, 1, False
+18, 2, False
+19, 3, False
+[26, 5], [35, 16]
+5, 0, True
+6, 1, True
+7, 2, True
+8, 3, True
+9, 4, True
+10, 5, True
+11, 6, True
+12, 7, True
+13, 8, True
+14, 9, True
+15, 10, True
+16, 11, True
+______NEW______
+[5, 13], [35, 16]
+13, 0, True
+14, 1, False
+15, 2, False
+16, 3, False
+[26, 2], [35, 13]
+2, 0, True
+3, 1, True
+4, 2, True
+5, 3, True
+6, 4, True
+7, 5, True
+8, 6, True
+9, 7, True
+10, 8, True
+11, 9, True
+12, 10, True
+13, 11, True
+______NEW______
+[10, 16], [40, 19]
+16, 0, True
+17, 1, False
+18, 2, False
+19, 3, False
+[31, 5], [40, 16]
+5, 0, True
+6, 1, True
+7, 2, True
+8, 3, True
+9, 4, True
+10, 5, True
+11, 6, True
+12, 7, True
+13, 8, True
+14, 9, True
+15, 10, True
+16, 11, True
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+[31, 5], [40, 16]
+5, 0, True
+6, 1, True
+7, 2, True
+8, 3, True
+9, 4, True
+10, 5, True
+11, 6, True
+12, 7, True
+13, 8, True
+14, 9, True
+15, 10, True
+16, 11, True
+[10, 16], [40, 19]
+16, 0, True
+17, 1, True
+18, 2, True
+19, 3, False
 ______NEW______
 ______NEW______
+[5, 16], [35, 19]
+16, 0, True
+17, 1, False
+18, 2, False
+19, 3, False
+[26, 5], [35, 16]
+5, 0, True
+6, 1, True
+7, 2, True
+8, 3, True
+9, 4, True
+10, 5, True
+11, 6, True
+12, 7, True
+13, 8, True
+14, 9, True
+15, 10, True
+16, 11, True
 ______NEW______
 ______NEW______
+[100, 61], [130, 64]
+61, 0, True
+62, 1, False
+63, 2, False
+64, 3, False
+[121, 50], [130, 61]
+50, 0, True
+51, 1, True
+52, 2, True
+53, 3, True
+54, 4, True
+55, 5, True
+56, 6, True
+57, 7, True
+58, 8, True
+59, 9, True
+60, 10, True
+61, 11, True
 ______NEW______
+[100, 21], [130, 24]
+21, 0, True
+22, 1, False
+23, 2, False
+24, 3, False
+[121, 10], [130, 21]
+10, 0, True
+11, 1, True
+12, 2, True
+13, 3, True
+14, 4, True
+15, 5, True
+16, 6, True
+17, 7, True
+18, 8, True
+19, 9, True
+20, 10, True
+21, 11, True
 ______NEW______
+[100, 31], [130, 34]
+31, 0, True
+32, 1, False
+33, 2, False
+34, 3, False
+[121, 20], [130, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+[121, 20], [130, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, False
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+[121, 20], [130, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+raycast vars: septs [[0, 0], [1, -1]] diffs [-1, 1] steps 1 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [2, 0]] diffs [0, 2] steps 2 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [-1, 1]] diffs [1, -1] steps 1 step [1.0, -1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [1, 1]] diffs [1, 1] steps 1 step [1.0, 1.0] method "check" dist -1
+raycast vars: septs [[0, 0], [0, 2]] diffs [2, 0] steps 2 step [1.0, 0.0] method "check" dist -1
+[121, 20], [130, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [130, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
 ______NEW______
+[100, 31], [130, 34]
+31, 0, True
+32, 1, False
+33, 2, False
+34, 3, False
+[121, 20], [130, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
 ______NEW______
+[100, 31], [130, 34]
+31, 0, True
+32, 1, False
+33, 2, False
+34, 3, False
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, False
+34, 3, False
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, False
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+raycast vars: septs [[2, 4], [4, -1]] diffs [-5, 2] steps 2 step [-2.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [5, 0]] diffs [-4, 3] steps 3 step [-1.3333333333333333, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 1]] diffs [-3, 2] steps 2 step [-1.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 2]] diffs [-2, 2] steps 2 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 3]] diffs [-1, 2] steps 2 step [-0.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [3, 4]] diffs [0, 1] steps 1 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [0, 5]] diffs [1, -2] steps 1 step [1.0, -2.0] method "check" dist -1
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+raycast vars: septs [[2, 4], [4, -1]] diffs [-5, 2] steps 2 step [-2.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [5, 0]] diffs [-4, 3] steps 3 step [-1.3333333333333333, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 1]] diffs [-3, 2] steps 2 step [-1.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 2]] diffs [-2, 2] steps 2 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 3]] diffs [-1, 2] steps 2 step [-0.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [3, 4]] diffs [0, 1] steps 1 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [0, 5]] diffs [1, -2] steps 1 step [1.0, -2.0] method "check" dist -1
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+raycast vars: septs [[2, 4], [4, -1]] diffs [-5, 2] steps 2 step [-2.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [5, 0]] diffs [-4, 3] steps 3 step [-1.3333333333333333, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 1]] diffs [-3, 2] steps 2 step [-1.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 2]] diffs [-2, 2] steps 2 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 3]] diffs [-1, 2] steps 2 step [-0.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [3, 4]] diffs [0, 1] steps 1 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [0, 5]] diffs [1, -2] steps 1 step [1.0, -2.0] method "check" dist -1
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+raycast vars: septs [[2, 4], [4, -1]] diffs [-5, 2] steps 2 step [-2.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [5, 0]] diffs [-4, 3] steps 3 step [-1.3333333333333333, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 1]] diffs [-3, 2] steps 2 step [-1.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 2]] diffs [-2, 2] steps 2 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 3]] diffs [-1, 2] steps 2 step [-0.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [3, 4]] diffs [0, 1] steps 1 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [0, 5]] diffs [1, -2] steps 1 step [1.0, -2.0] method "check" dist -1
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+raycast vars: septs [[2, 4], [4, -1]] diffs [-5, 2] steps 2 step [-2.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [5, 0]] diffs [-4, 3] steps 3 step [-1.3333333333333333, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 1]] diffs [-3, 2] steps 2 step [-1.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 2]] diffs [-2, 2] steps 2 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 3]] diffs [-1, 2] steps 2 step [-0.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [3, 4]] diffs [0, 1] steps 1 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [0, 5]] diffs [1, -2] steps 1 step [1.0, -2.0] method "check" dist -1
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+raycast vars: septs [[2, 4], [4, -1]] diffs [-5, 2] steps 2 step [-2.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [5, 0]] diffs [-4, 3] steps 3 step [-1.3333333333333333, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 1]] diffs [-3, 2] steps 2 step [-1.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 2]] diffs [-2, 2] steps 2 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 3]] diffs [-1, 2] steps 2 step [-0.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [3, 4]] diffs [0, 1] steps 1 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [0, 5]] diffs [1, -2] steps 1 step [1.0, -2.0] method "check" dist -1
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+raycast vars: septs [[2, 4], [4, -1]] diffs [-5, 2] steps 2 step [-2.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [5, 0]] diffs [-4, 3] steps 3 step [-1.3333333333333333, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 1]] diffs [-3, 2] steps 2 step [-1.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 2]] diffs [-2, 2] steps 2 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 3]] diffs [-1, 2] steps 2 step [-0.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [3, 4]] diffs [0, 1] steps 1 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [0, 5]] diffs [1, -2] steps 1 step [1.0, -2.0] method "check" dist -1
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+raycast vars: septs [[2, 4], [4, -1]] diffs [-5, 2] steps 2 step [-2.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [5, 0]] diffs [-4, 3] steps 3 step [-1.3333333333333333, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 1]] diffs [-3, 2] steps 2 step [-1.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 2]] diffs [-2, 2] steps 2 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 3]] diffs [-1, 2] steps 2 step [-0.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [3, 4]] diffs [0, 1] steps 1 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [0, 5]] diffs [1, -2] steps 1 step [1.0, -2.0] method "check" dist -1
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+raycast vars: septs [[2, 4], [4, -1]] diffs [-5, 2] steps 2 step [-2.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [5, 0]] diffs [-4, 3] steps 3 step [-1.3333333333333333, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 1]] diffs [-3, 2] steps 2 step [-1.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 2]] diffs [-2, 2] steps 2 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 3]] diffs [-1, 2] steps 2 step [-0.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [3, 4]] diffs [0, 1] steps 1 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [0, 5]] diffs [1, -2] steps 1 step [1.0, -2.0] method "check" dist -1
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+raycast vars: septs [[2, 4], [4, -1]] diffs [-5, 2] steps 2 step [-2.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [5, 0]] diffs [-4, 3] steps 3 step [-1.3333333333333333, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 1]] diffs [-3, 2] steps 2 step [-1.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 2]] diffs [-2, 2] steps 2 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 3]] diffs [-1, 2] steps 2 step [-0.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [3, 4]] diffs [0, 1] steps 1 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [0, 5]] diffs [1, -2] steps 1 step [1.0, -2.0] method "check" dist -1
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+raycast vars: septs [[2, 4], [4, -1]] diffs [-5, 2] steps 2 step [-2.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [5, 0]] diffs [-4, 3] steps 3 step [-1.3333333333333333, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 1]] diffs [-3, 2] steps 2 step [-1.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 2]] diffs [-2, 2] steps 2 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 3]] diffs [-1, 2] steps 2 step [-0.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [3, 4]] diffs [0, 1] steps 1 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [0, 5]] diffs [1, -2] steps 1 step [1.0, -2.0] method "check" dist -1
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+raycast vars: septs [[2, 4], [4, -1]] diffs [-5, 2] steps 2 step [-2.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [5, 0]] diffs [-4, 3] steps 3 step [-1.3333333333333333, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 1]] diffs [-3, 2] steps 2 step [-1.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 2]] diffs [-2, 2] steps 2 step [-1.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [4, 3]] diffs [-1, 2] steps 2 step [-0.5, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [3, 4]] diffs [0, 1] steps 1 step [0.0, 1.0] method "check" dist -1
+raycast vars: septs [[2, 4], [0, 5]] diffs [1, -2] steps 1 step [1.0, -2.0] method "check" dist -1
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
 ______NEW______
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-______NEW______
-______NEW______
-______NEW______
-______NEW______
-______NEW______
-______NEW______
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]
-______NEW______
-______NEW______
-2
-______NEW______
-2
-[-2, -2], [-1, -2], [0, -2], [1, -2], [2, -2], [-2, -1], [-1, -1], [0, -1], [1, -1], [2, -1], [-2, 0], [-1, 0], [0, 0], [1, 0], [2, 0], [3, 0], [-2, 1], [-1, 1], [0, 1], [1, 1], [2, 1], [-2, 2], [-1, 2], [0, 2], [1, 2], [2, 2], [0, 3]
-ooooooo
-oxxxxxo
-oooooxo
-ooooooo
-ooooooo
-ooooooo
-ooooooo
-
-______NEW______
-2
-______NEW______
-2
-[-2, -2], [-1, -2], [0, -2], [1, -2], [2, -2], [-2, -1], [-1, -1], [0, -1], [1, -1], [2, -1], [-2, 0], [-1, 0], [0, 0], [1, 0], [2, 0], [3, 0], [-2, 1], [-1, 1], [0, 1], [1, 1], [2, 1], [-2, 2], [-1, 2], [0, 2], [1, 2], [2, 2], [0, 3]
-______NEW______
-2
-(0, -2), (-1, -1), (0, -1), (1, -1), (-2, 0), (-1, 0), (0, 0), (1, 0), (2, 0), (-1, 1), (0, 1), (1, 1), (0, 2)
-
-______NEW______
-2
-[0, -2], [-1, -1], [0, -1], [1, -1], [-2, 0], [-1, 0], [0, 0], [1, 0], [2, 0], [-1, 1], [0, 1], [1, 1], [0, 2]
-______NEW______
-2
-bordersOnly!
-[0, -2], [-1, -1], [0, -1], [1, -1], [-2, 0], [-1, 0], [0, 0], [1, 0], [2, 0], [-1, 1], [0, 1], [1, 1], [0, 2]
-______NEW______
-2
-______NEW______
-2
-______NEW______
-2
-______NEW______
-2
-[0, 0], [-1, 1], [0, 1], [-2, 2], [-1, 2], [-1, 3], [0, 3], [0, 4]
-______NEW______
-2
-[0, 0], [-1, 1], [1, 1], [-2, 2], [2, 2], [-1, 3], [1, 3], [0, 4]
-
-2
-[0, 0], [-1, 1], [1, 1], [-2, 2], [2, 2], [-1, 3], [1, 3], [0, 4]
-
-2
-[0, 0], [-1, 1], [1, 1], [-2, 2], [2, 2], [-1, 3], [1, 3], [0, 4]
-
-2
-[0, 0], [-1, 1], [1, 1], [-2, 2], [2, 2], [-1, 3], [1, 3], [0, 4]
-
-2
-[0, 0], [-1, 1], [1, 1], [-2, 2], [2, 2], [-1, 3], [1, 3], [0, 4]
-
-2
-[0, 0], [-1, 1], [1, 1], [-2, 2], [2, 2], [-1, 3], [1, 3], [0, 4]
-
-2
-[0, 0], [-1, 1], [1, 1], [-2, 2], [2, 2], [-1, 3], [1, 3], [0, 4]
-
-2
-[0, 0], [-1, 1], [1, 1], [-2, 2], [2, 2], [-1, 3], [1, 3], [0, 4]
-
-2
-[0, 0], [-1, 1], [1, 1], [-2, 2], [2, 2], [-1, 3], [1, 3], [0, 4]
-
-2
-[0, 0], [-1, 1], [1, 1], [-2, 2], [2, 2], [-1, 3], [1, 3], [0, 4]
-
-2
-[0, 0], [-1, 1], [1, 1], [-2, 2], [2, 2], [-1, 3], [1, 3], [0, 4]
-
-2
-[0, 0], [-1, 1], [1, 1], [-2, 2], [2, 2], [-1, 3], [1, 3], [0, 4]
-
-2
-[0, 0], [-1, 1], [1, 1], [-2, 2], [2, 2], [-1, 3], [1, 3], [0, 4]
-
-______NEW______
-2
-2
-2
-______NEW______
-2
-(0, 0), (-1, 1), (1, 1), (-2, 2), (2, 2), (-1, 3), (1, 3), (0, 4)
-
-______NEW______
-2
-[0, 0], [-1, 1], [1, 1], [-2, 2], [2, 2], [-1, 3], [1, 3], [0, 4]
-
-______NEW______
-2
-
-
-
-
-
-
-
-[0, 0], [-1, 1], [1, 1], [-2, 2], [2, 2], [-1, 3], [1, 3], [0, 4]
-
-______NEW______
-2
-
-
-
-
-
-
-
-[0, 0], [-1, 1], [1, 1], [-2, 2], [2, 2], [-1, 3], [1, 3], [0, 4]
-
-2
-
-
-
-
-
-
-
-[0, 0], [-1, 1], [1, 1], [-2, 2], [2, 2], [-1, 3], [1, 3], [0, 4]
-
-2
-
-
-
-
-
-
-
-[0, 0], [-1, 1], [1, 1], [-2, 2], [2, 2], [-1, 3], [1, 3], [0, 4]
+[100, 31], [130, 34]
+31, 0, True
+32, 1, False
+33, 2, False
+34, 3, False
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, False
+34, 3, False
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, False
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+raycast vars: septs [[4, 5], [5, 0]] diffs [-5, 1] steps 1 step [-5.0, 1.0] method "check" dist -1
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True
+[121, 20], [230, 31]
+20, 0, True
+21, 1, True
+22, 2, True
+23, 3, True
+24, 4, True
+25, 5, True
+26, 6, True
+27, 7, True
+28, 8, True
+29, 9, True
+30, 10, True
+31, 11, True
+[100, 31], [130, 34]
+31, 0, True
+32, 1, True
+33, 2, True
+34, 3, True

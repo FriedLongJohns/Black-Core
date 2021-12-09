@@ -65,10 +65,10 @@ class cursedgrid():
                     self.scr.addch(y,x,getFunc(cell[0]),curses.color_pair(cell[1]))
 
 class cursedcam():
-    def __init__(self,viewSize,screen,cgrid,viewportOffset=[0,0],pos=[0,0]):
+    def __init__(self,viewSize,screen,cgrid,outOffset=[0,0],pos=[0,0]):
         #speed vars
         self.viewSize = viewSize
-        self.viewportOffset = viewportOffset
+        self.outOffset = outOffset
         self.pos = pos
 
         self.scr=screen
@@ -81,15 +81,16 @@ class cursedcam():
     def push(self,getFunc=gf):
         for y in range(self.pos[1],self.pos[1]+self.viewSize[1]):
             for x in range(self.pos[0],self.pos[0]+self.viewSize[0]):
+                # self.scr.addch(y-self.pos[1]+self.outOffset[1],(x-self.pos[0]+self.outOffset[0])*2,"x")
                 if -1<y<len(self.grid) and -1<x<len(self.grid[0]):
                     cell = self.grid[y][x]
-                    self.scr.addch(y-self.pos[1]+self.viewportOffset[1],(x-self.pos[0]+self.viewportOffset[0])*2,getFunc(cell[0]),curses.color_pair(cell[1]))
+                    self.scr.addch(y-self.pos[1]+self.outOffset[1],(x-self.pos[0]+self.outOffset[0])*2,getFunc(cell[0]),curses.color_pair(cell[1]))
                     if [x,y] in self.colclears:
                             self.grid[y][x][1]=self.cgrid.defColor
                     if [x,y] in self.celclears:
                             self.grid[y][x][0]=self.cgrid.defCell
                 else:
-                    self.scr.addch(y-self.pos[1]+self.viewportOffset[1],(x-self.pos[0]+self.viewportOffset[0])*2," ")
+                    self.scr.addch(y-self.pos[1]+self.outOffset[1],(x-self.pos[0]+self.outOffset[0])*2," ")
         self.colclears=[]
 
 class cursedtext():
@@ -108,9 +109,10 @@ class cursedtext():
             del self.text[0]
 
     def push(self):
-        
-        for i in range(self.rang[1][0],self.rang[1][1]+1):
-            index=i-self.rang[1][0]
+        filePrint(self.rang)
+        for i in range(self.rang[0][1],self.rang[1][1]+1):
+            index=i-self.rang[0][1]
+            filePrint([i,index,index<len(self.text)])
             if index<len(self.text):
                 text = self.text[index]
                 self.scref.addstr(i,self.rang[0][0]," "+forcefit(self.text[index],self.size[0],pos="r"))

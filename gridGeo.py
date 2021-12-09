@@ -26,7 +26,7 @@ def circleGrid(radius,start_coords=[0,0],bordersOnly=False):
         for i in range(len(outGrid)):
             while len(outGrid[i])>2:
                 del outGrid[i][1]
-            o+=[[outGrid[i][x],start_coords[1]+i] for x in range(len(outGrid[i]))]
+            o+=[[outGrid[i][x],start_coords[1]+i-rad] for x in range(len(outGrid[i]))]
         outGrid=o
     else:
         for y in range(start_coords[1]-radius,start_coords[1]+rad+1):
@@ -79,7 +79,7 @@ def inLine(septs,point):
 
     return False
 
-def rayCast(septs,grid,checkFunc,method="stop",dist=-1):
+def rayCast(septs,grid,checkFunc,method="check",dist=-1):
     assert len(septs[0])==len(septs[1])==2
     assert dist>0 or dist==-1
 
@@ -88,11 +88,18 @@ def rayCast(septs,grid,checkFunc,method="stop",dist=-1):
     if not steps>0:
         return []
     step = [diffs[0]/steps,diffs[1]/steps]
+
+    cd=0
+    mulch=0
     if dist!=-1:
-        steps=dist
+        cd=(diffs[0]*diffs[0],diffs[1]*diffs[1])**.5
+        mulch=dist/cd
+        steps=round(steps*mulch)
+
     last=septs[0]
     points=[]
 
+    filePrint("raycast vars: septs {} diffs {} steps {} step {} method \"{}\" dist {}".format(septs,diffs,steps,step,method,dist))
 
     for x in range(steps):
         last=[last[0]+step[0],last[1]+step[1]]
@@ -106,7 +113,7 @@ def rayCast(septs,grid,checkFunc,method="stop",dist=-1):
             break
 
         steps-=1
-    filePrint(points)
+    # filePrint(["rayCast points: ",points])
     if method=="stop":
         return points[-1]
     else:
@@ -139,11 +146,14 @@ def pathGrid(steps,canGoFunc,grid,startPos):
 
 def rayCircle(startPos,radius,grid,checkFunc,method="check"):
     points=[]
+    # filePrint("startPos {} radius {} method {}".format(startPos,radius,method))
     borders=circleGrid(radius,start_coords=startPos,bordersOnly=True)
+    # filePrint(["borders:",borders])
     for end in borders:
-        points+=rayCast([startPos,end],grid,checkFunc=checkFunc,method=method)
-    filePrint(borders)
-    filePrint(points)
+        pts = rayCast([startPos,end],grid,checkFunc=checkFunc,method=method)
+        # filePrint(["pts: ", pts])
+        points+=pts
+    # filePrint(points)
     return points
 
 class PathTree:
