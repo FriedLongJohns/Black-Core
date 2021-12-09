@@ -44,7 +44,7 @@ if __name__ == "__main__":
 
         player = Unit([0,0],"Talus",["Hammer","Burst Rifle"],"Fiber Skeletals",kind="player")
         def cangf(gc):
-            # filePrint(gc)
+            ctex.addText(gc)
             if gc[0]==".":
                 return True
             return False
@@ -68,7 +68,6 @@ if __name__ == "__main__":
         cam.celclears.append(player.pos)
 
         cam.push()
-        # cg.push()
         ctex.push()
         ptex.push()
 

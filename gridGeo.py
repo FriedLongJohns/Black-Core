@@ -45,7 +45,7 @@ def inCircle(radius,start_coords,point):
 def lineGrid(septs):
     assert len(septs[0])==len(septs[1])==2
 
-    diffs = [septs[1][1]-septs[0][1],septs[1][0]-septs[0][0]]
+    diffs = [septs[1][0]-septs[0][0],septs[1][1]-septs[0][1]]
     steps = max(diffs[0],diffs[1])
     if steps<1:
         return False
@@ -83,7 +83,7 @@ def rayCast(septs,grid,checkFunc,method="check",dist=-1):
     assert len(septs[0])==len(septs[1])==2
     assert dist>0 or dist==-1
 
-    diffs = [septs[1][1]-septs[0][1],septs[1][0]-septs[0][0]]
+    diffs = [septs[1][0]-septs[0][0],septs[1][1]-septs[0][1]]
     steps = max(diffs[0],diffs[1])
     if not steps>0:
         return []
@@ -97,6 +97,7 @@ def rayCast(septs,grid,checkFunc,method="check",dist=-1):
         steps=round(steps*mulch)
 
     last=septs[0]
+    lcheck=[]
     points=[]
 
     filePrint("raycast vars: septs {} diffs {} steps {} step {} method \"{}\" dist {}".format(septs,diffs,steps,step,method,dist))
@@ -104,14 +105,15 @@ def rayCast(septs,grid,checkFunc,method="check",dist=-1):
     for x in range(steps):
         last=[last[0]+step[0],last[1]+step[1]]
         check=[round(last[0]),round(last[1])]
-        if steps==0 or not (-1<check[0]<len(grid[0]) and -1<check[1]<len(grid)):
-            break
-        chk=checkFunc(grid[check[1]][check[0]])
-        if chk:
-            points.append(check)
-        elif not chk:
-            break
-
+        if check!=lcheck:
+            if steps==0 or not (-1<check[0]<len(grid[0]) and -1<check[1]<len(grid)):
+                break
+            chk=checkFunc(grid[check[1]][check[0]])
+            if chk:
+                points.append(check)
+            elif not chk:
+                break
+            lcheck=mapl(check)
         steps-=1
     # filePrint(["rayCast points: ",points])
     if method=="stop":
@@ -144,7 +146,7 @@ def pathGrid(steps,canGoFunc,grid,startPos):
 
     return moves
 
-def rayCircle(startPos,radius,grid,checkFunc,method="check"):
+def rayCircle(startPos,radius,grid,checkFunc,method="check"):#but what about S Q U A R E?
     points=[]
     # filePrint("startPos {} radius {} method {}".format(startPos,radius,method))
     borders=circleGrid(radius,start_coords=startPos,bordersOnly=True)
