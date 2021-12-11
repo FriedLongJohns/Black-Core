@@ -70,6 +70,8 @@ if __name__ == "__main__":
         cam.push()
         ctex.push()
         ptex.push()
+        # steps,canGoFunc,grid,startPos,endPos
+        tryPathFind(10,cangf,cg.grid,player.pos,(4,2))
 
         while True:
             # Wait for a keystroke before doing anything

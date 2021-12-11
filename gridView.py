@@ -109,10 +109,8 @@ class cursedtext():
             del self.text[0]
 
     def push(self):
-        filePrint(self.rang)
         for i in range(self.rang[0][1],self.rang[1][1]+1):
             index=i-self.rang[0][1]
-            filePrint([i,index,index<len(self.text)])
             if index<len(self.text):
                 text = self.text[index]
                 self.scref.addstr(i,self.rang[0][0]," "+forcefit(self.text[index],self.size[0],pos="r"))

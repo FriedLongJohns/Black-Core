@@ -19,19 +19,25 @@ def circleGrid(radius,start_coords=[0,0],bordersOnly=False):
             outGrid.append([])
             dex+=1
             for x in range(start_coords[0]-radius,start_coords[0]+rad+1):
-                if not square[abs(x)]+square[abs(y)]>square[rad]:
+                diff = [abs(x-start_coords[0]),abs(y-start_coords[1])]
+                dist = (diff[0]*diff[0] + diff[1]*diff[1])**.5
+                if dist<=rad:
                     outGrid[dex].append(x)
-
+        # filePrint(outGrid)
         o=[]
-        for i in range(len(outGrid)):
-            while len(outGrid[i])>2:
-                del outGrid[i][1]
-            o+=[[outGrid[i][x],start_coords[1]+i-rad] for x in range(len(outGrid[i]))]
+        for x in range(len(outGrid)):
+            t = [outGrid[x][0],outGrid[x][-1]]
+            if len(outGrid[x])==1:
+                del t[1]
+            o+=[[t[i],start_coords[1]+x-rad] for i in range(len(t))]
         outGrid=o
+        # filePrint(outGrid)
     else:
-        for y in range(start_coords[1]-radius,start_coords[1]+rad+1):
-            for x in range(start_coords[0]-radius,start_coords[0]+rad+1):
-                if not square[abs(x)]+square[abs(y)]>square[rad]:
+        for y in range(start_coords[1]-rad,start_coords[1]+rad+1):
+            for x in range(start_coords[0]-rad,start_coords[0]+rad+1):
+                diff = [abs(x-start_coords[0]),abs(y-start_coords[1])]
+                dist = (diff[0]*diff[0] + diff[1]*diff[1])**.5
+                if dist<=rad:
                     outGrid.append([x,y])
 
     return outGrid
@@ -84,7 +90,7 @@ def rayCast(septs,grid,checkFunc,method="check",dist=-1):
     assert dist>0 or dist==-1
 
     diffs = [septs[1][0]-septs[0][0],septs[1][1]-septs[0][1]]
-    steps = max(diffs[0],diffs[1])
+    steps = max(abs(diffs[0]),abs(diffs[1]))
     if not steps>0:
         return []
     step = [diffs[0]/steps,diffs[1]/steps]
@@ -94,7 +100,7 @@ def rayCast(septs,grid,checkFunc,method="check",dist=-1):
     if dist!=-1:
         cd=(diffs[0]*diffs[0],diffs[1]*diffs[1])**.5
         mulch=dist/cd
-        steps=round(steps*mulch)
+        steps=round(steps*mulch)#what is happening here?
 
     last=septs[0]
     lcheck=[]
@@ -106,6 +112,7 @@ def rayCast(septs,grid,checkFunc,method="check",dist=-1):
         last=[last[0]+step[0],last[1]+step[1]]
         check=[round(last[0]),round(last[1])]
         if check!=lcheck:
+            filePrint([last,check,grid[check[1]][check[0]]])
             if steps==0 or not (-1<check[0]<len(grid[0]) and -1<check[1]<len(grid)):
                 break
             chk=checkFunc(grid[check[1]][check[0]])
@@ -196,7 +203,7 @@ class PathTree:
     def getPath(self,prev=[]):
         prev.append(self.pos)
         if self.parent:
-            return getPath(self.parent,prev)
+            return self.parent.getPath(prev)
         else:
             return prev
 
@@ -224,12 +231,35 @@ class PathTree:
             return self
         return self.children[path[0]].getChildAt(path[1:])
 
-    def tryPathFind(steps,canGoFunc,grid,startPos,endPos):#horribly slow, DEFINETLY can be optimized.
-        poss = pathGrid(steps,canGoFunc,grid,startPos)
-        least=999999
-        ls=startPos
-        for pos in poss:
-            if dist(endPos,pos) < least:
-                least = dist(endPos,pos)
-                ls=pos
-        return ls
+def tryPathFind(steps,canGoFunc,grid,startPos,endPos):
+    assert steps>0
+    root=PathTree(pos=(startPos[0],startPos[1]),name="root")
+    # paf=explore(fp.children[0],steps,grid,endPos,canGoFunc)
+    queue=explore_step(root,grid,canGoFunc)
+    nq=[]
+    while steps>0:
+        filePrint(["steps:",steps,"queue:",[i.pos for i in queue]])
+        for c in queue:
+            if c.pos==endPos:
+                f=c.getPath()
+                out=[]
+                for i in range(len(f)):
+                    out.append(f[-1-i])
+                filePrint(out)
+                return out
+            else:
+                nq+=explore_step(c,grid,canGoFunc)
+        steps-=1
+        queue=mapl(nq)
+        nq=[]
+    return False
+
+    filePrint(["paf: ",paf])
+
+def explore_step(curr,grid,canGoFunc):
+    ps = list(curr.pos)
+    poss=[[ps[0]+i[0],ps[1]+i[1]] for i in [[-1,0],[1,0],[0,1],[0,-1]]]
+    for p in poss:
+        if (curr.parent==None or p!=curr.parent.pos) and (-1<p[0]<len(grid[0]) and -1<p[1]<len(grid)) and canGoFunc(grid[p[1]][p[0]]):
+            curr.addChild(pos=(p[0],p[1]))
+    return curr.children
