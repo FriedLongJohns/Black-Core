@@ -234,7 +234,6 @@ class PathTree:
 def tryPathFind(steps,canGoFunc,grid,startPos,endPos):
     assert steps>0
     root=PathTree(pos=(startPos[0],startPos[1]),name="root")
-    # paf=explore(fp.children[0],steps,grid,endPos,canGoFunc)
     queue=explore_step(root,grid,canGoFunc)
     nq=[]
     while steps>0:
@@ -242,11 +241,7 @@ def tryPathFind(steps,canGoFunc,grid,startPos,endPos):
         for c in queue:
             if c.pos==endPos:
                 f=c.getPath()
-                out=[]
-                for i in range(len(f)):
-                    out.append(f[-1-i])
-                filePrint(out)
-                return out
+                return [f[-1-i] for i in range(len(f))]
             else:
                 nq+=explore_step(c,grid,canGoFunc)
         steps-=1
