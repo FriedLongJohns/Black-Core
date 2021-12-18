@@ -5,12 +5,13 @@ gridJects = []
 # dex = [re.compile("\{name\}"),re.compile("\{pos\}"),re.compile("\{kind\}"),re.compile("\{health\}")]
 
 class ClassCell:
-    def __init__(self,coords,kind,health=-1,name=""):
+    def __init__(self,coords,kind,health=-1,name="",displayChar="?"):
         assert kind in ["terrain","enemy","player","ignoreKind"]
         self.pos = coords
         self.health = health
         self.kind = kind
         self.name = name
+        self.displayChar=displayChar
         gridJects.append(self)
 
     def damage(self,amount):
@@ -24,7 +25,7 @@ class ClassCell:
         return mess
 
 class Unit:
-    def __init__(self,coords,frame,weapons,armor,kind="enemy"):
+    def __init__(self,coords,frame,weapons,armor,kind="enemy",displayChar="o"):
         assert kind in ["enemy","player","ignoreKind"]
 
         assert frame in FRAMES
@@ -48,6 +49,7 @@ class Unit:
         self.pos = coords
         self.kind = kind
         self.name = self.kind
+        self.displayChar=displayChar
         if kind=="enemy":
             self.name+=str(hash(frame+armor+str(coords)))
 

@@ -9,7 +9,7 @@ def gf(cell):
 #END CUSTOMS
 
 class cursedgrid():
-    def __init__(self,crdRang,screen,defaultCell=" ",defaultColor=1):
+    def __init__(self,crdRang,screen,defaultCell=" ",defaultColor=0):
         #speed vars
         self.range=crdRang
         self.gridSize=[crdRang[1][0]-crdRang[0][0],crdRang[1][1]-crdRang[0][1]]
@@ -75,8 +75,8 @@ class cursedcam():
         self.grid=cgrid.grid
         self.cgrid=cgrid
 
-        self.colclears=[]
-        self.celclears=[]
+        self.color_overrides={}#"[5,2]": 2, etc
+        self.cell_overrides={}
 
     def push(self,getFunc=gf):
         for y in range(self.pos[1],self.pos[1]+self.viewSize[1]):
@@ -84,14 +84,17 @@ class cursedcam():
                 # self.scr.addch(y-self.pos[1]+self.outOffset[1],(x-self.pos[0]+self.outOffset[0])*2,"x")
                 if -1<y<len(self.grid) and -1<x<len(self.grid[0]):
                     cell = self.grid[y][x]
-                    self.scr.addch(y-self.pos[1]+self.outOffset[1],(x-self.pos[0]+self.outOffset[0])*2,getFunc(cell[0]),curses.color_pair(cell[1]))
-                    if [x,y] in self.colclears:
-                            self.grid[y][x][1]=self.cgrid.defColor
-                    if [x,y] in self.celclears:
-                            self.grid[y][x][0]=self.cgrid.defCell
+                    dicell = getFunc(cell[0])
+                    colr = curses.color_pair(cell[1])
+                    pch = stripe([x,y])
+                    if pch in self.color_overrides.keys():
+                        colr = self.color_overrides[pch]
+                        # filePrint("[cam] pos: {} color: {}".format((x,y),colr))
+                    if pch in self.cell_overrides.keys():
+                        dicell = self.cell_overrides[pch]
+                    self.scr.addch(y-self.pos[1]+self.outOffset[1],(x-self.pos[0]+self.outOffset[0])*2,dicell,curses.color_pair(colr))
                 else:
                     self.scr.addch(y-self.pos[1]+self.outOffset[1],(x-self.pos[0]+self.outOffset[0])*2," ")
-        self.colclears=[]
 
 class cursedtext():
     def __init__(self,posrang,screen,text=[],rolling=True):

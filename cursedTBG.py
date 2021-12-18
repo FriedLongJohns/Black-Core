@@ -6,14 +6,12 @@ from time import sleep
 
 if __name__ == "__main__":
     filePrint("______NEW______")
-    #0:black, 1:red, 2:green, 3:yellow, 4:blue, 5:magenta, 6:cyan, and 7:white
     def main(stdscr):
         curses.start_color()
-        curses.init_pair(1,curses.COLOR_WHITE,curses.COLOR_BLACK)
+        curses.init_pair(1,curses.COLOR_BLACK,curses.COLOR_WHITE)
         curses.init_pair(2,curses.COLOR_WHITE,curses.COLOR_GREEN)
         curses.init_pair(3,curses.COLOR_WHITE,curses.COLOR_RED)
         curses.init_pair(4,curses.COLOR_WHITE,curses.COLOR_CYAN)
-        curses.init_pair(5,curses.COLOR_BLACK,curses.COLOR_WHITE)
 
         curses.noecho()#terminal doesn't get keypresses
         curses.cbreak()#take keypresses
@@ -21,35 +19,24 @@ if __name__ == "__main__":
         stdscr.keypad(True)#make arrow keys not be escape sequences
 
         stdscr.resize(300,300)
-        gP = [100,20]
-        cg = cursedgrid([[gP[0],gP[1]],[50+gP[0],50+gP[1]]],stdscr,defaultCell=".")#to make things square
-
+        cg = cursedgrid([[0,0],[50,50]],stdscr,defaultCell=".")#to make things square
         camsize=(10,10)
-        cam = cursedcam(camsize,stdscr,cg,outOffset=[int(gP[0]/2),gP[1]])
-        ctex=cursedtext([[gP[0],11+gP[1]],[30+gP[0],14+gP[1]]],stdscr,rolling=True)
-        ptex=cursedtext([[21+gP[0],gP[1]],[30+gP[0]*2,11+gP[1]]],stdscr,rolling=False)
-
-        # filePrint(cg.grid)
-
-        za = [[1,1],[1,0],[1,2],[0,4],[1,4]]
-        for cell in za:
-            cg.grid[cell[1]][cell[0]][0]="#"
-
-        ctex.addText("started")
-        ptex.text[0]="last turn time: 0s"
+        uip=[25,25]#UI pos
+        cam=cursedcam(camsize,stdscr,cg,outOffset=uip)
+        ctex=cursedtext([[uip[0]*2,uip[1]+11],[50+uip[0]*2-1,14+uip[1]]],stdscr,rolling=True)#under
+        ptex=cursedtext([[21+uip[0]*2,uip[1]],[30+uip[0]*2-1,11+uip[1]]],stdscr,rolling=False)#right
 
         cursorPos = [0,0]
         def wcp():
             return [cam.pos[0]+cursorPos[0],cam.pos[1]+cursorPos[1]]
 
+        #unit and unit func setup
         player = Unit([0,0],"Talus",["Hammer","Burst Rifle"],"Fiber Skeletals",kind="player")
         def cangf(gc):
-            ctex.addText(gc)
             if gc[0]==".":
                 return True
             return False
         def canff(gc):
-            # filePrint(gc)
             if gc[0] in "#":
                 return False
             return True
@@ -57,17 +44,20 @@ if __name__ == "__main__":
             return unit.wait_time
         units=[player]
 
-        # block = ClassCell([3,3],"terrain",health=1000,name="Jonesy")
-
+        #level setup and vars
+        za = [[1,1],[1,0],[1,2],[0,4],[1,4]]
+        for cell in za:
+            cg.grid[cell[1]][cell[0]][0]="#"
+        ptex.text[0]="last turn time: 0s"
         time=0
         state=0#0: selecting 1: moving 2: shooting first weapon 3: shooting second weapon
         okays=[]
+        ctex.addText("started")
 
         #initial render
-        cg.grid[player.pos[1]][player.pos[0]][0]="o"
-        cam.celclears.append(player.pos)
-
+        cam.cell_overrides[stripe(player.pos)]=player.displayChar
         cam.push()
+        cam.cell_overrides={}
         ctex.push()
         ptex.push()
         filePrint(tryPathFind(3,cangf,cg.grid,player.pos,(4,2)))
@@ -87,12 +77,16 @@ if __name__ == "__main__":
                 cam.pos[1]+=1
 
             elif key=="w" and cursorPos[1]!=0:
+                del cam.color_overrides[stripe(cursorPos)]
                 cursorPos[1]-=1
             elif key=="s" and cursorPos[1]!=camsize[1]-1:
+                del cam.color_overrides[stripe(cursorPos)]
                 cursorPos[1]+=1
             elif key=="a" and cursorPos[0]!=0:
+                del cam.color_overrides[stripe(cursorPos)]
                 cursorPos[0]-=1
             elif key=="d" and cursorPos[0]!=camsize[0]-1:
+                del cam.color_overrides[stripe(cursorPos)]
                 cursorPos[0]+=1
 
             if state==0:
@@ -102,8 +96,6 @@ if __name__ == "__main__":
                     state=2
                 elif key=="2" and not player.wps[1][3]>0:
                     state=3
-
-            ctex.addText("state: {} cursorPos: {}".format(state,wcp()))
 
             if key=="\n" and state!=0:
                 cusp=wcp()
@@ -122,15 +114,17 @@ if __name__ == "__main__":
                         player.wps[1][3]=player.wps[1][1]["cooldown"]
                     state=0
                     okays=[]
+                    cam.color_overrides={}
 
                     ctex.addText("did action, taking {} time".format(str(time)))
-                    ptex.text[0]="last turn time: ."+str(time)+"s"
+                    ptex.text[0]="last turn time: "+str(time)+"ds"
 
             if key =="q":
                 if state==0:
                     break
                 else:
                     state=0
+                    cam.color_overrides={}
 
             #time+ai
             if time!=0:
@@ -158,29 +152,27 @@ if __name__ == "__main__":
             if state==1:
                 for p in pathGrid(player.move_max,cangf,cg.grid,player.pos):
                     okays.append(p)
-                    cg.grid[p[1]][p[0]][1]=5
-                    cam.colclears.append(p)
+                    cam.color_overrides[stripe(p)]=1
                 pos = wcp()
-                cg.grid[pos[1]][pos[0]][1]=4
-                cam.colclears.append(pos)
+                cam.color_overrides[stripe(pos)]=4
 
             elif state in [2,3]:
                 for p in rayCircle(player.pos,player.wps[state-2][1]["range"],cg.grid,canff):
                     okays.append(p)
-                    cg.grid[p[1]][p[0]][1]=5
-                    cam.colclears.append(p)
+                    cam.color_overrides[stripe(p)]=1
                 pos = wcp()
-                cg.grid[pos[1]][pos[0]][1]=3
-                cam.colclears.append(pos)
+                cam.color_overrides[stripe(pos)]=3
+
+            # ctex.addText("color: {} cell: {}".format(cam.color_overrides,cam.cell_overrides))
 
             #objects
-            cg.grid[player.pos[1]][player.pos[0]][0]="o"
-            cam.celclears.append(player.pos)
+            cam.cell_overrides[stripe(player.pos)]=player.displayChar
 
-            cam.push()
             ptex.push()
             ctex.push()
+            cam.push()
 
             stdscr.refresh()
+            cam.cell_overrides={}
 
     curses.wrapper(main)
