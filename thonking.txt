@@ -4,14 +4,14 @@ menu
       ask for difficulty then set objectives
       use 'cells' to create map
       randomize enemies' everything and have 4*difficulty of them spawn
-    
+
     loaded from files?
     info cmd
     transfer to gridPlayer/etc
-  
+
   player customization
     info cmd for all
-    
+
     weapons (2)
       have custom firing functions for some and a generic for most
         -range
@@ -20,52 +20,46 @@ menu
         -act time increase
         -turn cooldown
         time taken to fire is a multiplier of act time and use speed
-    
+
     mech
       -ttm (time to move) is max move dist * act time no matter how far they moved
       -health
       -act time
       -max move dist
-    
+
     armour
       -health
       -damage reduction multiplier
       -speed reduction multiplier
-    
-    special
-      all have seperate cooldowns
-      -minelayer
-      -stop time for 3 turns
-      -heal
-  
+
   settings
     gameTurnDelay
 
 battle
   destructible and indestructible terrain objects
   sleep(gameTurnDelay) between actions
-  
+
   game loop
     lowest ttm moves/acts first when none at 0
     when something moves/acts, all others tmm wait are minused by it's ttm of that and it's wait time is set to whatever it did to wait again
-  
+
   random objectives are a combination (1-difficulty setting) (premade maps have preset objectives saved to file)
     destroy all enemies
     touch (all) the thing(s)
     touch the thing and return to a certain square
     survive N time
     eliminate the target
-  
+
   enemies
     alert all others of player position when player can be raycasted to
     use min-med-max dynamic AI from the c# SRTS dynamic ai code (use a lot of rounding)
     have preset patrol routes when player is hidden
     forget about player position in 10 turns if not renewed
-  
-  1-2 keys to fire each weapon, 3 for special (which takes no time to use)
+
+  1-2 keys to fire each weapon
   m to move
   cursor for selection action square
-  
+
 PRIORITIES
   BATTLE PLAYER
   battle cursor

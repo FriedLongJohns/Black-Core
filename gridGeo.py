@@ -1,4 +1,3 @@
-import time as t
 from helpers import *
 
 def dist(pos1,pos2):
@@ -237,7 +236,6 @@ def tryPathFind(steps,canGoFunc,grid,startPos,endPos):
     queue=explore_step(root,grid,canGoFunc)
     nq=[]
     while steps>0:
-        filePrint(["steps:",steps,"queue:",[i.pos for i in queue]])
         for c in queue:
             if c.pos==endPos:
                 f=c.getPath()
@@ -247,9 +245,8 @@ def tryPathFind(steps,canGoFunc,grid,startPos,endPos):
         steps-=1
         queue=mapl(nq)
         nq=[]
+    #filePrint(["paf: ",paf])
     return False
-
-    filePrint(["paf: ",paf])
 
 def explore_step(curr,grid,canGoFunc):
     ps = list(curr.pos)
