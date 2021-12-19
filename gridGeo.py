@@ -105,13 +105,11 @@ def rayCast(septs,grid,checkFunc,method="check",dist=-1):
     lcheck=[]
     points=[]
 
-    filePrint("raycast vars: septs {} diffs {} steps {} step {} method \"{}\" dist {}".format(septs,diffs,steps,step,method,dist))
-
     for x in range(steps):
         last=[last[0]+step[0],last[1]+step[1]]
         check=[round(last[0]),round(last[1])]
         if check!=lcheck:
-            filePrint([last,check,grid[check[1]][check[0]]])
+            #filePrint([last,check,grid[check[1]][check[0]]])
             if steps==0 or not (-1<check[0]<len(grid[0]) and -1<check[1]<len(grid)):
                 break
             chk=checkFunc(grid[check[1]][check[0]])

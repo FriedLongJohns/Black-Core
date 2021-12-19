@@ -42,7 +42,7 @@ class Unit:
         self.act_time = self.frm["act_time"]*self.arm["act_time_multiplier"]
         self.wait_time = self.act_time
 
-        self.wps = [[wep,WEAPONS[wep],WEAPONS[wep]["use_time_speed"]*self.act_time,0] for wep in weapons]
+        self.wps = [[name,WEAPONS[name],WEAPONS[name]["use_time_speed"]*self.act_time,0] for name in weapons]
 
         self.move_max = self.frm["move"]
 
@@ -83,3 +83,28 @@ class Unit:
             mess = "{} unit at {} was destroyed".format(self.kind,str(self.pos))
 
         return mess
+
+    def evalPositions(self,enemy,checks,fireFunc,grid):
+        out=[]
+        for pos in checks:
+            dis = dist(pos,enemy.pos)
+            block={
+                "pos": (pos[0],pos[1]),
+                "dist": dis,
+                "LOS": raycast([pos,enemy.pos],grid,fireFunc,method="end")==enemy.pos,
+                "w1_inrange": dis<self.wps[0][1]["range"],
+                "w2_inrange": dis<self.wps[1][1]["range"],
+                "w1_canfire": not self.wps[0][3]>self.act_time,
+                "w2_canfire": not self.wps[0][3]>self.act_time
+            }
+            out.append(block)
+        return out
+
+    def think(self,mode="d/h"):
+        assert mode in ["d/h","assault","kite","angry"]
+        #d/h : gets to the range where it has more potential damage compared to the enemy
+        #assault : gets to the average between it's two weapon ranges to the enemy, prioritizing firing over moving,
+        #   and running away when fully on cooldown.
+        #kite : stays at max range, prioritising moving over firing
+        #angry : pathfinds to the player and then fires until it can't. no retreating.
+        if mode=="d/h":
