@@ -87,7 +87,7 @@ class Unit:
             mess = "{} unit at {} was damaged to {} hp".format(self.kind,str(self.pos),str(self.health))
         else:
             mess = "{} unit at {} was destroyed".format(self.kind,str(self.pos))
-
+        
         return mess
 
     def evalPositions(self,enemy,checks,fireFunc,grid):

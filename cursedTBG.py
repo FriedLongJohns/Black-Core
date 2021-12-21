@@ -2,6 +2,7 @@ from gridView import *
 from gridClasses import *
 from equipment import *
 from gridGeo import *
+from levelGen import *
 from time import sleep
 
 if __name__ == "__main__":
@@ -26,6 +27,11 @@ if __name__ == "__main__":
         ctex=cursedtext([[uip[0]*2,uip[1]+11],[50+uip[0]*2-1,14+uip[1]]],stdscr,rolling=True)#under
         ptex=cursedtext([[21+uip[0]*2,uip[1]],[30+uip[0]*2-1,11+uip[1]]],stdscr,rolling=False)#right
 
+        #level generation!
+        cg.grid = genBoard(50,50,wallCell="#")
+        units=spawnUnits([[0,0],[50,50]],cangf,cg.grid,minPlayerDist=4,playerPos=[3,3])
+        cg.repRange([[1,1],[6,6]])
+
         cursorPos = [0,0]
         def wcp():
             return [cam.pos[0]+cursorPos[0],cam.pos[1]+cursorPos[1]]
@@ -42,13 +48,8 @@ if __name__ == "__main__":
             return True
         def getwt(unit):
             return unit.wait_time
-        units=[player]
+        units.append(player)
 
-        #level setup and vars
-        za = [[1,1],[1,0],[1,2],[0,4],[1,4]]
-        for cell in za:
-            cg.grid[cell[1]][cell[0]][0]="#"
-        ptex.text[0]="last turn time: 0s"
         time=0
         state=0#0: selecting 1: moving 2: shooting first weapon 3: shooting second weapon
         okays=[]
@@ -102,16 +103,22 @@ if __name__ == "__main__":
                 if cusp in okays:
                     if state==1:
                         time=player.act_time/2
-                        player.wait_time=time#player moves twice as fast as enemies, to make it fair
+                        player.wait_time=time*2#player moves twice as fast as enemies, to make it fair
                         player.pos=cusp
                     elif state==2:
-                        time=player.wps[0][2]/2#the use time of the weapon is autocalculated already
-                        player.wait_time=time
+                        time=player.wps[0][2]/2#multiply acted wait time by 2 or they will be able toa ct again (wt=time,-time=0)
+                        player.wait_time=time*2
                         player.wps[0][3]=player.wps[0][1]["cooldown"]/2
+                        for u in units:
+                            if stripe(cusp)==stripe(u.pos):
+                                ctex.addText(u.damage(player.wps[0][1]["damage"]))
                     elif state==3:
                         time=player.wps[1][2]/2#the use time of the weapon is autocalculated already
-                        player.wait_time=time
+                        player.wait_time=time*2
                         player.wps[1][3]=player.wps[1][1]["cooldown"]/2
+                        for u in units:
+                            if stripe(cusp)==stripe(u.pos):
+                                ctex.addText(u.damage(player.wps[1][1]["damage"]))
                     state=0
                     okays=[]
                     cam.color_overrides={}
@@ -128,25 +135,24 @@ if __name__ == "__main__":
 
             #time+ai
             if time!=0:
-                # cg.rollText("time passed: {}".format(time))
-                for un in units:
-                    un.wait_time-=time
-                    un.wps[0][3]-=time
-                    un.wps[1][3]-=time
-                    # if un.wait_time<=0 and un.kind!="player":
-                    #     #do ai stuff
-                time=0
-                noneCanMove=True
-                min=9999999999
-                for un in units:
-                    oir=un.wait_time>0
-                    if un.wait_time<min:
-                        min=un.wait_time
-                if noneCanMove:
+                while player.wait_time>0:
                     for un in units:
-                        un.wait_time-=min
-
-
+                        un.wait_time-=time
+                        un.wps[0][3]-=time
+                        un.wps[1][3]-=time
+                        if un.wait_time<=0 and un.kind!="player":
+                            action = un.think(player,canff,gangf,grid)
+                            if action[0]=="wait":
+                                time=.1
+                            elif action[0]=="fire":
+                                time=u.wps[action[1]][2]
+                                u.wait_time=u.wps[action[1]][2]*2
+                                u.wps[action[1]][3]=u.wps[action[1]][1]["cooldown"]
+                                ctex.addText(player.damage(u.wps[action[1]][1]["damage"]))
+                            elif action[0]=="move":
+                                time=u.act_time
+                                u.wait_time=time*2
+                                u.pos=action[1]
             #EFFECTS
             #colors
             if state==1:

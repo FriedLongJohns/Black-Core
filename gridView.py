@@ -34,11 +34,13 @@ class cursedgrid():
         self.grid = [[[mapl(defaultCell),defaultColor] for j in range(self.gridSize[0]+1)] for i in range(self.gridSize[1]+1)]
         self.scr=screen
 
-    def repRange(self,rang,clearCell="˜¨¬¬"):#˜¨¬¬ is null but holding option down >:)
-        repCell=clearCell
+    def repRange(self,rang,clearCell="˜¨¬¬",clearColor=-1):#˜¨¬¬ is null but holding option down >:)
+        repCell=[clearCell,clearColor]
 
         if clearCell=="˜¨¬¬":
-            repCell=self.defCell
+            repCell[0]=self.defCell
+        if clearColor==-1:
+            repCell[1]=self.defColor
 
         for x in range(rang[0][0],rang[1][0]+1):
             for y in range(rang[0][1],rang[1][1]+1):
