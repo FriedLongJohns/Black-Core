@@ -89,3 +89,6 @@ def mapl(lst,depth=False):
 
 def stripe(tol):#turn tuple/list from ?a,b,c? to a,b,class
     return str(tol)[1:-1]
+
+def absol(num):
+    return (num*num)**.5

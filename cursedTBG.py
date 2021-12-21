@@ -102,15 +102,15 @@ if __name__ == "__main__":
                 if cusp in okays:
                     if state==1:
                         time=player.act_time
-                        player.wait_time=time
+                        player.wait_time=time/2#player moves twice as fast as enemies, to make it fair
                         player.pos=cusp
                     elif state==2:
                         time=player.wps[0][2]#the use time of the weapon is autocalculated already
-                        player.wait_time=time
+                        player.wait_time=time/2
                         player.wps[0][3]=player.wps[0][1]["cooldown"]
                     elif state==3:
                         time=player.wps[1][2]#the use time of the weapon is autocalculated already
-                        player.wait_time=time
+                        player.wait_time=time/2
                         player.wps[1][3]=player.wps[1][1]["cooldown"]
                     state=0
                     okays=[]
