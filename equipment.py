@@ -1,4 +1,4 @@
-# from gridHelpers import *
+from random import randint
 FRAMES = {
     "Talus": {
         "hp": 100,
@@ -58,3 +58,10 @@ ARMORS = {
         "damage_multiplier": .8,
     }
 }
+
+def randFrameName():
+    return FRAMES[FRAMES.keys()[random.randint(0,3)]]
+def randWeaponName():
+    return WEAPONS[WEAPONS.keys()[random.randint(0,1)]]
+def randArmorName():
+    return ARMOUR[FRAMES.keys()[random.randint(0,2)]]

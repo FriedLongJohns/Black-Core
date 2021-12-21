@@ -1,6 +1,8 @@
 from helpers import *
 from levelUnits import *
+from gridClasses import *
 from random import randint
+from gridGeo import dist
 
 def genBoard(x_size,y_size,defCell=".",wallCell="x",empty=.1):
     max_x_units=x_size//7
@@ -29,3 +31,12 @@ def genBoard(x_size,y_size,defCell=".",wallCell="x",empty=.1):
             grid[row][0]="x"
             grid[row][-1]="x"
     return grid
+
+def spawnUnits(range,amount,canSpawnFunc,grid,minPlayerDist=-1,playerPos=[0,0]):
+    spawned=[]
+    for i in range(amount):
+        pos=[randint(range[0],range[1]) for i in range(2)]
+        while (not canSpawnFunc(grid[pos[1]][pos[1]])) or dist(pos,playerPos)<minPlayerDist:
+            pos=[randint(range[0],range[1]) for i in range(2)]
+        spawned.append(Unit(pos,randFrameName(),[randWeaponName(),randWeaponName()],randArmorName(),displayChar="*"))
+    return spawned

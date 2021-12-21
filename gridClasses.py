@@ -1,4 +1,4 @@
-# from gridHelpers import *
+from random import randint
 from equipment import *
 import re
 gridJects = []
@@ -25,7 +25,7 @@ class ClassCell:
         return mess
 
 class Unit:
-    def __init__(self,coords,frame,weapons,armor,kind="enemy",displayChar="o"):
+    def __init__(self,coords,frame,weapons,armor,kind="enemy",displayChar="o",aimode="rand"):
         assert kind in ["enemy","player","ignoreKind"]
 
         assert frame in FRAMES
@@ -50,8 +50,13 @@ class Unit:
         self.kind = kind
         self.name = self.kind
         self.displayChar=displayChar
+
         if kind=="enemy":
-            self.name+=str(hash(frame+armor+str(coords)))
+            self.name+=str(hash(frame+armor+str(coords)))[2:]
+
+        self.aimode = aimode
+        if aimode=="rand":
+            self.aimode=["d/h","assault","kite","angry"][random.randint(0,3)]
 
         gridJects.append(self)
 
@@ -100,11 +105,15 @@ class Unit:
             out.append(block)
         return out
 
-    def think(self,mode="d/h"):
-        assert mode in ["d/h","assault","kite","angry"]
+    def think(self,mode="self"):
+        md=mode
+        if mode=="self":
+            md=self.aimode
+        else:
+            assert mode in ["d/h","assault","kite","angry"]
         #d/h : gets to the range where it has more potential damage compared to the enemy
         #assault : gets to the average between it's two weapon ranges to the enemy, prioritizing firing over moving,
         #   and running away when fully on cooldown.
         #kite : stays at max range, prioritising moving over firing
         #angry : pathfinds to the player and then fires until it can't. no retreating.
-        if mode=="d/h":
+        if md=="d/h":
