@@ -1,6 +1,7 @@
 from random import randint
 from helpers import *
 from equipment import *
+from gridGeo import pathGrid,dist,rayCast
 import re
 gridJects = []
 # dex = [re.compile("\{name\}"),re.compile("\{pos\}"),re.compile("\{kind\}"),re.compile("\{health\}")]
@@ -17,23 +18,18 @@ class ClassCell:
 
     def damage(self,amount):
         self.health-=amount
-        mess = ""
-        if not self.health>0:
-            mess = "{} unit at {} was damaged to {} hp".format(self.kind,str(self.pos),str(self.health))
-        else:
-            mess = "{} unit at {} was destroyed".format(self.kind,str(self.pos))
-
+        mess = "{} unit at {} was damaged to {} hp by {} unit".format(self.kind,str(self.pos),str(self.health),self.kind)
         return mess
 
 class Unit:
-    def __init__(self,coords,frame,weapons,armor,kind="enemy",displayChar="o",aimode="rand"):
+    def __init__(self,coords,frame,weapons,armor,kind="enemy",displayChar="o",displayColor=0,aimode="rand"):
         assert kind in ["enemy","player","ignoreKind"]
 
-        assert frame in FRAMES
-        assert armor in ARMORS
+        assert frame in FRAMES.keys()
+        assert armor in ARMORS.keys()
         assert len(weapons)<3
         for wep in weapons:
-            assert wep in WEAPONS
+            assert wep in WEAPONS.keys()
 
         self.frm = FRAMES[frame]
         self.arm = ARMORS[armor]
@@ -44,20 +40,20 @@ class Unit:
         self.wait_time = self.act_time
 
         self.wps = [[name,WEAPONS[name],WEAPONS[name]["use_time_speed"]*self.act_time,0] for name in weapons]
-
         self.move_max = self.frm["move"]
 
         self.pos = coords
         self.kind = kind
         self.name = self.kind
         self.displayChar=displayChar
+        self.displayColor=displayColor
 
         if kind=="enemy":
             self.name+=str(hash(frame+armor+str(coords)))[2:]
 
         self.aimode = aimode
         if aimode=="rand":
-            self.aimode=["dam","assault","kite","angry"][random.randint(0,3)]
+            self.aimode=["dam","assault","kite","angry"][randint(0,3)]
 
         gridJects.append(self)
 
@@ -80,14 +76,9 @@ class Unit:
 
         return chosen[2], mess
 
-    def damage(self,amount):
+    def damage(self,amount,enemy):
         self.health-=amount
-        mess = ""
-        if not self.health>0:
-            mess = "{} unit at {} was damaged to {} hp".format(self.kind,str(self.pos),str(self.health))
-        else:
-            mess = "{} unit at {} was destroyed".format(self.kind,str(self.pos))
-        
+        mess = "{} unit at {} was damaged to {} hp by {} unit".format(self.kind,str(self.pos),str(self.health),enemy.kind)
         return mess
 
     def evalPositions(self,enemy,checks,fireFunc,grid):
@@ -97,11 +88,7 @@ class Unit:
             block={
                 "pos": (pos[0],pos[1]),
                 "dist": dis,
-                "LOS": raycast([pos,enemy.pos],grid,fireFunc,method="end")==enemy.pos,
-                "w1_inrange": dis<self.wps[0][1]["range"],
-                "w2_inrange": dis<self.wps[1][1]["range"],
-                "w1_canfire": not self.wps[0][3]>self.act_time,
-                "w2_canfire": not self.wps[0][3]>self.act_time
+                "LOS": rayCast([pos,enemy.pos],grid,fireFunc,method="end")==enemy.pos,
             }
             out.append(block)
         return out
@@ -137,7 +124,7 @@ class Unit:
 
         if mode=="angry":
             optimal_range=1
-        elif mode=="kite"
+        elif mode=="kite":
             optimal_range=max(enemy.wps[0][1]["range"],enemy.wps[1][1]["range"])
         else:#dam and assault have dynamic ranges
             if checks[0]:#more range in weapon 1 orand and in weapon 2
@@ -155,32 +142,32 @@ class Unit:
                 optimal_range=sr[1]
 
             #if we will be vulnerable, stay out of their range!
-            if (self.wps[0][3]>0 and self.wps[0][3]>0):
+            if (self.wps[0][3]>0 and self.wps[0][3]>0 and (self.wps[0][3]-self.act_time>0 or self.wps[1][3]-self.act_time>0)):
                 optimal_range=max(enemy.wps[0][1]["range"],enemy.wps[1][1]["range"])+1
 
         moves = pathGrid(self.move_max,moveFunc,grid,self.pos)
-        posbs = evalPositions(enemy,moves,fireFunc,grid)
+        posbs = self.evalPositions(enemy,moves,fireFunc,grid)
         best = self.pos
         beste = dist(self.pos,enemy.pos)
         los=False
         for pos in posbs:
-            error = absol(dist(pos,enemy.pos)-optimal_range)
+            error = absol(dist(pos["pos"],enemy.pos)-optimal_range)
             if pos["LOS"]:
                 if not los:
                     los=True
                     beste=error
-                    best=pos
+                    best=pos["pos"]
                 if error<beste:#and we already have los position possibility
                     beste=error
-                    best=pos
+                    best=pos["pos"]
             elif not los and error<beste:
                 beste=error
-                best=pos
+                best=pos["pos"]
 
         if best==self.pos or (mode=="angry" and max(enemy.wps[0][1]["range"],enemy.wps[1][1]["range"])>=dist(self.pos,enemy.pos) and raycast([pos,enemy.pos],grid,fireFunc,method="end")==enemy.pos):
             #either if we don't have to move or we're [angry, in range, and in LOS of enemy]
             if not self.wps[0][3]>0:
-                if not self.wps[1][3]>0 and checks[4]:
+                if not self.wps[1][3]>0 and checks[4] and not self.wps[0][1]["range"]<dist(self.pos,enemy.pos):
                     return ["fire",0]
                 elif not self.wps[0][1]["range"]<dist(self.pos,enemy.pos):#if not in range, wait
                     return ["fire",1]

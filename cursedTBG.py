@@ -22,22 +22,16 @@ if __name__ == "__main__":
         stdscr.resize(300,300)
         cg = cursedgrid([[0,0],[50,50]],stdscr,defaultCell=".")#to make things square
         camsize=(10,10)
+        def cam_area():
+            return [[cam.pos[0],cam.pos[1]],[cam.pos[0]+camsize[0],cam.pos[1]+camsize[1]]]
         uip=[25,25]#UI pos
         cam=cursedcam(camsize,stdscr,cg,outOffset=uip)
-        ctex=cursedtext([[uip[0]*2,uip[1]+11],[50+uip[0]*2-1,14+uip[1]]],stdscr,rolling=True)#under
+        ctex=cursedtext([[uip[0]*2,uip[1]+11],[100+uip[0]*2-1,14+uip[1]]],stdscr,rolling=True)#under
         ptex=cursedtext([[21+uip[0]*2,uip[1]],[30+uip[0]*2-1,11+uip[1]]],stdscr,rolling=False)#right
 
-        #level generation!
-        cg.grid = genBoard(50,50,wallCell="#")
-        units=spawnUnits([[0,0],[50,50]],cangf,cg.grid,minPlayerDist=4,playerPos=[3,3])
-        cg.repRange([[1,1],[6,6]])
-
-        cursorPos = [0,0]
-        def wcp():
-            return [cam.pos[0]+cursorPos[0],cam.pos[1]+cursorPos[1]]
 
         #unit and unit func setup
-        player = Unit([0,0],"Talus",["Hammer","Burst Rifle"],"Fiber Skeletals",kind="player")
+        player = Unit([3,3],"Talus",["Hammer","Burst Rifle"],"Fiber Skeletals",kind="player",displayColor=2)
         def cangf(gc):
             if gc[0]==".":
                 return True
@@ -46,22 +40,44 @@ if __name__ == "__main__":
             if gc[0] in "#":
                 return False
             return True
+
         def getwt(unit):
             return unit.wait_time
-        units.append(player)
+
+        cursorPos = mapl(player.pos)
+        def wcp():
+            return [cam.pos[0]+cursorPos[0],cam.pos[1]+cursorPos[1]]
+
+        #level generation!
+        level=genBoard(50,50,wallCell="#")
+        for y in range(len(level)):
+            for x in range(len(level[y])):
+                cg.grid[y][x][0]=level[y][x]
+        units={stripe(u.pos):u for u in spawnUnits(([0,0],[49,49]),1,cangf,cg.grid,minPlayerDist=4,playerPos=[3,3])}
+        for k in list(units.keys()):
+            units[k].displayColor=3
+        cg.repRange([[1,1],[6,6]])
+        units[stripe(player.pos)]=player
 
         time=0
         state=0#0: selecting 1: moving 2: shooting first weapon 3: shooting second weapon
         okays=[]
-        ctex.addText("started")
+        ctex.addText("GAME START")
 
-        #initial render
-        cam.cell_overrides[stripe(player.pos)]=player.displayChar
-        cam.push()
-        cam.cell_overrides={}
-        ctex.push()
-        ptex.push()
-        filePrint(tryPathFind(3,cangf,cg.grid,player.pos,(4,2)))
+        def render():
+
+            for k in list(units.keys()):
+                un=units[k]
+                cam.cell_overrides[stripe(un.pos)]=un.displayChar
+                cam.color_overrides[stripe(un.pos)]=un.displayColor
+            ptex.push()
+            ctex.push()
+            cam.push()
+            stdscr.refresh()
+            cam.cell_overrides={}
+            cam.color_overrides={}
+
+        render()
 
         while True:
             # Wait for a keystroke before doing anything
@@ -78,16 +94,12 @@ if __name__ == "__main__":
                 cam.pos[1]+=1
 
             elif key=="w" and cursorPos[1]!=0:
-                del cam.color_overrides[stripe(cursorPos)]
                 cursorPos[1]-=1
             elif key=="s" and cursorPos[1]!=camsize[1]-1:
-                del cam.color_overrides[stripe(cursorPos)]
                 cursorPos[1]+=1
             elif key=="a" and cursorPos[0]!=0:
-                del cam.color_overrides[stripe(cursorPos)]
                 cursorPos[0]-=1
             elif key=="d" and cursorPos[0]!=camsize[0]-1:
-                del cam.color_overrides[stripe(cursorPos)]
                 cursorPos[0]+=1
 
             if state==0:
@@ -97,6 +109,8 @@ if __name__ == "__main__":
                     state=2
                 elif key=="2" and not player.wps[1][3]>0:
                     state=3
+                if state!=0:
+                    cursorPos=[mapl(player.pos)[i]-mapl(cam.pos)[i] for i in range(2)]
 
             if key=="\n" and state!=0:
                 cusp=wcp()
@@ -104,27 +118,40 @@ if __name__ == "__main__":
                     if state==1:
                         time=player.act_time/2
                         player.wait_time=time*2#player moves twice as fast as enemies, to make it fair
+                        for pos in tryPathFind(player.move_max,cangf,cg.grid,player.pos,cusp):
+                            cam.color_overrides[stripe(pos)]=4
                         player.pos=cusp
+                        render()
+                        sleep(.3)
                     elif state==2:
                         time=player.wps[0][2]/2#multiply acted wait time by 2 or they will be able toa ct again (wt=time,-time=0)
                         player.wait_time=time*2
                         player.wps[0][3]=player.wps[0][1]["cooldown"]/2
-                        for u in units:
-                            if stripe(cusp)==stripe(u.pos):
-                                ctex.addText(u.damage(player.wps[0][1]["damage"]))
+
+                        for pos in lineGrid([cusp,player.pos]):
+                            cam.color_overrides[stripe(pos)]=3
+                        if stripe(cusp) in units.keys():
+                            ctex.addText(units[stripe(cusp)].damage(player.wps[0][1]["damage"],player))
+                        render()
+                        sleep(.3)
+
                     elif state==3:
                         time=player.wps[1][2]/2#the use time of the weapon is autocalculated already
                         player.wait_time=time*2
                         player.wps[1][3]=player.wps[1][1]["cooldown"]/2
-                        for u in units:
-                            if stripe(cusp)==stripe(u.pos):
-                                ctex.addText(u.damage(player.wps[1][1]["damage"]))
+
+                        for pos in lineGrid([cusp,player.pos]):
+                            cam.color_overrides[stripe(pos)]=3
+                        if stripe(cusp) in units.keys():
+                            ctex.addText(units[stripe(cusp)].damage(player.wps[1][1]["damage"],player))
+                        render()
+                        sleep(.3)
                     state=0
                     okays=[]
-                    cam.color_overrides={}
+                    # cam.color_overrides={}
 
-                    ctex.addText("did action, taking {} time".format(str(time)))
-                    ptex.text[0]="last turn time: "+str(time)+"ds"
+                    # ctex.addText("did action, taking {} time".format(str(time)))
+                    # ptex.text[0]="last turn time: "+str(time)+"ds"
 
             if key =="q":
                 if state==0:
@@ -136,24 +163,55 @@ if __name__ == "__main__":
             #time+ai
             if time!=0:
                 while player.wait_time>0:
-                    for un in units:
+                    for k in list(units.keys()):
+                        un=units[k]
+                        cam.cell_overrides[stripe(un.pos)]=un.displayChar
+                        cam.color_overrides[stripe(un.pos)]=un.displayColor
                         un.wait_time-=time
                         un.wps[0][3]-=time
                         un.wps[1][3]-=time
                         if un.wait_time<=0 and un.kind!="player":
-                            action = un.think(player,canff,gangf,grid)
+                            action = un.think(player,canff,cangf,cg.grid)
                             if action[0]=="wait":
                                 time=.1
                             elif action[0]=="fire":
-                                time=u.wps[action[1]][2]
-                                u.wait_time=u.wps[action[1]][2]*2
-                                u.wps[action[1]][3]=u.wps[action[1]][1]["cooldown"]
-                                ctex.addText(player.damage(u.wps[action[1]][1]["damage"]))
+                                time=un.wps[action[1]][2]
+                                un.wait_time=un.wps[action[1]][2]*2
+                                un.wps[action[1]][3]=un.wps[action[1]][1]["cooldown"]
+
+                                for pos in rayCircle(un.pos,un.wps[action[1]][1]["range"],cg.grid,canff):
+                                    cam.color_overrides[stripe(pos)]=1
+                                render()
+                                sleep(.3)
+                                for pos in lineGrid([un.pos,player.pos]):
+                                    cam.color_overrides[stripe(pos)]=3
+                                render()
+                                ctex.addText(player.damage(un.wps[action[1]][1]["damage"],un))
+                                sleep(.3)
+                                if player.health<0:
+                                    ctex.addText("PLAYER IS DEAD")
+                                    render()
+                                    sleep(1.2)
+                                    ctex.addText("GAME SHUTDOWN")
+                                    render()
+                                    sleep(1.5)
+                                    exit()
+                                render()
                             elif action[0]=="move":
-                                time=u.act_time
-                                u.wait_time=time*2
-                                u.pos=action[1]
+                                time=un.act_time
+                                un.wait_time=time*2
+                                if between2d(un.pos,cam_area()):
+                                    for pos in pathGrid(un.move_max,cangf,cg.grid,un.pos):
+                                        cam.color_overrides[stripe(pos)]=1
+                                    render()
+                                    sleep(.3)
+                                    un.pos=action[1]
+                                    sleep(.3)
+                                else:
+                                    un.pos=action[1]
+                                render()
             #EFFECTS
+
             #colors
             if state==1:
                 for p in pathGrid(player.move_max,cangf,cg.grid,player.pos):
@@ -169,16 +227,16 @@ if __name__ == "__main__":
                 pos = wcp()
                 cam.color_overrides[stripe(pos)]=3
 
-            # ctex.addText("color: {} cell: {}".format(cam.color_overrides,cam.cell_overrides))
+            for k in list(units.keys()):
+                unit = units[k]
+                if unit.health>0:
+                    cam.cell_overrides[stripe(unit.pos)]=unit.displayChar
+                    cam.color_overrides[stripe(unit.pos)]=unit.displayColor
+                else:
+                    del units[k]
 
-            #objects
-            cam.cell_overrides[stripe(player.pos)]=player.displayChar
-
-            ptex.push()
-            ctex.push()
-            cam.push()
-
-            stdscr.refresh()
+            render()
             cam.cell_overrides={}
+            cam.color_overrides={}
 
     curses.wrapper(main)

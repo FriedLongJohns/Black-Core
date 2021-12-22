@@ -9,7 +9,7 @@ FRAMES = {
     "Prevada": {
         "hp": 70,
         "act_time": 4,
-        "move:": 3,
+        "move": 3,
         "desc": "The Prevada is quick and fast, although it's low hp means it needs to be used carefully.",
     },
     "Chralor": {
@@ -28,13 +28,13 @@ FRAMES = {
 
 WEAPONS = {
     "Hammer": {
-        "dam": 65,
+        "damage": 65,
         "range": 2,
         "use_time_speed": .6,
         "cooldown": 1,
     },
     "Burst Rifle": {
-        "dam": 50,
+        "damage": 50,
         "range": 5,
         "use_time_speed": .7,
         "cooldown": 2,
@@ -60,8 +60,8 @@ ARMORS = {
 }
 
 def randFrameName():
-    return FRAMES[FRAMES.keys()[random.randint(0,3)]]
+    return list(FRAMES.keys())[randint(0,3)]
 def randWeaponName():
-    return WEAPONS[WEAPONS.keys()[random.randint(0,1)]]
+    return list(WEAPONS.keys())[randint(0,1)]
 def randArmorName():
-    return ARMOUR[FRAMES.keys()[random.randint(0,2)]]
+    return list(ARMORS.keys())[randint(0,2)]

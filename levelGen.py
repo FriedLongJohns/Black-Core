@@ -20,7 +20,7 @@ def genBoard(x_size,y_size,defCell=".",wallCell="x",empty=.1):
     for ry in range(max_y_units):
         for rx in range(max_x_units):
             gunit = gunits[randint(0,len(gunits)-1)]
-            if random.randint(1,100)/100>empty:
+            if randint(1,100)/100>empty:
                 poosh(gunit,rx*7,ry*7)
 
     for row in range(len(grid)):
@@ -32,11 +32,11 @@ def genBoard(x_size,y_size,defCell=".",wallCell="x",empty=.1):
             grid[row][-1]="x"
     return grid
 
-def spawnUnits(range,amount,canSpawnFunc,grid,minPlayerDist=-1,playerPos=[0,0]):
+def spawnUnits(crang,amount,canSpawnFunc,grid,minPlayerDist=-1,playerPos=[0,0]):
     spawned=[]
     for i in range(amount):
-        pos=[randint(range[0],range[1]) for i in range(2)]
-        while (not canSpawnFunc(grid[pos[1]][pos[1]])) or dist(pos,playerPos)<minPlayerDist:
-            pos=[randint(range[0],range[1]) for i in range(2)]
+        pos=[randint(crang[0][i],crang[1][i]) for i in range(2)]
+        while (not canSpawnFunc(grid[pos[1]][pos[0]])) or dist(pos,playerPos)<minPlayerDist:
+            pos=[randint(crang[0][i],crang[1][i]) for i in range(2)]
         spawned.append(Unit(pos,randFrameName(),[randWeaponName(),randWeaponName()],randArmorName(),displayChar="*"))
     return spawned

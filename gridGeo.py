@@ -1,7 +1,12 @@
 from helpers import *
 
 def dist(pos1,pos2):
-    return sqrt(square[abs(pos1[0]-pos2[0])],square[abs(pos1[1]-pos2[1])])
+    if pos1==pos2:
+        return 0
+    else:
+        xd = pos1[0]-pos2[0]
+        yd = pos1[1]-pos2[1]
+        return (square[int((xd*xd)**.5)]+square[int((yd*yd)**.5)])**.5
 
 def circleGrid(radius,start_coords=[0,0],bordersOnly=False):
     assert type(radius)==int and -1<radius<101 #stored squares only go from 0-100
@@ -51,17 +56,18 @@ def lineGrid(septs):
     assert len(septs[0])==len(septs[1])==2
 
     diffs = [septs[1][0]-septs[0][0],septs[1][1]-septs[0][1]]
-    steps = max(diffs[0],diffs[1])
+    steps = max(abs(diffs[0]),abs(diffs[1]))*2
     if steps<1:
-        return False
+        return [septs[0]]
     step = [diffs[0]/steps,diffs[1]/steps]
-    last=septs[0]
-    points=[]
+    loc=list(septs[0])
+    points=[loc]
 
     for x in range(steps):
-        last=[last[0]+step[0],last[1]+step[1]]
-        check=[round(last[0]),round(last[1])]
-        points.append(check)
+        loc[0]+=step[0]
+        loc[1]+=step[1]
+        point=[round(loc[0]),round(loc[1])]
+        points.append(point)
 
     return points
 
@@ -69,19 +75,18 @@ def inLine(septs,point):
     assert len(septs[0])==len(septs[1])==2
 
     diffs = [septs[1][1]-septs[0][1],septs[1][0]-septs[0][0]]
-    steps = max(diffs[0],diffs[1])
+    steps = max(abs(diffs[0]),abs(diffs[1]))*2
     if steps<1:
         return False
     step = [diffs[0]/steps,diffs[1]/steps]
-    last=septs[0]
-    points=[]
+    loc=list(septs[0])
 
     for x in range(steps):
-        last=[last[0]+step[0],last[1]+step[1]]
-        check=[round(last[0]),round(last[1])]
+        loc[0]+=step[0]
+        loc[1]+=step[1]
+        point=[round(loc[0]),round(loc[1])]
         if point==check:
             return True
-
     return False
 
 def rayCast(septs,grid,checkFunc,method="check",dist=-1):
@@ -89,35 +94,37 @@ def rayCast(septs,grid,checkFunc,method="check",dist=-1):
     assert dist>0 or dist==-1
 
     diffs = [septs[1][0]-septs[0][0],septs[1][1]-septs[0][1]]
-    steps = max(abs(diffs[0]),abs(diffs[1]))
+    steps = round(max(abs(diffs[0]),abs(diffs[1])))*2
     if not steps>0:
         return []
     step = [diffs[0]/steps,diffs[1]/steps]
 
-    cd=0
-    mulch=0
+    diff_dist=0
+    mult=0
     if dist!=-1:
-        cd=(diffs[0]*diffs[0],diffs[1]*diffs[1])**.5
-        mulch=dist/cd
-        steps=round(steps*mulch)#what is happening here?
+        diff_dist=(diffs[0]*diffs[0],diffs[1]*diffs[1])**.5#get the distance of diffs
+        mult=dist/diff_dist#get what it needs to be (dist wanted/dist made)
+        diffs[0]*=mult#then apply that
+        diffs[1]*=mult
+        steps = round(max(abs(diffs[0]),abs(diffs[1])))
+        if not steps>0:
+            return []
+        step = [diffs[0]/steps,diffs[1]/steps]
 
-    last=septs[0]
-    lcheck=[]
-    points=[]
+    loc=septs[0]
+    points=[septs[0]]
 
     for x in range(steps):
-        last=[last[0]+step[0],last[1]+step[1]]
-        check=[round(last[0]),round(last[1])]
-        if check!=lcheck:
-            #filePrint([last,check,grid[check[1]][check[0]]])
-            if steps==0 or not (-1<check[0]<len(grid[0]) and -1<check[1]<len(grid)):
-                break
-            chk=checkFunc(grid[check[1]][check[0]])
-            if chk:
-                points.append(check)
-            elif not chk:
-                break
-            lcheck=mapl(check)
+        loc[0]+=step[0]
+        loc[1]+=step[1]
+        check=[round(loc[0]),round(loc[1])]
+        if steps==0 or not (-1<check[0]<len(grid[0]) and -1<check[1]<len(grid)):
+            break
+        chk=checkFunc(grid[check[1]][check[0]])
+        if chk:
+            points.append(check)
+        else:
+            break
         steps-=1
     # filePrint(["rayCast points: ",points])
     if method=="stop":
@@ -152,14 +159,11 @@ def pathGrid(steps,canGoFunc,grid,startPos):
 
 def rayCircle(startPos,radius,grid,checkFunc,method="check"):#but what about S Q U A R E?
     points=[]
-    # filePrint("startPos {} radius {} method {}".format(startPos,radius,method))
-    borders=circleGrid(radius,start_coords=startPos,bordersOnly=True)
-    # filePrint(["borders:",borders])
+    sp=[round(startPos[0]),round(startPos[1])]
+    borders=circleGrid(radius,start_coords=sp,bordersOnly=True)
     for end in borders:
-        pts = rayCast([startPos,end],grid,checkFunc=checkFunc,method=method)
-        # filePrint(["pts: ", pts])
+        pts = rayCast([sp,end],grid,checkFunc=checkFunc,method=method)
         points+=pts
-    # filePrint(points)
     return points
 
 class PathTree:
@@ -168,9 +172,6 @@ class PathTree:
         self.pos=pos
         self.children=children
         self.name=name
-
-    def __str__(self):
-        return "<PathTree instance \"{}\">".format(self.name)
 
     def getTree2Q(self, acc = [], rest = []):
         if not rest:
@@ -183,12 +184,9 @@ class PathTree:
             return acc
 
     def getTree(self):
-        print("self: ",self)
         tree=[self,[]]
         if self.children:
-            print("children!")
             for child in self.children:
-                print("child: ",child)
                 tree[1].append(child.getTree())
         return tree
 
@@ -197,7 +195,9 @@ class PathTree:
         self.children.append(child)
         return child
 
-    def getPath(self,prev=[]):
+    def getPath(self,prev=None):
+        if not prev:
+            prev = []
         prev.append(self.pos)
         if self.parent:
             return self.parent.getPath(prev)
@@ -234,8 +234,10 @@ def tryPathFind(steps,canGoFunc,grid,startPos,endPos):
     queue=explore_step(root,grid,canGoFunc)
     nq=[]
     while steps>0:
+        # filePrint(queue)
+        # filePrint(steps)
         for c in queue:
-            if c.pos==endPos:
+            if c.pos[0]==endPos[0] and c.pos[1]==endPos[1]:
                 f=c.getPath()
                 return [f[-1-i] for i in range(len(f))]
             else:
@@ -243,12 +245,13 @@ def tryPathFind(steps,canGoFunc,grid,startPos,endPos):
         steps-=1
         queue=mapl(nq)
         nq=[]
-    #filePrint(["paf: ",paf])
+    # filePrint(root.getTree())
     return False
 
 def explore_step(curr,grid,canGoFunc):
     ps = list(curr.pos)
     poss=[[ps[0]+i[0],ps[1]+i[1]] for i in [[-1,0],[1,0],[0,1],[0,-1]]]
+    curr.children=[]
     for p in poss:
         if (curr.parent==None or p!=curr.parent.pos) and (-1<p[0]<len(grid[0]) and -1<p[1]<len(grid)) and canGoFunc(grid[p[1]][p[0]]):
             curr.addChild(pos=(p[0],p[1]))
