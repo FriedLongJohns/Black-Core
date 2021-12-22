@@ -1,4 +1,5 @@
 from helpers import *
+from vector2 import vec2
 
 def dist(pos1,pos2):
     if pos1==pos2:
@@ -7,6 +8,14 @@ def dist(pos1,pos2):
         xd = pos1[0]-pos2[0]
         yd = pos1[1]-pos2[1]
         return (square[int((xd*xd)**.5)]+square[int((yd*yd)**.5)])**.5
+
+def rdist(pos1,pos2):
+    if pos1==pos2:
+        return 0
+    else:
+        xd = pos1[0]-pos2[0]
+        yd = pos1[1]-pos2[1]
+        return (xd*xd+yd*yd)**.5
 
 def circleGrid(radius,start_coords=[0,0],bordersOnly=False):
     assert type(radius)==int and -1<radius<101 #stored squares only go from 0-100
@@ -93,10 +102,10 @@ def rayCast(septs,grid,checkFunc,method="check",dist=-1):
     assert len(septs[0])==len(septs[1])==2
     assert dist>0 or dist==-1
 
-    diffs = [septs[1][0]-septs[0][0],septs[1][1]-septs[0][1]]
-    steps = round(max(abs(diffs[0]),abs(diffs[1])))*2
+    diffs = septs[1][0]-septs[0][0],septs[1][1]-septs[0][1]]
+    steps = round(max(abs(diffs[0]),abs(diffs[1])))*5
     if not steps>0:
-        return []
+        return [mapl(septs[0])]
     step = [diffs[0]/steps,diffs[1]/steps]
 
     diff_dist=0
@@ -112,12 +121,13 @@ def rayCast(septs,grid,checkFunc,method="check",dist=-1):
         step = [diffs[0]/steps,diffs[1]/steps]
 
     loc=septs[0]
+    gloc=[round(septs[0][0]),round(septs[0][1])]
     points=[septs[0]]
 
     for x in range(steps):
         loc[0]+=step[0]
         loc[1]+=step[1]
-        check=[round(loc[0]),round(loc[1])]
+        if rdist(gloc[0])
         if steps==0 or not (-1<check[0]<len(grid[0]) and -1<check[1]<len(grid)):
             break
         chk=checkFunc(grid[check[1]][check[0]])

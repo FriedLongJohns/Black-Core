@@ -53,7 +53,7 @@ if __name__ == "__main__":
         for y in range(len(level)):
             for x in range(len(level[y])):
                 cg.grid[y][x][0]=level[y][x]
-        units={stripe(u.pos):u for u in spawnUnits(([0,0],[49,49]),1,cangf,cg.grid,minPlayerDist=4,playerPos=[3,3])}
+        units={stripe(u.pos):u for u in spawnUnits(([0,0],[49,49]),15,cangf,cg.grid,minPlayerDist=4,playerPos=[3,3])}
         for k in list(units.keys()):
             units[k].displayColor=3
         cg.repRange([[1,1],[6,6]])
@@ -68,8 +68,10 @@ if __name__ == "__main__":
 
             for k in list(units.keys()):
                 un=units[k]
+                posk = stripe(un.pos)
                 cam.cell_overrides[stripe(un.pos)]=un.displayChar
-                cam.color_overrides[stripe(un.pos)]=un.displayColor
+                if not posk in list(cam.color_overrides.keys()):
+                    cam.color_overrides[stripe(un.pos)]=un.displayColor
             ptex.push()
             ctex.push()
             cam.push()
@@ -127,10 +129,11 @@ if __name__ == "__main__":
                         time=player.wps[0][2]/2#multiply acted wait time by 2 or they will be able toa ct again (wt=time,-time=0)
                         player.wait_time=time*2
                         player.wps[0][3]=player.wps[0][1]["cooldown"]/2
-
+                        filePrint(stripe(cusp))
+                        filePrint(units.keys())
                         for pos in lineGrid([cusp,player.pos]):
                             cam.color_overrides[stripe(pos)]=3
-                        if stripe(cusp) in units.keys():
+                        if stripe(cusp) in list(units.keys()):
                             ctex.addText(units[stripe(cusp)].damage(player.wps[0][1]["damage"],player))
                         render()
                         sleep(.3)
@@ -142,7 +145,7 @@ if __name__ == "__main__":
 
                         for pos in lineGrid([cusp,player.pos]):
                             cam.color_overrides[stripe(pos)]=3
-                        if stripe(cusp) in units.keys():
+                        if stripe(cusp) in list(units.keys()):
                             ctex.addText(units[stripe(cusp)].damage(player.wps[1][1]["damage"],player))
                         render()
                         sleep(.3)
@@ -205,11 +208,14 @@ if __name__ == "__main__":
                                         cam.color_overrides[stripe(pos)]=1
                                     render()
                                     sleep(.3)
+                                    for pos in tryPathFind(un.move_max,cangf,cg.grid,un.pos,action[1]):
+                                        cam.color_overrides[stripe(pos)]=4
                                     un.pos=action[1]
+                                    render()
                                     sleep(.3)
                                 else:
                                     un.pos=action[1]
-                                render()
+                                    render()
             #EFFECTS
 
             #colors
@@ -218,14 +224,20 @@ if __name__ == "__main__":
                     okays.append(p)
                     cam.color_overrides[stripe(p)]=1
                 pos = wcp()
-                cam.color_overrides[stripe(pos)]=4
+                if pos in okays:
+                    cam.cell_overrides[stripe(pos)]="O"
+                else:
+                    cam.cell_overrides[stripe(pos)]="X"
 
             elif state in [2,3]:
                 for p in rayCircle(player.pos,player.wps[state-2][1]["range"],cg.grid,canff):
                     okays.append(p)
                     cam.color_overrides[stripe(p)]=1
                 pos = wcp()
-                cam.color_overrides[stripe(pos)]=3
+                if pos in okays:
+                    cam.cell_overrides[stripe(pos)]="O"
+                else:
+                    cam.cell_overrides[stripe(pos)]="X"
 
             for k in list(units.keys()):
                 unit = units[k]
