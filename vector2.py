@@ -45,13 +45,11 @@ class vec2():
 
     @property
     def normal(self):
-        mult = 1/self.dist
-        return self*mult
+        return self/self.dist
 
     def normalize(self):
-        mult = 1/self.dist
-        self.pos[0]*=mult
-        self.pos[1]*=mult
+        self.pos[0]/=self.dist
+        self.pos[1]/=self.dist
         self.dist=1
 
     @property
