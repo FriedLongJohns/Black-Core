@@ -49,9 +49,14 @@ class vec2():
         return self*mult
 
     def normalize(self):
-        self.x=self.x/self.m
-        self.y=self.y/self.m
-        self.reload()
+        mult = 1/self.dist
+        self.pos[0]*=mult
+        self.pos[1]*=mult
+        self.dist=1
+
+    @property
+    def copy(self):
+        return vec2(self.pos[0],self.pos[1])
 
     def __mul__(self, value):
         assert isinstance(value, (int, float, complex, vec2))
