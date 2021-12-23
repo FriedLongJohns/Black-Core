@@ -12,12 +12,12 @@ class cursedgrid():
     def __init__(self,crdRang,screen,defaultCell=" ",defaultColor=0):
         #speed vars
         self.range=crdRang
-        self.gridSize=[crdRang[1][0]-crdRang[0][0],crdRang[1][1]-crdRang[0][1]]
-        self.bigSize=[self.gridSize[0]*2+2,self.gridSize[1]+1]
+        self.gridSize=vec2(crdRang[1][0]-crdRang[0][0],crdRang[1][1]-crdRang[0][1])
+        self.bigSize=vec2(self.gridSize.x*2+2,self.gridSize.y+1)
         self.defColor=defaultColor
         self.defCell=defaultCell
 
-        self.grid = [[[mapl(defaultCell),defaultColor] for j in range(self.gridSize[0]+1)] for i in range(self.gridSize[1]+1)]
+        self.grid = [[[mapl(defaultCell),defaultColor] for j in range(self.gridSize.x+1)] for i in range(self.gridSize.y+1)]
         self.scr=screen
 
     def __str__(self):
@@ -26,12 +26,12 @@ class cursedgrid():
     def initScr(self,crdRang,screen,defaultCell=" ",defaultColor=1):
         #speed vars
         self.rang=crdRang
-        self.bigSize=[crdRang[1][0]-crdRang[0][0]+1,crdRang[1][1]-crdRang[0][1]+1]
-        self.gridSize=[int(self.gridSize[0]/2)+self.gridSize[0]%2,self.gridSize[1]]
+        self.bigSize=vec2(crdRang[1][0]-crdRang[0][0]+1,crdRang[1][1]-crdRang[0][1]+1)
+        self.gridSize=vec2(int(self.gridSize.x/2)+self.gridSize.x%2,self.gridSize.y)
         self.defColor=defaultColor
         self.defCell=defaultCell
 
-        self.grid = [[[mapl(defaultCell),defaultColor] for j in range(self.gridSize[0]+1)] for i in range(self.gridSize[1]+1)]
+        self.grid = [[[mapl(defaultCell),defaultColor] for j in range(self.gridSize.x+1)] for i in range(self.gridSize.y+1)]
         self.scr=screen
 
     def repRange(self,rang,clearCell="˜¨¬¬",clearColor=-1):#˜¨¬¬ is null but holding option down >:)
@@ -59,8 +59,8 @@ class cursedgrid():
             self.grid[post[1]][post[0]][1] = temp[1]
 
     def push(self,getFunc=gf):
-        for y in range(self.gridSize[1]):
-            for x in range(self.gridSize[0]):
+        for y in range(self.gridSize.y):
+            for x in range(self.gridSize.x):
                 self.scr.addch(y,x," ")
                 if x%2==0:
                     cell = self.grid[y][x//2]
