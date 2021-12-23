@@ -95,8 +95,9 @@ class vec2():
         self.pos[index]=value
         reload()
 
-    def __eq__(self,other_vec):
-        return self.pos==other_vec.pos
+    def __eq__(self,value):
+        assert isinstance(value, (vec2,list,tuple))
+        return self.pos==other_vec.pos or (self.pos[0]==other[0] and self.pos[1]==other[1])
 
     def __round__(self):
         return Vec2(round(self.x), round(self.y))
