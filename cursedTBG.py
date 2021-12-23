@@ -46,7 +46,7 @@ if __name__ == "__main__":
 
         cursorPos = mapl(player.pos)
         def wcp():
-            return [cam.pos[0]+cursorPos[0],cam.pos[1]+cursorPos[1]]
+            return vec2(cam.pos[0]+cursorPos[0],cam.pos[1]+cursorPos[1])
 
         #level generation!
         level=genBoard(50,50,wallCell="#")
