@@ -1,5 +1,6 @@
 from helpers import *
 import curses
+from vector2 import vec2
 
 #CUSTOMS
 
