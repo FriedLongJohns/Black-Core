@@ -83,7 +83,7 @@ class Unit:
         for pos in checks:
             dis = dist(pos,enemy.pos)
             block={
-                "pos": pos.copy,
+                "pos": pos.copy(),
                 "dist": dis,
                 "LOS": rayCast([pos,enemy.pos],grid,fireFunc,method="end")==enemy.pos,
             }
