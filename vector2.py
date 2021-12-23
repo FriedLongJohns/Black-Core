@@ -2,8 +2,8 @@
 # import numpy as np
 
 class vec2():
-    def __init__(self,pos):
-        self.pos=list(pos)
+    def __init__(self,x,y):
+        self.pos=[x,y]
         self.dist=0
         self.reload()
 
@@ -52,44 +52,48 @@ class vec2():
         self.pos[1]/=self.dist
         self.dist=1
 
-    @property
     def copy(self):
         return vec2(self.pos[0],self.pos[1])
 
+    def __str__(self):
+        return "vec2({},{})".format(self.pos[0],self.pos[1])
+
+
+
     def __mul__(self, value):
-        assert isinstance(value, (int, float, complex, vec2))
+        assert isinstance(value, (int, float, complex, vec2,list,tuple))
 
         if isinstance(value, (int, float, complex)):
             return vec2(*(e*value for e in self))
 
-        return vec2(self.x*value.x, self.y*value.y)
+        return vec2(self.x*value[0], self.y*value[1])
 
     def __truediv__(self, value):
-        assert isinstance(value, (int, float, complex, vec2))
+        assert isinstance(value, (int, float, complex, vec2,list,tuple))
 
         if isinstance(value, (int, float, complex)):
-            return Vec2(*(e/value for e in self))
+            return vec2(*(e/value for e in self))
 
-        return Vec2(self.x/value.x, self.y/value.y)
+        return vec2(self.x/value[0], self.y/value[1])
 
     def __add__(self,value):
-        assert isinstance(value, (int, float, complex, vec2))
+        assert isinstance(value, (int, float, complex, vec2,list,tuple))
 
         if isinstance(value, (int, float, complex)):
-            return Vec2(*(e+value for e in self))
+            return vec2(*(e+value for e in self))
 
-        return Vec2(self.x+value.x, self.y+value.y)
+        return vec2(self.x+value[0], self.y+value[1])
 
     def __sub__(self,value):
-        assert isinstance(value, (int, float, complex, vec2))
+        assert isinstance(value, (int, float, complex, vec2,list,tuple))
 
         if isinstance(value, (int, float, complex)):
-            return Vec2(*(e-value for e in self))
+            return vec2(*(e-value for e in self))
 
-        return Vec2(self.x-value.x, self.y-value.y)
+        return vec2(self.x-value[0], self.y-value[1])
 
     def __neg__(self):
-        return Vec2(-1*self.x, -1*self.y)
+        return vec2(-1*self.x, -1*self.y)
 
     def __getitem__(self,index):
         return self.pos[index]
@@ -100,7 +104,7 @@ class vec2():
 
     def __eq__(self,value):
         assert isinstance(value, (vec2,list,tuple))
-        return self.pos==other_vec.pos or (self.pos[0]==other[0] and self.pos[1]==other[1])
+        return self.pos[0]==value[0] and self.pos[1]==value[1]
 
     def __round__(self):
-        return Vec2(round(self.x), round(self.y))
+        return vec2(round(self.x), round(self.y))
