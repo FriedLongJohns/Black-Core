@@ -1,6 +1,6 @@
 from helpers import *
 import curses
-from vector2 import vec2
+from classtypes import vec2
 
 #CUSTOMS
 
@@ -89,7 +89,7 @@ class cursedcam():
                     cell = self.grid[y][x]
                     dicell = getFunc(cell[0])
                     colr = curses.color_pair(cell[1])
-                    pch = stripe([x,y])
+                    pch = str(vec2(x,y))
                     if pch in self.color_overrides.keys():
                         colr = self.color_overrides[pch]
                         # filePrint("[cam] pos: {} color: {}".format((x,y),colr))

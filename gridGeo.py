@@ -1,5 +1,5 @@
 from helpers import *
-from vector2 import vec2
+from classtypes import vec2
 
 def dist(pos1,pos2):
     if pos1==pos2:
@@ -115,8 +115,6 @@ def rayCast(septs,grid,checkFunc,method="line",dist=-1):
             else:
                 break
         steps-=1
-    if list(septs[0])==[3,3]:
-        filePrint([str(i) for i in points])
     if method=="end":
         return points[-1]
     else:
@@ -144,7 +142,7 @@ def pathGrid(steps,canGoFunc,grid,startPos):
                     options.append(chk)
 
         del options[0]
-
+    moves = [vec2(i[0],i[1]) for i in moves]
     return moves
 
 def rayCircle(startPos,radius,grid,checkFunc,method="check"):#raysquare, anyone?
@@ -224,18 +222,16 @@ def tryPathFind(steps,canGoFunc,grid,startPos,endPos):
     queue=explore_step(root,grid,canGoFunc)
     nq=[]
     while steps>0:
-        # filePrint(queue)
-        # filePrint(steps)
         for c in queue:
             if c.pos[0]==endPos[0] and c.pos[1]==endPos[1]:
                 f=c.getPath()
+                f = [vec2(i[0],i[1]) for i in f]
                 return [f[-1-i] for i in range(len(f))]
             else:
                 nq+=explore_step(c,grid,canGoFunc)
         steps-=1
         queue=mapl(nq)
         nq=[]
-    # filePrint(root.getTree())
     return False
 
 def explore_step(curr,grid,canGoFunc):

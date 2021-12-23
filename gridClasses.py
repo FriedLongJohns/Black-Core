@@ -3,7 +3,7 @@ from helpers import *
 from equipment import *
 from gridGeo import pathGrid,dist,rayCast
 import re
-from vector2 import vec2
+from classtypes import vec2
 # dex = [re.compile("\{name\}"),re.compile("\{pos\}"),re.compile("\{kind\}"),re.compile("\{health\}")]
 
 class ClassCell:
