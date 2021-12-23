@@ -21,23 +21,21 @@ def circleGrid(radius,start_pos=None,bordersOnly=False):
     if not start_pos:
         start_pos=vec2(0,0)
     assert type(radius)==int and -1<radius<101 #stored squares only go from 0-100
-    outGrid = []
+    outgrid = []
     rad = abs(radius)
 
-    for y in range(start_pos.y-rad,start_pos.y+rad+1):
-        for x in range(start_pos.x-rad,start_pos.x+rad+1):
-            point = vec2(x-start_pos.x,y-start_pos.y)
+    for y in range(start_pos[1]-rad,start_pos[1]+rad+1):
+        for x in range(start_pos[0]-rad,start_pos[0]+rad+1):
+            point = vec2(x-start_pos[0],y-start_pos[1])
             if point.dist<=rad:
-                outGrid.append(point)
+                outgrid.append(point+start_pos)
     realog=[]
     if bordersOnly:
-        for ly in range(len(outgrid)):
-            for lx in range(len(outgrid[ly])):
-                pos = outgrid[ly][lx]
-                if 0<=dist(pos,start_pos)-rad<.5:
-                    realog.append(pos)
+        for pos in outgrid:
+            if -.9<dist(pos,start_pos)-rad<.9:#sqrt(2)/2
+                realog.append(pos)
         outgrid=realog
-    return outGrid
+    return outgrid
 
 
 def inCircle(radius,start_coords,point):
@@ -59,8 +57,8 @@ def lineGrid(septs):
     for x in range(steps):
         loc+=step#haha custom class go brrr just add them
         point=round(loc)
-        points.append(point)
-
+        if point!=points[-1]:
+            points.append(point)
     return points
 
 def inLine(septs,point):
@@ -77,7 +75,7 @@ def inLine(septs,point):
     for x in range(steps):
         loc+=step
         check=round(loc)
-        if point==check:#vec2 can check equality with lists and tuples as well, this is fine
+        if point!=points[-1] and point==check:
             return True
     return False
 
@@ -86,7 +84,7 @@ def rayCast(septs,grid,checkFunc,method="line",dist=-1):
     assert len(septs)==2
 
     diffs = vec2(septs[1][0]-septs[0][0],septs[1][1]-septs[0][1])
-    steps = round(diffs.dist*2)
+    steps = round(diffs.dist*2)+1
     if steps<1:
         return [vec2(septs[0][0],septs[0][1])]
     step = diffs/steps
@@ -97,7 +95,7 @@ def rayCast(septs,grid,checkFunc,method="line",dist=-1):
     if dist!=-1:
         mult=dist/diffs.dist#get what it needs to be (dist wanted/dist made)
         diffs*=mult#then apply that
-        steps = round(diffs.dist*2)
+        steps = round(diffs.dist*2)+1
         if not steps>0:
             return [vec2(septs[0][0],septs[0][1])]
         step = diffs/steps
@@ -108,15 +106,17 @@ def rayCast(septs,grid,checkFunc,method="line",dist=-1):
     for x in range(steps):
         loc+=step
         check=round(loc)
-        if steps==0 or not (-1<check[0]<len(grid[0]) and -1<check[1]<len(grid)):
-            break
-        chk=checkFunc(grid[check.x][check.y])
-        if chk:
-            points.append(check)
-        else:
-            break
+        if check!=points[-1]:
+            if steps==0 or not (-1<check[0]<len(grid[0]) and -1<check[1]<len(grid)):
+                break
+            chk=checkFunc(grid[check.x][check.y])
+            if chk:
+                points.append(check)
+            else:
+                break
         steps-=1
-    # filePrint(["rayCast points: ",points])
+    if list(septs[0])==[3,3]:
+        filePrint([str(i) for i in points])
     if method=="end":
         return points[-1]
     else:
@@ -150,7 +150,7 @@ def pathGrid(steps,canGoFunc,grid,startPos):
 def rayCircle(startPos,radius,grid,checkFunc,method="check"):#raysquare, anyone?
     points=[]
     sp=[round(startPos[0]),round(startPos[1])]
-    borders=circleGrid(radius,start_coords=sp,bordersOnly=True)
+    borders=circleGrid(radius,start_pos=sp,bordersOnly=True)
     for end in borders:
         pts = rayCast([sp,end],grid,checkFunc=checkFunc,method=method)
         points+=pts
