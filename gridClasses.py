@@ -3,22 +3,21 @@ from helpers import *
 from equipment import *
 from gridGeo import pathGrid,dist,rayCast
 import re
-gridJects = []
+from vector2 import vec2
 # dex = [re.compile("\{name\}"),re.compile("\{pos\}"),re.compile("\{kind\}"),re.compile("\{health\}")]
 
 class ClassCell:
     def __init__(self,coords,kind,health=-1,name="",displayChar="?"):
         assert kind in ["terrain","enemy","player","ignoreKind"]
-        self.pos = coords
+        self.pos = vec2(coords[0],coords[1])
         self.health = health
         self.kind = kind
         self.name = name
         self.displayChar=displayChar
-        gridJects.append(self)
 
-    def damage(self,amount):
+    def damage(self,amount,enemy):
         self.health-=amount
-        mess = "{} unit at {} was damaged to {} hp by {} unit".format(self.kind,str(self.pos),str(self.health),self.kind)
+        mess = "{} unit was damaged to {} hp by {}".format(self.name,self.health,enemy.name)
         return mess
 
 class Unit:
@@ -42,7 +41,7 @@ class Unit:
         self.wps = [[name,WEAPONS[name],WEAPONS[name]["use_time_speed"]*self.act_time,0] for name in weapons]
         self.move_max = self.frm["move"]
 
-        self.pos = coords
+        self.pos = vec2(coords[0],coords[1])
         self.kind = kind
         self.name = self.kind
         self.displayChar=displayChar
@@ -54,8 +53,6 @@ class Unit:
         self.aimode = aimode
         if aimode=="rand":
             self.aimode=["dam","assault","kite","angry"][randint(0,3)]
-
-        gridJects.append(self)
 
     # def aiDynamicMove(player=None)
 
@@ -78,7 +75,7 @@ class Unit:
 
     def damage(self,amount,enemy):
         self.health-=amount
-        mess = "{} unit at {} was damaged to {} hp by {} unit".format(self.kind,str(self.pos),str(self.health),enemy.kind)
+        mess = "{} unit was damaged to {} hp by {}".format(self.name,self.health,enemy.name)
         return mess
 
     def evalPositions(self,enemy,checks,fireFunc,grid):
@@ -86,7 +83,7 @@ class Unit:
         for pos in checks:
             dis = dist(pos,enemy.pos)
             block={
-                "pos": (pos[0],pos[1]),
+                "pos": pos.copy,
                 "dist": dis,
                 "LOS": rayCast([pos,enemy.pos],grid,fireFunc,method="end")==enemy.pos,
             }
@@ -125,7 +122,7 @@ class Unit:
         if mode=="angry":
             optimal_range=1
         elif mode=="kite":
-            optimal_range=max(enemy.wps[0][1]["range"],enemy.wps[1][1]["range"])
+            optimal_range=max(self.wps[0][1]["range"],self.wps[1][1]["range"])
         else:#dam and assault have dynamic ranges
             if checks[0]:#more range in weapon 1 orand and in weapon 2
                 optimal_range=sr[0]
