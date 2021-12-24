@@ -36,7 +36,7 @@ def spawnUnits(crang,amount,canSpawnFunc,grid,minPlayerDist=-1,playerPos=[0,0]):
     spawned=[]
     for i in range(amount):
         pos=[randint(crang[0][i],crang[1][i]) for i in range(2)]
-        while (not canSpawnFunc(grid[pos[1]][pos[0]])) or dist(pos,playerPos)<minPlayerDist:
+        while (not canSpawnFunc(pos[0],pos[1])) or dist(pos,playerPos)<minPlayerDist:
             pos=[randint(crang[0][i],crang[1][i]) for i in range(2)]
         spawned.append(Unit(pos,randFrameName(),[randWeaponName(),randWeaponName()],randArmorName(),displayChar="*"))
     return spawned

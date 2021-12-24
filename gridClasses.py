@@ -48,7 +48,7 @@ class Unit:
         self.displayColor=displayColor
 
         if kind=="enemy":
-            self.name+=str(hash(frame+armor+str(coords)))[2:]
+            self.name+="_"+forcefit(hash(frame+armor+str(coords)),4,pos="r")
 
         self.aimode = aimode
         if aimode=="rand":
@@ -120,7 +120,7 @@ class Unit:
             checks[4]=True
 
         if mode=="angry":
-            optimal_range=1
+            optimal_range=2
         elif mode=="kite":
             optimal_range=max(self.wps[0][1]["range"],self.wps[1][1]["range"])
         else:#dam and assault have dynamic ranges

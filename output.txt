@@ -1,3 +1,10 @@
 
 ______NEW______
+Main fail: name 'vec' is not defined
+______NEW______
+Main fail: name 'vec' is not defined
+______NEW______
+Main fail: free variable 'units' referenced before assignment in enclosing scope
+______NEW______
+Main fail: local variable 'cangf' referenced before assignment
 ______NEW______

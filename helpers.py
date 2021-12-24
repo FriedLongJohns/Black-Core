@@ -47,8 +47,14 @@ def simp(nums,returnFactor=False):
     return out
 
 def filePrint(text,file="output.txt"):
-    with open(file,"r") as s:
-        pre=s.read()
+    try:
+        with open(file,"r") as s:
+            pre=s.read()
+    except:
+        f=open(file,"x")
+        f.close()
+        with open(file,"r") as s:
+            pre=s.read()
     with open(file,"w") as fl:
         if type(text) == list:
             fl.write(pre+"\n"+", ".join([str(e) for e in text]))

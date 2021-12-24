@@ -84,7 +84,7 @@ def rayCast(septs,grid,checkFunc,method="line",dist=-1):
     assert len(septs)==2
 
     diffs = vec2(septs[1][0]-septs[0][0],septs[1][1]-septs[0][1])
-    steps = round(diffs.dist*2)+1
+    steps = round(diffs.dist)+2
     if steps<1:
         return [vec2(septs[0][0],septs[0][1])]
     step = diffs/steps
@@ -95,7 +95,7 @@ def rayCast(septs,grid,checkFunc,method="line",dist=-1):
     if dist!=-1:
         mult=dist/diffs.dist#get what it needs to be (dist wanted/dist made)
         diffs*=mult#then apply that
-        steps = round(diffs.dist*2)+1
+        steps = round(diffs.dist)+2
         if not steps>0:
             return [vec2(septs[0][0],septs[0][1])]
         step = diffs/steps
@@ -109,7 +109,7 @@ def rayCast(septs,grid,checkFunc,method="line",dist=-1):
         if check!=points[-1]:
             if steps==0 or not (-1<check[0]<len(grid[0]) and -1<check[1]<len(grid)):
                 break
-            chk=checkFunc(grid[check.x][check.y])
+            chk=checkFunc(check.x,check.y)
             if chk:
                 points.append(check)
             else:
@@ -136,8 +136,7 @@ def pathGrid(steps,canGoFunc,grid,startPos):
                 if not (-1<chk[0]<len(dupe[0]) and -1<chk[1]<len(dupe)):
                     continue
 
-                cell = dupe[chk[1]][chk[0]]
-                if not chk[:-1] in moves and canGoFunc(cell):
+                if not chk[:-1] in moves and canGoFunc(chk[0],chk[1]):
                     moves.append(chk[:-1])
                     options.append(chk)
 
@@ -145,9 +144,8 @@ def pathGrid(steps,canGoFunc,grid,startPos):
     moves = [vec2(i[0],i[1]) for i in moves]
     return moves
 
-def rayCircle(startPos,radius,grid,checkFunc,method="check"):#raysquare, anyone?
+def rayCircle(sp,radius,grid,checkFunc,method="check"):#raysquare, anyone?
     points=[]
-    sp=[round(startPos[0]),round(startPos[1])]
     borders=circleGrid(radius,start_pos=sp,bordersOnly=True)
     for end in borders:
         pts = rayCast([sp,end],grid,checkFunc=checkFunc,method=method)
@@ -239,6 +237,6 @@ def explore_step(curr,grid,canGoFunc):
     poss=[[ps[0]+i[0],ps[1]+i[1]] for i in [[-1,0],[1,0],[0,1],[0,-1]]]
     curr.children=[]
     for p in poss:
-        if (curr.parent==None or p!=curr.parent.pos) and (-1<p[0]<len(grid[0]) and -1<p[1]<len(grid)) and canGoFunc(grid[p[1]][p[0]]):
+        if (curr.parent==None or p!=curr.parent.pos) and (-1<p[0]<len(grid[0]) and -1<p[1]<len(grid)) and canGoFunc(p[0],p[1]):
             curr.addChild(pos=(p[0],p[1]))
     return curr.children

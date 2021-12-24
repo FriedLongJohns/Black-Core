@@ -1,10 +1,13 @@
-from gridView import *
-from gridClasses import *
-from equipment import *
-from gridGeo import *
-from levelGen import *
-from time import sleep
-
+try:
+    from gridView import *
+    from gridClasses import *
+    from equipment import *
+    from gridGeo import *
+    from levelGen import *
+    from time import sleep
+except Exception as e:
+    filePrint("Import fail: {}".format(e))
+    # logger.error('Failed to upload to ftp: '+ str(e))
 if __name__ == "__main__":
     filePrint("______NEW______")
     def main(stdscr):
@@ -19,12 +22,12 @@ if __name__ == "__main__":
         curses.curs_set(0)# Hide the cursor
         stdscr.keypad(True)#make arrow keys not be escape sequences
 
-        stdscr.resize(300,300)
+        stdscr.resize(75,50)
         cg = cursedgrid([[0,0],[50,50]],stdscr,defaultCell=".")#to make things square
         camsize=(10,10)
         def cam_area():
             return [[cam.pos[0],cam.pos[1]],[cam.pos[0]+camsize[0],cam.pos[1]+camsize[1]]]
-        uip=[25,25]#UI pos
+        uip=[4,4]#UI pos
         cam=cursedcam(camsize,stdscr,cg,outOffset=uip)
         ctex=cursedtext([[uip[0]*2,uip[1]+11],[100+uip[0]*2-1,14+uip[1]]],stdscr,rolling=True)#under
         ptex=cursedtext([[21+uip[0]*2,uip[1]],[30+uip[0]*2-1,11+uip[1]]],stdscr,rolling=False)#right
@@ -32,19 +35,20 @@ if __name__ == "__main__":
 
         #unit and unit func setup
         player = Unit([3,3],"Talus",["Hammer","Burst Rifle"],"Fiber Skeletals",kind="player",displayColor=2)
-        def cangf(gc):
-            if gc[0]==".":
+        cursorPos = mapl(player.pos)
+        units={}
+
+        #helper funcs
+        def cangf(x,y):
+            if cg.grid[y][x][0]=="." or str(vec2(x,y)) in list(units.keys()):
                 return True
             return False
-        def canff(gc):
-            if gc[0] in "#":
+        def canff(x,y):
+            if cg.grid[y][x][0] in "#x":
                 return False
             return True
-
         def getwt(unit):
             return unit.wait_time
-
-        cursorPos = mapl(player.pos)
         def wcp():
             return vec2(cam.pos[0]+cursorPos[0],cam.pos[1]+cursorPos[1])
 
@@ -64,18 +68,20 @@ if __name__ == "__main__":
         okays=[]
         ctex.addText("GAME START")
 
-        def render():
+        def render(clear=True):
             for k in list(units.keys()):
                 un=units[k]
-                cam.cell_overrides[str(un.pos)]=un.displayChar
+                if not str(un.pos) in list(cam.cell_overrides.keys()):
+                    cam.cell_overrides[str(un.pos)]=un.displayChar
                 if not str(un.pos) in list(cam.color_overrides.keys()):
                     cam.color_overrides[str(un.pos)]=un.displayColor
             ptex.push()
             ctex.push()
             cam.push()
             stdscr.refresh()
-            cam.cell_overrides={}
-            cam.color_overrides={}
+            if clear:
+                cam.cell_overrides={}
+                cam.color_overrides={}
 
         render()
 
@@ -126,23 +132,14 @@ if __name__ == "__main__":
                     elif state==2:
                         time=player.wps[0][2]/2#multiply acted wait time by 2 or they will be able toa ct again (wt=time,-time=0)
                         player.wait_time=time*2
-                        player.wps[0][3]=player.wps[0][1]["cooldown"]/2
+                        player.wps[state-2][3]=player.wps[state-2][1]["cooldown"]/2
                         for pos in lineGrid([cusp,player.pos]):
                             cam.color_overrides[str(pos)]=3
                         if str(cusp) in list(units.keys()):
-                            ctex.addText(units[str(cusp)].damage(player.wps[0][1]["damage"],player))
-                        render()
-                        sleep(.3)
-
-                    elif state==3:
-                        time=player.wps[1][2]/2#the use time of the weapon is autocalculated already
-                        player.wait_time=time*2
-                        player.wps[1][3]=player.wps[1][1]["cooldown"]/2
-
-                        for pos in lineGrid([cusp,player.pos]):
-                            cam.color_overrides[str(pos)]=3
-                        if str(cusp) in list(units.keys()):
-                            ctex.addText(units[str(cusp)].damage(player.wps[1][1]["damage"],player))
+                            ctex.addText(units[str(cusp)].damage(player.wps[state-2][1]["damage"],player))
+                            if not units[str(cusp)].health>0:
+                                ctex.addText(units[str(cusp)].name+" was destroyed!")
+                                del units[str(cusp)]
                         render()
                         sleep(.3)
                     state=0
@@ -229,6 +226,7 @@ if __name__ == "__main__":
                 for p in rayCircle(player.pos,player.wps[state-2][1]["range"],cg.grid,canff):
                     okays.append(p)
                     cam.color_overrides[str(p)]=1
+                render(clear=False)
                 pos = wcp()
                 if pos in okays:
                     cam.cell_overrides[str(pos)]="O"
@@ -246,5 +244,7 @@ if __name__ == "__main__":
             render()
             cam.cell_overrides={}
             cam.color_overrides={}
-
-    curses.wrapper(main)
+    try:
+        curses.wrapper(main)
+    except Exception as e:
+        filePrint("Main fail: {}".format(e))
