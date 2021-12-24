@@ -22,7 +22,7 @@ if __name__ == "__main__":
         curses.curs_set(0)# Hide the cursor
         stdscr.keypad(True)#make arrow keys not be escape sequences
 
-        stdscr.resize(75,50)
+        stdscr.resize(100,50)
         cg = cursedgrid([[0,0],[50,50]],stdscr,defaultCell=".")#to make things square
         camsize=(10,10)
         def cam_area():
@@ -34,7 +34,7 @@ if __name__ == "__main__":
 
 
         #unit and unit func setup
-        player = Unit([3,3],"Talus",["Hammer","Burst Rifle"],"Fiber Skeletals",kind="player",displayColor=2)
+        player = Unit([3,3],"Talus",["Hammer","Burst Rifle"],"None",kind="player",displayColor=2)
         cursorPos = mapl(player.pos)
         units={}
 
@@ -44,7 +44,7 @@ if __name__ == "__main__":
                 return True
             return False
         def canff(x,y):
-            if cg.grid[y][x][0] in "#x":
+            if cg.grid[y][x][0] in "#":
                 return False
             return True
         def getwt(unit):
@@ -73,8 +73,8 @@ if __name__ == "__main__":
                 un=units[k]
                 if not str(un.pos) in list(cam.cell_overrides.keys()):
                     cam.cell_overrides[str(un.pos)]=un.displayChar
-                if not str(un.pos) in list(cam.color_overrides.keys()):
-                    cam.color_overrides[str(un.pos)]=un.displayColor
+                # if not str(un.pos) in list(cam.color_overrides.keys()):
+                #     cam.color_overrides[str(un.pos)]=un.displayColor
             ptex.push()
             ctex.push()
             cam.push()

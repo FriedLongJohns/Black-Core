@@ -56,6 +56,11 @@ ARMORS = {
         "hp": 40,
         "act_time_multiplier": 1.35,
         "damage_multiplier": .8,
+    },
+    "None": {
+        "hp": 0,
+        "act_time_multiplier": 1,
+        "damage_multiplier": 1,
     }
 }
 

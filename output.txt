@@ -8,3 +8,16 @@ Main fail: free variable 'units' referenced before assignment in enclosing scope
 ______NEW______
 Main fail: local variable 'cangf' referenced before assignment
 ______NEW______
+______NEW______
+Import fail: invalid syntax (equipment.py, line 60)
+______NEW______
+Main fail: name 'Unit' is not defined
+Import fail: invalid syntax (equipment.py, line 60)
+______NEW______
+Main fail: name 'Unit' is not defined
+______NEW______
+______NEW______
+______NEW______
+______NEW______
+______NEW______
+______NEW______

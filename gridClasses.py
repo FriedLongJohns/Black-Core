@@ -161,14 +161,14 @@ class Unit:
                 beste=error
                 best=pos["pos"]
 
-        if best==self.pos or (mode=="angry" and max(enemy.wps[0][1]["range"],enemy.wps[1][1]["range"])>=dist(self.pos,enemy.pos) and raycast([pos,enemy.pos],grid,fireFunc,method="end")==enemy.pos):
+        if los and (best==self.pos or (mode=="angry" and max(enemy.wps[0][1]["range"],enemy.wps[1][1]["range"])>=dist(self.pos,enemy.pos))):
             #either if we don't have to move or we're [angry, in range, and in LOS of enemy]
             if not self.wps[0][3]>0:
-                if not self.wps[1][3]>0 and checks[4] and not self.wps[0][1]["range"]<dist(self.pos,enemy.pos):
+                if not self.wps[1][3]>0 and checks[4] and self.wps[0][1]["range"]>=dist(self.pos,enemy.pos):
                     return ["fire",0]
-                elif not self.wps[0][1]["range"]<dist(self.pos,enemy.pos):#if not in range, wait
+                elif self.wps[0][1]["range"]>=dist(self.pos,enemy.pos):#if not in range, wait
                     return ["fire",1]
-            elif not self.wps[1][3]>0 and  not self.wps[1][1]["range"]<dist(self.pos,enemy.pos):
+            elif not self.wps[1][3]>0 and self.wps[1][1]["range"]>=dist(self.pos,enemy.pos):
                 return ["fire",1]
             return ["wait"]#wait .1 time, basically until it needs (or can) do something
         else:

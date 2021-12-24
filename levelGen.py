@@ -26,10 +26,10 @@ def genBoard(x_size,y_size,defCell=".",wallCell="x",empty=.1):
     for row in range(len(grid)):
         if row==0 or row==len(grid)-1:
             for i in range(len(grid[row])):
-                grid[row][i]="x"
+                grid[row][i]=wallCell
         else:
-            grid[row][0]="x"
-            grid[row][-1]="x"
+            grid[row][0]=wallCell
+            grid[row][-1]=wallCell
     return grid
 
 def spawnUnits(crang,amount,canSpawnFunc,grid,minPlayerDist=-1,playerPos=[0,0]):
