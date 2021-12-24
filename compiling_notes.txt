@@ -1,0 +1,1 @@
+Always do -F so it makes a single standalone exec instead of a folder!
