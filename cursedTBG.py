@@ -22,15 +22,16 @@ if __name__ == "__main__":
         curses.curs_set(0)# Hide the cursor
         stdscr.keypad(True)#make arrow keys not be escape sequences
 
-        stdscr.resize(100,50)
+        stdscr.resize(150,150)
         cg = cursedgrid([[0,0],[50,50]],stdscr,defaultCell=".")#to make things square
         camsize=(10,10)
         def cam_area():
-            return [[cam.pos[0],cam.pos[1]],[cam.pos[0]+camsize[0],cam.pos[1]+camsize[1]]]
+            return [[cam.pos[0],cam.pos[1]],[cam.pos[0]+cam.viewSize[0],cam.pos[1]+cam.viewSize[1]]]
+
         uip=[4,4]#UI pos
         cam=cursedcam(camsize,stdscr,cg,outOffset=uip)
-        ctex=cursedtext([[uip[0]*2,uip[1]+11],[100+uip[0]*2-1,14+uip[1]]],stdscr,rolling=True)#under
-        ptex=cursedtext([[21+uip[0]*2,uip[1]],[30+uip[0]*2-1,11+uip[1]]],stdscr,rolling=False)#right
+        ctex=cursedtext([[uip[0]*2,uip[1]+11],[200+uip[0]*2-1,14+uip[1]]],stdscr,rolling=True)#under
+        ptex=cursedtext([[21+uip[0]*2,uip[1]],[50+uip[0]*2-1,11+uip[1]]],stdscr,rolling=False)#right
 
 
         #unit and unit func setup
@@ -44,7 +45,7 @@ if __name__ == "__main__":
                 return True
             return False
         def canff(x,y):
-            if cg.grid[y][x][0] in "#":
+            if cg.grid[y][x][0] == "#":
                 return False
             return True
         def getwt(unit):
@@ -57,7 +58,7 @@ if __name__ == "__main__":
         for y in range(len(level)):
             for x in range(len(level[y])):
                 cg.grid[y][x][0]=level[y][x]
-        units={str(u.pos):u for u in spawnUnits(([0,0],[49,49]),15,cangf,cg.grid,minPlayerDist=4,playerPos=[3,3])}
+        units={str(u.pos):u for u in spawnUnits(([0,0],[49,49]),50,cangf,cg.grid,minPlayerDist=4,playerPos=[3,3])}
         for k in list(units.keys()):
             units[k].displayColor=3
         cg.repRange([[1,1],[6,6]])
@@ -68,13 +69,13 @@ if __name__ == "__main__":
         okays=[]
         ctex.addText("GAME START")
 
-        def render(clear=True):
+        def render(clear=True,color=1,cell=1,):
             for k in list(units.keys()):
                 un=units[k]
-                if not str(un.pos) in list(cam.cell_overrides.keys()):
+                if cell==2 or (cell==1 and not str(un.pos) in list(cam.cell_overrides.keys())):
                     cam.cell_overrides[str(un.pos)]=un.displayChar
-                # if not str(un.pos) in list(cam.color_overrides.keys()):
-                #     cam.color_overrides[str(un.pos)]=un.displayColor
+                if color==2 or (color==1 and not str(un.pos) in list(cam.color_overrides.keys())):
+                    cam.color_overrides[str(un.pos)]=un.displayColor
             ptex.push()
             ctex.push()
             cam.push()
@@ -120,6 +121,8 @@ if __name__ == "__main__":
 
             if key=="\n" and state!=0:
                 cusp=wcp()
+                # filePrint(okays)
+                # filePrint(cusp)
                 if cusp in okays:
                     if state==1:
                         time=player.act_time/2
@@ -129,8 +132,8 @@ if __name__ == "__main__":
                         player.pos=cusp
                         render()
                         sleep(.3)
-                    elif state==2:
-                        time=player.wps[0][2]/2#multiply acted wait time by 2 or they will be able toa ct again (wt=time,-time=0)
+                    elif state in [2,3]:
+                        time=player.wps[state-2][2]/2#multiply acted wait time by 2 or they will be able toa ct again (wt=time,-time=0)
                         player.wait_time=time*2
                         player.wps[state-2][3]=player.wps[state-2][1]["cooldown"]/2
                         for pos in lineGrid([cusp,player.pos]):
@@ -144,10 +147,8 @@ if __name__ == "__main__":
                         sleep(.3)
                     state=0
                     okays=[]
-                    # cam.color_overrides={}
-
-                    # ctex.addText("did action, taking {} time".format(str(time)))
-                    # ptex.text[0]="last turn time: "+str(time)+"ds"
+                else:
+                    ctex.addText("Weapon cannot shoot there")
 
             if key =="q":
                 if state==0:
@@ -159,6 +160,7 @@ if __name__ == "__main__":
             #time+ai
             if time!=0:
                 while player.wait_time>0:
+                    new={}
                     for k in list(units.keys()):
                         un=units[k]
                         cam.cell_overrides[str(un.pos)]=un.displayChar
@@ -196,11 +198,7 @@ if __name__ == "__main__":
                             elif action[0]=="move":
                                 time=un.act_time
                                 un.wait_time=time*2
-                                if between2d(un.pos,cam_area()):
-                                    for pos in pathGrid(un.move_max,cangf,cg.grid,un.pos):
-                                        cam.color_overrides[str(pos)]=1
-                                    render()
-                                    sleep(.3)
+                                if between2d(un.pos,cam_area()[0],cam_area()[1]):
                                     for pos in tryPathFind(un.move_max,cangf,cg.grid,un.pos,action[1]):
                                         cam.color_overrides[str(pos)]=4
                                     un.pos=action[1]
@@ -209,7 +207,8 @@ if __name__ == "__main__":
                                 else:
                                     un.pos=action[1]
                                     render()
-            #EFFECTS
+                        new[str(un.pos)]=un
+                    units = new
 
             #colors
             if state==1:
@@ -221,30 +220,23 @@ if __name__ == "__main__":
                     cam.cell_overrides[str(pos)]="O"
                 else:
                     cam.cell_overrides[str(pos)]="X"
+                render(cell=0,color=2)
 
             elif state in [2,3]:
                 for p in rayCircle(player.pos,player.wps[state-2][1]["range"],cg.grid,canff):
                     okays.append(p)
                     cam.color_overrides[str(p)]=1
-                render(clear=False)
                 pos = wcp()
                 if pos in okays:
                     cam.cell_overrides[str(pos)]="O"
                 else:
                     cam.cell_overrides[str(pos)]="X"
+                render(cell=0,color=2)
 
-            for k in list(units.keys()):
-                unit = units[k]
-                if unit.health>0:
-                    cam.cell_overrides[str(unit.pos)]=unit.displayChar
-                    cam.color_overrides[str(unit.pos)]=unit.displayColor
-                else:
-                    del units[k]
-
-            render()
-            cam.cell_overrides={}
-            cam.color_overrides={}
+            else:
+                render()
     try:
         curses.wrapper(main)
     except Exception as e:
+        print(e)
         filePrint("Main fail: {}".format(e))

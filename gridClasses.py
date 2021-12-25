@@ -48,7 +48,7 @@ class Unit:
         self.displayColor=displayColor
 
         if kind=="enemy":
-            self.name+="_"+forcefit(hash(frame+armor+str(coords)),4,pos="r")
+            self.name+="_"+forcefit(hash(frame+armor+str(coords)),4,pos="l")
 
         self.aimode = aimode
         if aimode=="rand":

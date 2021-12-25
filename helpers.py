@@ -99,5 +99,5 @@ def stripe(tol):#turn tuple/list from ?a,b,c? to a,b,class
 def absol(num):
     return (num*num)**.5
 
-def between2d(point,borders):
-    return borders[0][0]<point[0]<borders[1][0] and borders[1][0]<point[1]<borders[1][1]
+def between2d(point,mn,mx):
+    return mn[0]<point[0]<mx[0] and mn[1]<point[1]<mx[1]

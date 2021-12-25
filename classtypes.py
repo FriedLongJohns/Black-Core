@@ -104,7 +104,7 @@ class vec2():
 
     def __eq__(self,value):
         assert isinstance(value, (vec2,list,tuple))
-        return self.pos[0]==value[0] and self.pos[1]==value[1]
+        return self[0]==value[0] and self[1]==value[1]
 
     def __round__(self):
         return vec2(round(self.x), round(self.y))
