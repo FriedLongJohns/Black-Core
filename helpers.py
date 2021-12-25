@@ -1,3 +1,5 @@
+import os
+
 square=[0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361, 400, 441, 484, 529, 576, 625, 676, 729, 784, 841, 900, 961, 1024, 1089, 1156, 1225, 1296, 1369, 1444, 1521, 1600, 1681, 1764, 1849, 1936, 2025, 2116, 2209, 2304, 2401, 2500, 2601, 2704, 2809, 2916, 3025, 3136, 3249, 3364, 3481, 3600, 3721, 3844, 3969, 4096, 4225, 4356, 4489, 4624, 4761, 4900, 5041, 5184, 5329, 5476, 5625, 5776, 5929, 6084, 6241, 6400, 6561, 6724, 6889, 7056, 7225, 7396, 7569, 7744, 7921, 8100, 8281, 8464, 8649, 8836, 9025, 9216, 9409, 9604, 9801, 10000]
 #0-100
 
@@ -47,21 +49,17 @@ def simp(nums,returnFactor=False):
     return out
 
 def filePrint(text,file="output.txt"):
+    path=os.getcwd()+"/"+str(file)
     try:
-        with open(file,"r") as s:
-            pre=s.read()
+        open(path,"x").close()
     except:
-        f=open(file,"x")
-        f.close()
-        with open(file,"r") as s:
-            pre=s.read()
-    with open(file,"w") as fl:
+        pass
+    with open(path,"a") as fl:
         if type(text) == list:
-            fl.write(pre+"\n"+", ".join([str(e) for e in text]))
-            fl.close()
+            fl.write("\n"+", ".join([str(e) for e in text]))
         else:
-            fl.write(pre+"\n"+str(text))
-            fl.close()
+            fl.write("\n"+str(text))
+        fl.close()
 
 def digDex(thing,path):
     if type(thing) == string or len(path)==0:
