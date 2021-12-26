@@ -100,7 +100,7 @@ class vec2():
 
     def __setitem__(self,index,value):
         self.pos[index]=value
-        reload()
+        self.reload()
 
     def __eq__(self,value):
         assert isinstance(value, (vec2,list,tuple))

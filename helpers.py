@@ -21,12 +21,15 @@ def forcefit(thing,size,pos="l"):
     stronk = str(thing)
 
     if len(stronk)>size:
-        return stronk[:size]
+        if pos=="l":
+            return stronk[:size]
+        else:
+            return stronk[-1-size:]
 
     if pos=="l":
         return " "*(size-len(stronk))+stronk
     else:
-        return stronk+" "*(size-len(stronk))
+        return stronk+(" "*(size-len(stronk)))
 
 def simp(nums,returnFactor=False):
     index=0

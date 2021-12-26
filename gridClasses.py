@@ -48,7 +48,7 @@ class Unit:
         self.displayColor=displayColor
 
         if kind=="enemy":
-            self.name+="_"+forcefit(hash(frame+armor+str(coords)),4,pos="l")
+            self.name+="_"+forcefit(hash(frame+armor+str(coords)),4,pos="r")
 
         self.aimode = aimode
         if aimode=="rand":
@@ -96,8 +96,8 @@ class Unit:
             md=self.aimode
         else:
             assert mode in ["dam","assault","kite","angry"]
-        #dam : gets to the range where it has more potential damage compared to the enemy, attempting to kite if possible - prioritisies position over firing
-        #assault : gets to the average between it's two weapon ranges to the enemy, prioritizing firing over moving,
+        #dam : gets to the range where it has more potential damage compared to the enemy, attempting to kite if possible
+        #assault : gets to the average between it's two weapon ranges to the enemy
         #   and running away when fully on cooldown.
         #kite : stays at max range, prioritising moving over firing
         #angry : pathfinds to the player and then fires until it can't. no retreating.
@@ -161,8 +161,8 @@ class Unit:
                 beste=error
                 best=pos["pos"]
 
-        if los and (best==self.pos or (mode=="angry" and max(enemy.wps[0][1]["range"],enemy.wps[1][1]["range"])>=dist(self.pos,enemy.pos))):
-            #either if we don't have to move or we're [angry, in range, and in LOS of enemy]
+        if (mode!="kite" or self.pos==best) and los and max(self.wps[0][1]["range"],self.wps[1][1]["range"])>=dist(self.pos,enemy.pos) and min(self.wps[0][3],self.wps[1][3])<=0:
+            #if we can fire, do it (unless kiting and not at best pos)
             if not self.wps[0][3]>0:
                 if not self.wps[1][3]>0 and checks[4] and self.wps[0][1]["range"]>=dist(self.pos,enemy.pos):
                     return ["fire",0]

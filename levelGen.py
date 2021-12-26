@@ -11,7 +11,6 @@ def genBoard(x_size,y_size,defCell=".",wallCell="x",empty=.1):
     def poosh(unit,xo,yo):
         for y in range(len(unit)):
             for x in range(len(unit[0])):
-                print("poosh x{} y{}".format(x,y))
                 cell = unit[y][x]
                 if cell=="x":
                     if cell!=wallCell:
