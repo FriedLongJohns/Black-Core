@@ -58,7 +58,7 @@ if __name__ == "__main__":
                 kind="player",
                 displayColor=2
             )
-            cursorPos = mapl(player.pos)
+            cursorPos = vec2(player.pos[0],player.pos[1])
             units={}
 
             #helper funcs
@@ -89,7 +89,6 @@ if __name__ == "__main__":
             time=0
             state=0#0: selecting 1: moving 2: shooting first weapon 3: shooting second weapon
             okays=[]
-            ctex.addText("GAME START")
 
             def render(clear=True,color=1,cell=1,):
                 for k in list(units.keys()):
@@ -104,6 +103,34 @@ if __name__ == "__main__":
                 if clear:
                     cam.cell_overrides={}
                     cam.color_overrides={}
+
+            render()
+
+            instructions=[
+                "PLAYER INITIALIZED",
+                "Keybinds:",
+                "   w,a,s,d : cursor up,left,down,right",
+                "   up,left,down,right arrow keys : camera up,left,down,right",
+                "   m : select movement",
+                "   1 : select first weapon for firing",
+                "   2 : select second weapon for firing",
+                "   q : exit selection modes (from keys m,1, and 2) or exit game",
+                "   enter : confirm selection to fire or move",
+                "Game basics:",
+                "The player is green with an \"o\" icon.",
+                "When you select an action to do, several grid squares will turn white.",
+                "These are the acceptable areas to preform actions.",
+                "The cursor will always start on the position of the player, and will have an \"O\" or \"X\" displayed.",
+                "Enemies are \"*\" icons. They will shoot at the player.",
+                "# are walls. Do not try to break a wall. They do not break.",
+                "ELIMINATE ALL ENEMIES",
+            ]
+            for i in instructions:
+                ctex.addText(i)
+                render()
+                sleep(.7+len(i)/80)#bigger ones give longer time to read
+
+            ctex.addText("GAME START")
 
             render()
             try:
@@ -164,6 +191,14 @@ if __name__ == "__main__":
                                     if not units[str(cusp)].health>0:
                                         ctex.addText(units[str(cusp)].name+" was destroyed!")
                                         del units[str(cusp)]
+                                        if len(units.keys())==1:#only player is left
+                                            ctex.addText("OBJECTIVE COMPLETED")
+                                            render()
+                                            sleep(1.2)
+                                            ctex.addText("GAME SHUTDOWN")
+                                            render()
+                                            sleep(1.5)
+                                            exit()
                                 render()
                                 sleep(.3)
                             state=0
@@ -274,7 +309,6 @@ if __name__ == "__main__":
             # if True:
                 rtex=cursedtext([[22+uip[0]*2,uip[1]],[70+uip[0]*2-1,11+uip[1]]],stdscr,rolling=False)#right
                 mtex=cursedtext([[uip[0],uip[1]],[19+uip[0]*2-1,11+uip[1]]],stdscr,rolling=False)#middle
-                mtex.text[0]="EQUIPMENT"
                 pos=[pGear[0],0]
 
                 def geardex(index):
@@ -327,6 +361,10 @@ if __name__ == "__main__":
                     rtex.push()
                     mtex.push()
 
+                # stdscr.clear()
+                mtex.text[0]="EQUIPMENT"
+                mtex.text[-2]="Arrow keys to swap gear"
+                mtex.text[-1]="Press enter to confirm loadout"
                 render()
                 while True:
                     key=stdscr.getkey()
