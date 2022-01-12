@@ -9,6 +9,8 @@ def gf(cell):
 
 #END CUSTOMS
 
+# use these doodoo head  ┤ ├ ■ ┌ ┴ ┐└ ╥ ┘ ╫ ║ ═ ╩
+
 class cursedgrid():
     def __init__(self,crdRang,screen,defaultCell=" ",defaultColor=0):
         #speed vars
