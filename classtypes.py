@@ -1,6 +1,3 @@
-# from math import cos,sin
-# import numpy as np
-
 class vec2():
     def __init__(self,x,y):
         self.pos=[x,y]
@@ -27,21 +24,6 @@ class vec2():
     def y(self, value):
         self[1] = value
         self.reload()
-
-    # @property
-    # def angle(self):
-    #     return np.degrees(np.arctan2(self.x, self.y)) % 360.0
-    #
-    # @angle.setter
-    # def angle(self, value):
-    #     theta = np.deg2rad(value)
-    #     rot = np.array([[cos(theta), -sin(theta)], [sin(theta), cos(theta)]])
-    #     end = np.dot(rot, np.array([0,1]))
-    #     self.pos=[end[0],end[1]]
-    #     self.reload()
-    #
-    # def rotate(self, angle):
-    #     self.angle=self.angle+angle
 
     @property
     def normal(self):
@@ -161,7 +143,6 @@ class polydict:
 
         self.stored[hash(str(set))]=set
         self.len = len(self.stored)
-
 
     def get(self, criteria):
         assert type(criteria)==dict
