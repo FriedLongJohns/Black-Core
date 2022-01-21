@@ -36,6 +36,11 @@ if __name__ == "__main__":
         stdscr.resize(150,150)
         uip=[4,4]#UI pos
         pGear=[0,0,1,0]
+
+        def menu():
+            ctex=cursedtext([[uip[0],uip[1]+11],[200+uip[0],16+uip[1]]],stdscr,rolling=False)
+            ctex.text=[""]
+
         def core():
             cg = cursedgrid([[0,0],[50,50]],stdscr,defaultCell=".")
             camsize=(10,10)
@@ -355,6 +360,7 @@ if __name__ == "__main__":
 
                     for l in range(len(names)):
                         if l==pos[1]:
+
                             mtex.text[l+1]="-"+names[l]+"-"
                         else:
                             mtex.text[l+1]=names[l]
@@ -388,6 +394,7 @@ if __name__ == "__main__":
                 filePrint("pos: "+str(pos))
                 filePrint("pGear: "+str(pGear))
                 filePrint("Gear fail: {}".format(e))
+
         gear()
         stdscr.clear()
         core()
