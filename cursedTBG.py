@@ -107,34 +107,41 @@ if __name__ == "__main__":
 
             render()
 
-            instructions=[
-                "PLAYER INITIALIZED",
-                "Keybinds:",
-                "   w,a,s,d : cursor up,left,down,right",
-                "   up,left,down,right arrow keys : camera up,left,down,right",
-                "   m : select movement",
-                "   1 : select first weapon for firing",
-                "   2 : select second weapon for firing",
-                "   q : exit selection modes (from keys m,1, and 2) or exit game",
-                "   enter : confirm selection to fire or move",
-                "Game basics:",
-                "The player is green with an \"o\" icon.",
-                "When you select an action to do, several grid squares will turn white.",
-                "These are the acceptable areas to preform actions.",
-                "The cursor will always start on the position of the player,",
-                "and will have an \"O\" or \"X\" displayed.",
-                "Enemies are \"*\" icons. They will shoot at the player.",
-                "# are walls. Do not try to break a wall. They do not break.",
-                "ELIMINATE ALL ENEMIES",
-            ]
-            for i in instructions:
-                ctex.addText(i)
+            ctex.addText("Show the tutorial? (q or enter to skip, any other to show)")
+            render()
+            key=stdscr.getkey()
+            if not key in ["q","\n"]:
+                instructions=[
+                    "PLAYER INITIALIZED",
+                    "Keybinds:",
+                    "   w,a,s,d : cursor up,left,down,right",
+                    "   up,left,down,right arrow keys : camera up,left,down,right",
+                    "   m : select movement",
+                    "   1 : select first weapon for firing",
+                    "   2 : select second weapon for firing",
+                    "   q : exit selection modes (from keys m,1, and 2) or exit game",
+                    "   enter : confirm selection to fire or move",
+                    "Game basics:",
+                    "The player is green with an \"o\" icon.",
+                    "When you select an action to do, several grid squares will turn white.",
+                    "These are the acceptable areas to preform actions.",
+                    "The cursor will always start on the position of the player,",
+                    "and will have an \"O\" or \"X\" displayed.",
+                    "Enemies are \"*\" icons. They will shoot at the player.",
+                    "# are walls. Do not try to break a wall. They do not break.",
+                    "ELIMINATE ALL ENEMIES",
+                ]
+                for i in instructions:
+                    ctex.addText(i)
+                    render()
+                    sleep(.7+len(i)/80)#bigger ones give longer time to read
+            else:
+                ctex.addText("Tutorial skipped")
                 render()
-                sleep(.7+len(i)/80)#bigger ones give longer time to read
 
             ctex.addText("GAME START")
-
             render()
+
             try:
                 while True:
                     # Wait for a keystroke before doing anything
