@@ -121,7 +121,8 @@ if __name__ == "__main__":
                 "The player is green with an \"o\" icon.",
                 "When you select an action to do, several grid squares will turn white.",
                 "These are the acceptable areas to preform actions.",
-                "The cursor will always start on the position of the player, and will have an \"O\" or \"X\" displayed.",
+                "The cursor will always start on the position of the player,",
+                "and will have an \"O\" or \"X\" displayed.",
                 "Enemies are \"*\" icons. They will shoot at the player.",
                 "# are walls. Do not try to break a wall. They do not break.",
                 "ELIMINATE ALL ENEMIES",
@@ -249,8 +250,8 @@ if __name__ == "__main__":
                                             sleep(1.2)
                                             ctex.addText("GAME SHUTDOWN")
                                             render()
-                                            sleep(1.5)
-                                            exit()
+                                            sleep(2.2)
+                                            return
                                         render()
                                     elif action[0]=="move":
                                         time=un.act_time
