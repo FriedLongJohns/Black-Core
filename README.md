@@ -11,6 +11,6 @@ There might be many more enemies than players, but the player moves much quicker
 
 Every action in the game takes time, so if you're quick you might be able to attack the enemy then run away before it can do anything, and vice versa for a slow unit.
 
-There's a little AI system I very much like, and it was my first venture into pathfinding as well.
+On the more technical side of things, I very much had fun with pathfinding for the first time - although not so much with good AI, and I'll admit I've reworked the math functions many, many times to get them to work correctly.
 
 I hope you enjoy it.
