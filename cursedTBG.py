@@ -392,7 +392,7 @@ if __name__ == "__main__":
                 filePrint("Gear fail: {}".format(e))
 
         def menu():
-            ctex=cursedtext([[uip[0],uip[1]+11],[200+uip[0],20+uip[1]]],stdscr,rolling=False)
+            ctex=cursedtext([[uip[0],uip[1]+3],[200+uip[0],20+uip[1]]],stdscr,rolling=False)
             options=[
                 "BLACK CORE",
                 "Play",
