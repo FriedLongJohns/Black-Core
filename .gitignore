@@ -22,3 +22,5 @@ __pycache__/gridClasses.cpython-39.pyc
 __pycache__/equipment.cpython-39.pyc
 __pycache__/cursedTBG.cpython-39.pyc
 __pycache__/classtypes.cpython-39.pyc
+.DS_Store
+cursedTBG.spec
