@@ -37,10 +37,6 @@ if __name__ == "__main__":
         uip=[4,4]#UI pos
         pGear=[0,0,1,0]
 
-        def menu():
-            ctex=cursedtext([[uip[0],uip[1]+11],[200+uip[0],16+uip[1]]],stdscr,rolling=False)
-            ctex.text=[""]
-
         def core():
             cg = cursedgrid([[0,0],[50,50]],stdscr,defaultCell=".")
             camsize=(10,10)
@@ -395,9 +391,65 @@ if __name__ == "__main__":
                 filePrint("pGear: "+str(pGear))
                 filePrint("Gear fail: {}".format(e))
 
-        gear()
-        stdscr.clear()
-        core()
+        def menu():
+            ctex=cursedtext([[uip[0],uip[1]+11],[200+uip[0],20+uip[1]]],stdscr,rolling=False)
+            options=[
+                "BLACK CORE",
+                "Play",
+                "Equipment",
+                "Options",
+                "Credits",
+                "Exit",
+            ]
+            selected=0
+            try:
+                while True:
+                    ctex.text=mapl(options)
+                    ctex.text[selected]="-"+ctex.text[selected]+"-"
+                    stdscr.clear()
+                    ctex.push()
+                    key=stdscr.getkey()
+                    if key in ["KEY_UP","w"] and selected>0:
+                        selected-=1
+                    elif key in ["KEY_DOWN","s"] and selected<5:
+                        selected+=1
+                    elif key=="\n":
+                        key="null"
+                        if selected==0:
+                            ctex.text=["ABOUT BLACK CORE","","  This is a game I made.","I like text-based visuals,","and turn-based games,","and I had fun making this.","So I hope you have fun playing."]
+                            stdscr.clear()
+                            ctex.push()
+                            while not key in ["\n","q"]:
+                                key=stdscr.getkey()
+                        elif selected==1:
+                            stdscr.clear()
+                            core()
+                        elif selected==2:
+                            stdscr.clear()
+                            gear()
+                        elif selected==3:
+                            ctex.text=["Options Menu","","...What options would I put in this kind of game?","","You can go back now."]
+                            stdscr.clear()
+                            ctex.push()
+                            while not key in ["\n","q"]:
+                                key=stdscr.getkey()
+                        elif selected==4:
+                            ctex.text=["Credits","","100% Coded by me.","Uses:","-Curses, a python ascii display library","-PyInstaller, a python-to-exe command line tool","-Sheer will, to finish the despicable AI system."]
+                            stdscr.clear()
+                            ctex.push()
+                            while not key in ["\n","q"]:
+                                key=stdscr.getkey()
+                        elif selected==5:
+                            exit()
+                    elif key=="q":
+                        exit()
+            except Exception as e:
+                filePrint("options: {}".format(options))
+                filePrint("selected: {}".format(selected))
+                filePrint("ctex: "+str(vars(ctx)))
+                filePrint("Menu fail: {}".format(e))
+
+        menu()
 
     curses.wrapper(main)
     print("LOG")
