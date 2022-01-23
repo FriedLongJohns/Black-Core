@@ -22,3 +22,6 @@ Every action in the game takes time, so if you're quick you might be able to att
 On the more technical side of things, I very much had fun with pathfinding for the first time - although not so much with good AI, and I'll admit I've reworked the math functions many, many times to get them to work correctly.
 
 I hope you enjoy it.
+
+OS X: .exec file located in /dist
+Windows: You'll have to copy the repository and run from terminal on windows, sorry :(
