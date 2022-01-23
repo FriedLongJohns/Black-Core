@@ -37,8 +37,38 @@ WEAPONS = {
         "damage": 50,
         "range": 5,
         "use_time_speed": .7,
+        "cooldown": 3,
+    },
+    "Sniper Rifle": {
+        "damage": 60,
+        "range": 10,
+        "use_time_speed": 1.2,
+        "cooldown": 4,
+    },
+    "Pistol": {
+        "damage": 30,
+        "range": 4,
+        "use_time_speed": .5,
         "cooldown": 2,
-    }
+    },
+    "Cannon": {
+        "damage": 100,
+        "range": 5,
+        "use_time_speed": 1.1,
+        "cooldown": 10,
+    },
+    "Shotgun": {
+        "damage": 90,
+        "range": 3,
+        "use_time_speed": .7,
+        "cooldown": 4,
+    },
+    "SMG": {
+        "damage": 10,
+        "range": 5,
+        "use_time_speed": .4,
+        "cooldown": 0,
+    },
 }
 
 ARMORS = {

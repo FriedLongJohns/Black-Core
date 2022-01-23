@@ -189,7 +189,7 @@ if __name__ == "__main__":
                                 player.pos=cusp
                                 render()
                                 sleep(.3)
-                            elif state in [2,3]:
+                            elif state in [2,3] and player.wps[state-2][3]<=0:
                                 time=player.wps[state-2][2]/2#multiply acted wait time by 2 or they will be able toa ct again (wt=time,-time=0)
                                 player.wait_time=time*2
                                 player.wps[state-2][3]=player.wps[state-2][1]["cooldown"]/2
@@ -424,7 +424,30 @@ if __name__ == "__main__":
                     elif key=="\n":
                         key="null"
                         if selected==0:
-                            ctex.text=["ABOUT BLACK CORE","","  This is a game I made.","I like text-based visuals,","and turn-based games,","and I had fun making this.","So I hope you have fun playing."]
+                            ctex.text=["ABOUT BLACK CORE",
+                            "Black Core is a little turn-based text display game I made for fun, and because I wanted to make something cool.",
+                            "",
+                            "On par with my normal game development criteria, it's meant for those who want a challenge."
+                            " Not those who get dopamine from slowly gaining power or wealth,"
+                            " the game gives you everything you need to finish it."
+                            " And the only reward for doing so is knowing you did it,"
+                            " is that YOU, through your work and time,"
+                            " beat a little game in a big world."
+                            "",
+                            "The entire game is played with only number, q, WASD, arrow, and enter keys. All of it.",
+                            "",
+                            "The game itself is quite simple: Choose equipment, then venture out into a randomized map with enemies do destroy in it.",
+                            "",
+                            "There might be many more enemies than players, but the player moves much quicker than the enemies.",
+                            "",
+                            "Every action in the game takes time, so if you're quick you might be able to attack the enemy then run away before it can do anything,",
+                            " and vice versa for a slow unit.",
+                            "",
+                            "On the more technical side of things, I very much had fun with pathfinding for the first time - although not so much with good AI,",
+                            " and I'll admit I've reworked the math functions many, many times to get them to work correctly.",
+                            "",
+                            "I hope you enjoy it.",
+                            ]
                             stdscr.clear()
                             ctex.push()
                             while not key in ["\n","q"]:
