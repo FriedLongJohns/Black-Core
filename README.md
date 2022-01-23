@@ -23,5 +23,6 @@ On the more technical side of things, I very much had fun with pathfinding for t
 
 I hope you enjoy it.
 
-OS X: .exec file located in /dist
+OS X and Linux: .exec file located in /dist
+
 Windows: You'll have to copy the repository and run from terminal on windows, sorry :(
