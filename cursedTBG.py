@@ -427,12 +427,12 @@ if __name__ == "__main__":
                             ctex.text=["ABOUT BLACK CORE",
                             "Black Core is a little turn-based text display game I made for fun, and because I wanted to make something cool.",
                             "",
-                            "On par with my normal game development criteria, it's meant for those who want a challenge."
-                            " Not those who get dopamine from slowly gaining power or wealth,"
-                            " the game gives you everything you need to finish it."
-                            " And the only reward for doing so is knowing you did it,"
-                            " is that YOU, through your work and time,"
-                            " beat a little game in a big world."
+                            "On par with my normal game development criteria, it's meant for those who want a challenge.",
+                            " Not those who get dopamine from slowly gaining power or wealth",
+                            " the game gives you everything you need to finish it.",
+                            " And the only reward for doing so is knowing you did it",
+                            " is that YOU, through your work and time,",
+                            " beat a little game in a big world.",
                             "",
                             "The entire game is played with only number, q, WASD, arrow, and enter keys. All of it.",
                             "",
