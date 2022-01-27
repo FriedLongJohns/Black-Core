@@ -1,6 +1,12 @@
 class vec2():
-    def __init__(self,x,y):
-        self.pos=[x,y]
+    def __init__(self,x,y=None):
+        if y==None:
+            if type(x) in [list,tuple]:
+                self.pos=[x[0],x[1]]
+            else:
+                self.pos=[x,x]
+        else:
+            self.pos=[x,y]
         self.dist=0
         self.reload()
 
