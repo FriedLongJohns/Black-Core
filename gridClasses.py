@@ -8,7 +8,6 @@ from classtypes import vec2
 
 class ClassCell:
     def __init__(self,coords,kind,health=-1,name="",displayChar="?"):
-        assert kind in ["terrain","enemy","player","ignoreKind"]
         self.pos = vec2(coords[0],coords[1])
         self.health = health
         self.kind = kind
@@ -22,7 +21,6 @@ class ClassCell:
 
 class Unit:
     def __init__(self,coords,frame,weapons,armor,kind="enemy",displayChar="o",displayColor=0,aimode="rand"):
-        assert kind in ["enemy","player","ignoreKind"]
 
         assert frame in FRAMES.keys()
         assert armor in ARMORS.keys()
@@ -47,14 +45,20 @@ class Unit:
         self.displayChar=displayChar
         self.displayColor=displayColor
 
-        if kind=="enemy":
-            self.name+="_"+forcefit(hash(frame+armor+str(coords)),4,pos="r")
+        self.id=hash(frame+armor+str(coords))
+
+        if kind in ["enemy","ally"]:
+            self.name+="_"+forcefit(self.id,4,pos="r")
 
         self.aimode = aimode
         if aimode=="rand":
             self.aimode=["dam","assault","kite","angry"][randint(0,3)]
 
     # def aiDynamicMove(player=None)
+    def __equals__(self,other):
+        if self.id==other.id:
+            return True
+        return False
 
     def attack(enemy,weapon):
         assert weapon in [i[0] for i in self.wps]
@@ -78,6 +82,20 @@ class Unit:
         mess = "{} unit was damaged to {} hp by {}".format(self.name,self.health,enemy.name)
         return mess
 
+    def get_enemy(self,units):
+        poss=[]
+        checks=(self.kind=="ally",self.kind=="enemy")
+        for unit in units:
+            if (checks[0] and unit.kind=="enemy") or (checks[1] and unit.kind!=self.kind):
+                poss.append([unit,dist(self.pos,unit.pos)*unit.health/self.health])
+        min=99999999999
+        selected=None
+        for p in poss:
+            if p[1]<min:
+                selected=p[0]
+                min=p[1]
+        return selected
+
     def evalPositions(self,enemy,checks,fireFunc,grid):
         out=[]
         for pos in checks:
@@ -85,7 +103,7 @@ class Unit:
             block={
                 "pos": pos.copy(),
                 "dist": dis,
-                "LOS": rayCast([pos,enemy.pos],grid,fireFunc,method="end")==enemy.pos,
+                "LOS": enemy.pos in rayCast([pos,enemy.pos],grid,fireFunc,method="line"),
             }
             out.append(block)
         return out
@@ -109,15 +127,15 @@ class Unit:
         checks=[False,False,False,False,False]
 
         if sr[0]>er[0]:
-            checks[0]=True
+            checks[0]=True#our first weapon has more range than enemy
         if sr[1]>er[1]:
-            checks[1]=True
+            checks[1]=True#our second weapon has more range than enemy
         if sd[0]>ed[0]:
-            checks[2]=True
+            checks[2]=True#our first weapon has more damage than enemy
         if sd[1]>ed[1]:
-            checks[3]=True
+            checks[3]=True#our second weapon has more  damage than enemy
         if sd[1]>sd[0]:
-            checks[4]=True
+            checks[4]=True#our first weapon has more range
 
         if mode=="angry":
             optimal_range=2
