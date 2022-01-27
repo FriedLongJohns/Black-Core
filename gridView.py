@@ -16,11 +16,11 @@ class cursedgrid():
         #speed vars
         self.range=crdRang
         self.gridSize=vec2(crdRang[1][0]-crdRang[0][0],crdRang[1][1]-crdRang[0][1])
-        self.bigSize=vec2(self.gridSize.x*2+2,self.gridSize.y+1)
+        self.bigSize=vec2(self.gridSize.x*2+1,self.gridSize.y)
         self.defColor=defaultColor
         self.defCell=defaultCell
 
-        self.grid = [[[mapl(defaultCell),defaultColor] for j in range(self.gridSize.x+1)] for i in range(self.gridSize.y+1)]
+        self.grid = [[[mapl(defaultCell),defaultColor] for j in range(self.gridSize.x)] for i in range(self.gridSize.y)]
         self.scr=screen
 
     def __str__(self):
@@ -34,7 +34,7 @@ class cursedgrid():
         self.defColor=defaultColor
         self.defCell=defaultCell
 
-        self.grid = [[[mapl(defaultCell),defaultColor] for j in range(self.gridSize.x+1)] for i in range(self.gridSize.y+1)]
+        self.grid = [[[mapl(defaultCell),defaultColor] for j in range(self.gridSize.x)] for i in range(self.gridSize.y)]
         self.scr=screen
 
     def repRange(self,rang,clearCell="˜¨¬¬",clearColor=-1):#˜¨¬¬ is null but holding option down >:)
@@ -102,12 +102,13 @@ class cursedcam():
                     self.scr.addch(y-self.pos[1]+self.outOffset[1],(x-self.pos[0]+self.outOffset[0])*2," ")
 
 class cursedtext():
-    def __init__(self,posrang,screen,text=[],rolling=True):
+    def __init__(self,posrang,screen,text=[],rolling=True,fit="r"):
         self.rang=posrang
         self.size=[posrang[1][0]-posrang[0][0]+1,posrang[1][1]-posrang[0][1]+1]
         self.rolling=rolling
         self.text=text
         self.scref=screen
+        self.fit=fit
         if not rolling and text==[]:
             self.text=[""*self.size[0] for i in range(self.size[1])]
 
@@ -121,6 +122,6 @@ class cursedtext():
             index=i-self.rang[0][1]
             if index<len(self.text):
                 text = self.text[index]
-                self.scref.addstr(i,self.rang[0][0]," "+forcefit(self.text[index],self.size[0],pos="r"))
+                self.scref.addstr(i,self.rang[0][0]," "+forcefit(self.text[index],self.size[0],pos=self.fit))
             else:
-                self.scref.addstr(i,self.rang[0][0]," "+forcefit("",self.size[0],pos="r"))
+                self.scref.addstr(i,self.rang[0][0]," "+forcefit("",self.size[0],pos=self.fit))
