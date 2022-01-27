@@ -230,7 +230,7 @@ def tryPathFind(steps,canGoFunc,grid,startPos,endPos):
         steps-=1
         queue=mapl(nq)
         nq=[]
-    return False
+    return startPos
 
 def explore_step(curr,grid,canGoFunc):
     ps = list(curr.pos)
