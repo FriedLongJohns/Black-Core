@@ -17,7 +17,10 @@ except:
     with open(os.getcwd()+"/output.txt","w") as file:
         file.write("")
 
-sleep(.5)
+#versions so far: mink
+print("Current Version: Mink")
+
+sleep(1)
 
 if __name__ == "__main__":
     filePrint("______NEW______")
