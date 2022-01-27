@@ -72,6 +72,11 @@ WEAPONS = {
 }
 
 ARMORS = {
+    "None": {
+        "hp": 0,
+        "act_time_multiplier": 1,
+        "damage_multiplier": 1,
+    },
     "Blast Segment Plating": {
         "hp": 30,
         "act_time_multiplier": 1.1,
@@ -87,11 +92,6 @@ ARMORS = {
         "act_time_multiplier": 1.35,
         "damage_multiplier": .8,
     },
-    "None": {
-        "hp": 0,
-        "act_time_multiplier": 1,
-        "damage_multiplier": 1,
-    }
 }
 
 def randFrameName():
