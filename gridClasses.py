@@ -88,7 +88,7 @@ class Unit:
         for unit in units:
             if (checks[0] and unit.kind=="enemy") or (checks[1] and unit.kind!=self.kind):
                 poss.append([unit,dist(self.pos,unit.pos)*unit.health/self.health])
-        min=99999999999
+        min=inf()
         selected=None
         for p in poss:
             if p[1]<min:
