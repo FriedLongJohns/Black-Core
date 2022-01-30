@@ -1,13 +1,11 @@
-try:
-    from gridView import *
-    from gridClasses import *
-    from equipment import *
-    from gridGeo import *
-    from levelGen import *
-    from time import sleep
-    import os
-except Exception as e:
-    filePrint("Import fail: {}".format(e))
+from gridView import *
+from gridClasses import *
+from equipment import *
+from gridGeo import *
+from levelGen import *
+from time import sleep
+from classtypes import inf
+import os
 
 try:
     open(os.getcwd()+"/compiling_notes.txt","r").close()
@@ -42,7 +40,7 @@ if __name__ == "__main__":
         uip=[4,4]#UI pos
         pGear=[0,0,1,0]
 
-        def core(level,units,cg,objectiveFunc,tex):
+        def core(level,units,cg,objectiveFunc,tex,nameOverrides={}):
             camsize=(10,10)
             def cam_area():
                 return [[cam.pos[0],cam.pos[1]],[cam.pos[0]+cam.viewSize[0],cam.pos[1]+cam.viewSize[1]]]
@@ -108,6 +106,7 @@ if __name__ == "__main__":
             list_tex.addText(tex)
             cursor_tex.text[0]="cursoring: nothing"
             cam.color_overrides[str(wcp())]=1
+
             render()
             while True:
                 if objectiveFunc(units)==True:
@@ -224,17 +223,16 @@ if __name__ == "__main__":
                                 break
 
                             else:
-                                action=None
-                                targets=[player]
+                                action=["wait"]
+                                targets=[]
                                 for u in units:
-                                    if u!=player and (u.kind=="ally" and un.kind=="enemy" or (u.kind!="ally" and un.kind!="enemy")):
+                                    if u.kind in ["ally","player"] and un.kind=="enemy" or (u.kind=="enemy" and un.kind=="ally"):
                                         targets.append(u)
-                                target=un.get_enemy(targets)
-                                action=un.think(target,canff,cangf,cg.grid)
+                                if targets!=[]:#if no targets, use else case and wait
+                                    target=un.get_enemy(targets)
+                                    action=un.think(target,canff,cangf,cg.grid)
 
-                                if action[0]=="wait":
-                                    time=.1
-                                elif action[0]=="fire":
+                                if action[0]=="fire":
                                     time=un.wps[action[1]][2]
                                     un.wait_time=un.wps[action[1]][2]*2
                                     un.wps[action[1]][3]=un.wps[action[1]][1]["cooldown"]
@@ -294,6 +292,8 @@ if __name__ == "__main__":
                                     else:
                                         un.pos=action[1]
                                         render()
+                                else:#wait
+                                    time=.1
                                 un.wait_time-=time
                                 un.wps[0][3]-=time
                                 un.wps[1][3]-=time
@@ -322,6 +322,8 @@ if __name__ == "__main__":
                             cursor_tex.text[0]="cursoring: {}".format(unit.name)
                     if cg.grid[pos[1]][pos[0]][0]=="#":
                             cursor_tex.text[0]="cursoring: wall"
+                    elif str(pos) in nameOverrides.keys():
+                        cursor_tex.text[0]="cursoring: "+nameOverrides[str(pos)]
                     render(cell=0,color=2)
 
                 elif state in [2,3]:
@@ -340,6 +342,8 @@ if __name__ == "__main__":
                             cursor_tex.text[0]="cursoring: {}".format(unit.name)
                     if cg.grid[pos[1]][pos[0]][0]=="#":
                             cursor_tex.text[0]="cursoring: wall"
+                    elif str(pos) in nameOverrides.keys():
+                        cursor_tex.text[0]="cursoring: "+nameOverrides[str(pos)]
                     render(cell=0,color=2)
 
                 else:
@@ -351,6 +355,8 @@ if __name__ == "__main__":
                             cursor_tex.text[0]="cursoring: {}".format(unit.name)
                     if cg.grid[cp[1]][cp[0]][0]=="#":
                             cursor_tex.text[0]="cursoring: wall"
+                    elif str(cp) in nameOverrides.keys():
+                        cursor_tex.text[0]="cursoring: "+nameOverrides[str(cp)]
                     render()
 
         def gear():
@@ -481,7 +487,7 @@ if __name__ == "__main__":
                         enemies=27
                         minpd=6
                         size=(7,2)
-                        tex="FIND THE EXTRACTION POINT"
+                        tex="GO TO THE EXTRACTION POINT"
                     elif selected==2:#squad combat
                         allies=4
                         enemies=5
@@ -517,8 +523,9 @@ if __name__ == "__main__":
                     units=spawnEnemies(([0,0],[raw_size[0]-1,raw_size[1]-1]),enemies,cangf,cg.grid,minPlayerDist=minpd,playerPos=pp)
                     units+=spawnAllies(([0,0],[raw_size[0]-1,raw_size[1]-1]),allies,cangf,cg.grid,maxPlayerDist=maxpd,playerPos=pp,bad=[unit.pos for unit in units])
 
+                    nameOverride={}
                     if selected==1:#extraction
-                        pos=get_free_loc(([0,0],[raw_size[0]-1,raw_size[1]-1]),cg.grid,cangf,playerPos=pp,dist_range=[40,99999],bad=[unit.pos for unit in units])
+                        pos=get_free_loc(([0,0],[raw_size[0]-1,raw_size[1]-1]),cg.grid,cangf,playerPos=pp,dist_range=[40,inf()],bad=[unit.pos for unit in units])
                         def func(unit_list,saved=pos):
                             for unit in unit_list:
                                 if unit.kind=="player":
@@ -527,9 +534,13 @@ if __name__ == "__main__":
                                     return False
 
                         cg.grid[pos[1]][pos[0]][1]=6
+                        nameOverride[str(vec2(pos))]="extraction point"
+
+                    elif selected==0:#duel
+                        units[0].aimode="assault"
 
                     stdscr.clear()
-                    core(level,units,cg,func,tex)
+                    core(level,units,cg,func,tex,nameOverrides=nameOverride)
 
                 elif key=="q":
                     return
