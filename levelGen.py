@@ -3,6 +3,7 @@ from levelUnits import *
 from gridClasses import *
 from random import randint
 from gridGeo import dist
+from classtypes import inf
 
 def genBoard(x,y,defCell=".",wallCell="x",empty=.1):
     x_size=x*7
@@ -42,7 +43,7 @@ def spawnEnemies(crang,amount,canSpawnFunc,grid,minPlayerDist=-1,playerPos=[0,0]
     return spawned
 
 #spawnAllies
-def spawnAllies(crang,amount,canSpawnFunc,grid,maxPlayerDist=99999,playerPos=[0,0],bad=[]):
+def spawnAllies(crang,amount,canSpawnFunc,grid,maxPlayerDist=inf(),playerPos=[0,0],bad=[]):
     spawned=[]
     for i in range(amount):
         pos=[randint(crang[0][i],crang[1][i]) for i in range(2)]
@@ -51,7 +52,7 @@ def spawnAllies(crang,amount,canSpawnFunc,grid,maxPlayerDist=99999,playerPos=[0,
         spawned.append(Unit(pos,randFrameName(),[randWeaponName(),randWeaponName()],randArmorName(),displayChar="+",kind="ally"))
     return spawned
 
-def get_free_loc(crang,grid,canSpawnFunc,bad=[],playerPos=[0,0],dist_range=[-1,99999]):
+def get_free_loc(crang,grid,canSpawnFunc,bad=[],playerPos=[0,0],dist_range=[-1,inf()]):
     loc=[randint(crang[0][i],crang[1][i]) for i in range(2)]
     while (not canSpawnFunc(loc[0],loc[1])) or loc in bad or (not dist_range[0]<dist(loc,playerPos)<dist_range[1]):
         loc=[randint(crang[0][i],crang[1][i]) for i in range(2)]
