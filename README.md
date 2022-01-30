@@ -13,7 +13,7 @@ It's that YOU, through your work and time, beat a little game in a big world.
 
 The entire game is played with only number, q, WASD, arrow, and enter keys. All of it.
 
-The game itself is quite simple: Choose equipment, then venture out into a randomized map with enemies do destroy in it.
+The game itself is quite simple: Choose equipment, then venture out into a randomized map with enemies and an objective to complete.
 
 There might be many more enemies than players, but the player moves much quicker than the enemies.
 
