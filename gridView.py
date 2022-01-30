@@ -90,7 +90,7 @@ class cursedcam():
                 if -1<y<len(self.grid) and -1<x<len(self.grid[0]):
                     cell = self.grid[y][x]
                     dicell = getFunc(cell[0])
-                    colr = curses.color_pair(cell[1])
+                    colr = cell[1]
                     pch = str(vec2(x,y))
                     if pch in self.color_overrides.keys():
                         colr = self.color_overrides[pch]
