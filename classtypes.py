@@ -12,7 +12,6 @@ class vec2():
 
     def reload(self):
         self.dist=(self.x*self.x+self.y*self.y)**.5
-
     @property
     def x(self):
         return self[0]
@@ -165,3 +164,48 @@ class polydict:
                 if id in self.refs[axis].values() and axis in criteria.keys():
                     del self.refs[axis][str(criteria[axis])]
             self.len = len(self.stored)
+
+class inf:
+    def __init__(self,amount=1):
+        self.amount=amount
+
+    def __str__(self):
+        return str(self.amount)+"inf"
+
+    def __mul__(self,other):
+        self.amount*=other#works for inf*inf too!
+        return self
+    def __truediv__(self,other):
+        self.amount/=other
+        return self
+    def __add__(self,other):
+        self.amount+=other
+        return self
+    def __sub__(self,other):
+        self.amount-=other
+        return self
+
+    def __neg__(self):
+        self.amount=0-self.amount
+        return self
+
+    def __eq__(self,other):
+        if type(other)==type(self):
+            return self.amount==other.amount
+        return False
+    def __lt__(self,other):#less
+        if type(other)==type(self):
+            return self.amount<other.amount
+        return False
+    def __le__(self,other):#less or equal
+        if type(other)==type(self):
+            return self.amount<=other.amount
+        return False
+    def __gt__(self,other):#greater
+        if type(other)==type(self):
+            return self.amount>other.amount
+        return True
+    def __ge__(self,other):#greater or equal
+        if type(other)==type(self):
+            return self.amount>=other.amount
+        return True
