@@ -30,9 +30,22 @@ WEAPONS = {
     "Hammer": {
         "damage": 65,
         "range": 2,
-        "use_time_speed": .6,
+        "use_time_speed": .8,
         "cooldown": 1,
     },
+    "Knife": {
+        "damage": 40,
+        "range": 1,
+        "use_time_speed": .5,
+        "cooldown": 0,
+    },
+    "STICK": {
+        "damage": 60,
+        "range": 3,
+        "use_time_speed": .7,
+        "cooldown": 1,
+    },
+
     "Burst Rifle": {
         "damage": 50,
         "range": 5,
@@ -45,29 +58,37 @@ WEAPONS = {
         "use_time_speed": 1.2,
         "cooldown": 4,
     },
+
     "Pistol": {
         "damage": 30,
         "range": 4,
         "use_time_speed": .5,
         "cooldown": 2,
     },
+    "SMG": {
+        "damage": 10,
+        "range": 5,
+        "use_time_speed": .4,
+        "cooldown": 0,
+    },
+
     "Cannon": {
         "damage": 100,
         "range": 5,
         "use_time_speed": 1.1,
         "cooldown": 10,
     },
+    "Railgun": {
+        "damage": 150,
+        "range": 20,
+        "use_time_speed": 1.5,
+        "cooldown": 15,
+    },
     "Shotgun": {
         "damage": 90,
         "range": 3,
-        "use_time_speed": .7,
+        "use_time_speed": .9,
         "cooldown": 4,
-    },
-    "SMG": {
-        "damage": 10,
-        "range": 5,
-        "use_time_speed": .4,
-        "cooldown": 0,
     },
 }
 
@@ -77,26 +98,40 @@ ARMORS = {
         "act_time_multiplier": 1,
         "damage_multiplier": 1,
     },
-    "Blast Segment Plating": {
-        "hp": 30,
-        "act_time_multiplier": 1.1,
-        "damage_multiplier": 1.1,
-    },
-    "Fiber Skeletals": {
-        "hp": -5,
-        "act_time_multiplier": 1,
-        "damage_multiplier": .9,
-    },
     "Heavy Composite": {
         "hp": 40,
         "act_time_multiplier": 1.35,
         "damage_multiplier": .8,
     },
+    "Fiber Skeletals": {
+        "hp": -5,
+        "act_time_multiplier": .95,
+        "damage_multiplier": .95,
+    },
+    "Blast Segment Plating": {
+        "hp": 30,
+        "act_time_multiplier": 1.1,
+        "damage_multiplier": 1.1,
+    },
+    "Aerodynamic Refits": {
+        "hp": 3,
+        "act_time_multiplier": .85,
+        "damage_multiplier": 1.1,
+    },
+    "Magnetic Shielding": {
+        "hp": -10,
+        "act_time_multiplier": 1.5,
+        "damage_multiplier": .5,
+    },
 }
 
+len_frms=len(list(FRAMES.keys()))-1
+len_wps=len(list(WEAPONS.keys()))-1
+len_arms=len(list(ARMORS.keys()))-1
+
 def randFrameName():
-    return list(FRAMES.keys())[randint(0,3)]
+    return list(FRAMES.keys())[randint(0,len_frms)]
 def randWeaponName():
-    return list(WEAPONS.keys())[randint(0,1)]
+    return list(WEAPONS.keys())[randint(0,len_wps)]
 def randArmorName():
-    return list(ARMORS.keys())[randint(0,2)]
+    return list(ARMORS.keys())[randint(0,len_arms)]
