@@ -36,9 +36,9 @@ if __name__ == "__main__":
         curses.curs_set(0)# Hide the cursor
         stdscr.keypad(True)#make arrow keys not be escape sequences
 
-        stdscr.resize(150,150)
+        stdscr.resize(60,90)
         uip=[4,4]#UI pos
-        pGear=[0,0,1,0]
+        pGear=[0,0,2,0]
 
         def core(level,units,cg,objectiveFunc,tex,nameOverrides={}):
             camsize=(10,10)
@@ -546,7 +546,7 @@ if __name__ == "__main__":
                     return
 
         def menu():
-            ctex=cursedtext([[uip[0],uip[1]+3],[200+uip[0],20+uip[1]]],stdscr,rolling=False)
+            ctex=cursedtext([[uip[0],uip[1]+3],[300+uip[0],50+uip[1]]],stdscr,rolling=False)
             options=[
                 "BLACK CORE",
                 "Play",
@@ -570,29 +570,31 @@ if __name__ == "__main__":
                 elif key=="\n":
                     key="null"
                     if selected==0:
-                        ctex.text=["ABOUT BLACK CORE",
-                        "Black Core is a little turn-based text display game I made for fun, and because I wanted to make something cool.",
-                        "",
-                        "On par with my normal game development criteria, it's meant for those who want a challenge.",
-                        "",
-                        "Not those who get dopamine from slowly gaining power or wealth, the game gives you everything you need to finish it.",
-                        "",
-                        "And the only reward for doing so is knowing you did it.",
-                        "",
-                        "It's that YOU, through your work and time, beat a little game in a big world.",
-                        "",
-                        "The entire game is played with only number, q, WASD, arrow, and enter keys. All of it.",
-                        "",
-                        "The game itself is quite simple: Choose equipment, then venture out into a randomized map with enemies do destroy in it.",
-                        "",
-                        "There might be many more enemies than players, but the player moves much quicker than the enemies.",
-                        "",
-                        "Every action in the game takes time, so if you're quick you might be able to attack the enemy then run away before it can do anything, and vice versa for a slow unit.",
-                        "",
-                        "On the more technical side of things, I very much had fun with pathfinding for the first time - although not so much with good AI, and I'll admit I've reworked the math functions many, many times to get them to work correctly.",
-                        "",
-                        "I hope you enjoy it.",
-                        ]
+                        ctex.text=[]
+                        for line in [
+                            "ABOUT BLACK CORE",
+                            "Black Core is a little turn-based text display game I made for fun, and because I wanted to make something cool.",
+                            "On par with my normal game development criteria, it's meant for those who want a challenge.",
+                            "Not those who get dopamine from slowly gaining power or wealth, the game gives you everything you need to finish it.",
+                            "And the only reward for doing so is knowing you did it.",
+                            "It's that YOU, through your work and time, beat a little game in a big world.",
+                            "The entire game is played with only number, q, WASD, arrow, and enter keys. All of it.",
+                            "The game itself is quite simple: Choose equipment, then venture out into a randomized map with enemies do destroy in it.",
+                            "There might be many more enemies than players, but the player moves much quicker than the enemies.",
+                            "Every action in the game takes time, so if you're quick you might be able to attack the enemy then run away before it can do anything, and vice versa for a slow unit.",
+                            "On the more technical side of things, I very much had fun with pathfinding for the first time - although not so much with good AI, and I'll admit I've reworked the math functions many, many times to get them to work correctly.",
+                            "I hope you enjoy it."]:
+                            chunks=line.split(" ")
+                            nc=[""]
+                            for chunk in chunks:
+                                if len(nc[-1])+len(chunk)<70:
+                                    nc[-1]+=" "+chunk
+                                else:
+                                    nc.append(chunk)
+                            # nc[0]=nc[0][1:]
+                            for l in range(len(nc)):
+                                ctex.text.append(nc[l])
+                            ctex.text.append("")
                         stdscr.clear()
                         ctex.push()
                         while not key in ["\n","q"]:
