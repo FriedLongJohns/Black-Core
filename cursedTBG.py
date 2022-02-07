@@ -15,8 +15,10 @@ except:
     with open(os.getcwd()+"/output.txt","w") as file:
         file.write("")
 
-#versions so far: mink
-print("Current Version: Mink")
+#versions so far:
+#   Mink: Base
+#   Sleuth: AI upgrade, animations
+print("Current Version: Sleuth")
 
 sleep(1)
 
@@ -175,17 +177,28 @@ if __name__ == "__main__":
                         if state==1:
                             time=player.act_time
                             player.wait_time=time*1.5#player moves twice as fast as enemies, to make it fair
+                            loine={}
                             for pos in tryPathFind(player.move_max,cangf,cg.grid,player.pos,cusp):
-                                cam.color_overrides[str(pos)]=4
+                                loine[str(pos)]=4
+                                player.pos=pos
+                                for key in loine.keys():
+                                    cam.color_overrides[key]=loine[key]
+                                render()
+                                sleep(.1)
                             player.pos=cusp
                             render()
-                            sleep(.3)
                         elif state in [2,3] and player.wps[state-2][3]<=0:
                             time=player.wps[state-2][2]#multiply acted wait time by 2 or they will be able to act again (wt=time,-time=0)
                             player.wait_time=time*1.5
                             player.wps[state-2][3]=player.wps[state-2][1]["cooldown"]/2
-                            for pos in lineGrid([cusp,player.pos]):
-                                cam.color_overrides[str(pos)]=3
+                            loine={}
+                            for pos in lineGrid([player.pos,cusp]):
+                                loine[str(pos)]=3
+                                for key in loine.keys():
+                                    cam.color_overrides[key]=loine[key]
+                                render()
+                                sleep(.05)
+                            render()
                             for i in range(len(units)):
                                 unit=units[i]
                                 if cusp==unit.pos:
@@ -204,12 +217,11 @@ if __name__ == "__main__":
                             un.wait_time-=time
                             un.wps[0][3]-=time
                             un.wps[1][3]-=time
-                            filePrint([un.name,un.wait_time,un.wps[0][3],un.wps[1][3]])
 
                         while player.wait_time>0:
                             todo=mapl(units)
-                            un=todo[0]
-                            m=todo[0].wait_time
+                            un=player
+                            m=player.wait_time
                             for i in todo:
                                 if i.wait_time<m:
                                     un=i
@@ -229,10 +241,11 @@ if __name__ == "__main__":
                             else:
                                 action=["wait"]
                                 targets=[]
-                                for u in units:
-                                    if u.kind in ["ally","player"] and un.kind=="enemy" or (u.kind=="enemy" and un.kind=="ally"):
-                                        targets.append(u)
-                                if targets!=[]:#if no targets, use else case and wait
+                                for other in units:
+                                    if other!=un and (other.kind in ["ally","player"] and un.kind=="enemy") or (other.kind=="enemy" and un.kind=="ally"):
+                                        targets.append(other)
+
+                                if targets:#if no targets [], use else case and wait
                                     target=un.get_enemy(targets)
                                     action=un.think(target,canff,cangf,cg.grid)
 
@@ -241,16 +254,20 @@ if __name__ == "__main__":
                                     un.wait_time=un.wps[action[1]][2]*2
                                     un.wps[action[1]][3]=un.wps[action[1]][1]["cooldown"]
                                     ca=cam_area()
-                                    if between2d(un.pos,ca[0],ca[1]):
+                                    if between2d(target.pos,ca[0],ca[1]):
                                         for pos in rayCircle(un.pos,un.wps[action[1]][1]["range"],cg.grid,canff):
                                             cam.color_overrides[str(pos)]=1
                                         render()
-                                        sleep(.3)
+                                        sleep(.1)
+                                        loine={}
                                         for pos in lineGrid([un.pos,target.pos]):
-                                            cam.color_overrides[str(pos)]=3
+                                            loine[str(pos)]=3
+                                            for key in loine.keys():
+                                                cam.color_overrides[key]=loine[key]
+                                            render()
+                                            sleep(.05)
                                         render()
                                         list_tex.addText(target.damage(un.wps[action[1]][1]["damage"],un))
-                                        sleep(.3)
                                     else:
                                         list_tex.addText(target.damage(un.wps[action[1]][1]["damage"],un))
                                     if target.health<=0:
@@ -287,12 +304,16 @@ if __name__ == "__main__":
                                     time=un.act_time
                                     un.wait_time=time*2
                                     ca=cam_area()
-                                    if between2d(un.pos,ca[0],ca[1]):
+                                    if between2d(action[1],ca[0],ca[1]):
                                         for pos in tryPathFind(un.move_max,cangf,cg.grid,un.pos,action[1]):
-                                            cam.color_overrides[str(pos)]=4
+                                            un.pos=pos
+                                            loine[str(pos)]=4
+                                            for key in loine.keys():
+                                                cam.color_overrides[key]=loine[key]
+                                            render()
+                                            sleep(.1)
                                         un.pos=action[1]
                                         render()
-                                        sleep(.3)
                                     else:
                                         un.pos=action[1]
                                         render()
