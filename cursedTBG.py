@@ -124,20 +124,24 @@ if __name__ == "__main__":
 
                 if key == "KEY_LEFT" and cam.pos[0]!=0:
                     cam.pos[0]-=1
-                elif key == "KEY_RIGHT" and cam.pos[0]!=cg.gridSize[0]:
+                elif key == "KEY_RIGHT" and cam_area()[1][0]!=cg.gridSize[0]:
+                    if wcp()[0]==cg.gridSize[0]-1:
+                        cursorPos[0]-=1
                     cam.pos[0]+=1
                 elif key == "KEY_UP" and cam.pos[1]!=0:
                     cam.pos[1]-=1
-                elif key == "KEY_DOWN" and cam.pos[1]!=cg.gridSize[1]:
+                elif key == "KEY_DOWN" and cam_area()[1][1]!=cg.gridSize[1]:
+                    if wcp()[1]==cg.gridSize[1]-1:
+                        cursorPos[1]-=1
                     cam.pos[1]+=1
 
                 elif key=="w" and cursorPos[1]!=0:
                     cursorPos[1]-=1
-                elif key=="s" and cursorPos[1]!=camsize[1]-1:
+                elif key=="s" and cursorPos[1]!=camsize[1]-1 and wcp()[1]!=cg.gridSize[1]:
                     cursorPos[1]+=1
                 elif key=="a" and cursorPos[0]!=0:
                     cursorPos[0]-=1
-                elif key=="d" and cursorPos[0]!=camsize[0]-1:
+                elif key=="d" and cursorPos[0]!=camsize[0]-1 and wcp()[0]!=cg.gridSize[0]:
                     cursorPos[0]+=1
 
                 elif key in "mq12" and state==0:
