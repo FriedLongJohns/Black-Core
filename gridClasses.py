@@ -124,6 +124,7 @@ class Unit:
         er = [enemy.wps[0][1]["range"],enemy.wps[1][1]["range"]]
         ed = [enemy.wps[0][1]["damage"],enemy.wps[1][1]["damage"]]
         optimal_range=0
+        chosen=0
         checks=[False,False,False,False,False]
 
         if sr[0]>er[0]:
@@ -159,26 +160,34 @@ class Unit:
             #if we will be vulnerable, stay out of their range!
             if (self.wps[0][3]>0 and self.wps[0][3]>0 and (self.wps[0][3]-self.act_time>0 or self.wps[1][3]-self.act_time>0)):
                 optimal_range=max(enemy.wps[0][1]["range"],enemy.wps[1][1]["range"])+1
+                chosen=1
 
         moves = pathGrid(self.move_max,moveFunc,grid,self.pos)
         posbs = self.evalPositions(enemy,moves,fireFunc,grid)
-        best = self.pos
-        beste = dist(self.pos,enemy.pos)
-        los=False
+        bests = [self.pos,self.pos]#attack,retreat
+        beste = [dist(self.pos,enemy.pos),dist(self.pos,enemy.pos)]
+        los=[False,False]
         for pos in posbs:
             error = absol(dist(pos["pos"],enemy.pos)-optimal_range)
-            if pos["LOS"]:
-                if not los:
-                    los=True
-                    beste=error
-                    best=pos["pos"]
-                if error<beste:#and we already have los position possibility
-                    beste=error
-                    best=pos["pos"]
-            elif not los and error<beste:
-                beste=error
-                best=pos["pos"]
+            for i in [0,1]:
+                bl=bool(i)
+                do=False
+                if (not bl)==pos["LOS"]:#los, not los
+                    #attack
+                    if cond==los[i]:
+                        los[i]=(not bl)
+                        do=True
+                    elif error<beste[i]:#and we already have los position possibility
+                        do=True
 
+                elif bl==los[i] and error<beste[i]:#not los and not found, los and found (and more optimal position)
+                    do=True
+
+                if do:
+                    beste[i]=error
+                    bests[i]=pos["pos"]
+
+        best=bests[chosen]
         if (mode!="kite" or self.pos==best) and los and max(self.wps[0][1]["range"],self.wps[1][1]["range"])>=dist(self.pos,enemy.pos) and min(self.wps[0][3],self.wps[1][3])<=0:
             #if we can fire, do it (unless kiting and not at best pos)
             if not self.wps[0][3]>0:
