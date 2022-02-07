@@ -100,10 +100,11 @@ class Unit:
         out=[]
         for pos in checks:
             dis = dist(pos,enemy.pos)
+
             block={
                 "pos": pos.copy(),
                 "dist": dis,
-                "LOS": enemy.pos in rayCast([pos,enemy.pos],grid,fireFunc,method="line"),
+                "los": enemy.pos in rayCast([pos,enemy.pos],grid,fireFunc,method="line"),
             }
             out.append(block)
         return out
@@ -165,29 +166,37 @@ class Unit:
         moves = pathGrid(self.move_max,moveFunc,grid,self.pos)
         posbs = self.evalPositions(enemy,moves,fireFunc,grid)
         bests = [self.pos,self.pos]#attack,retreat
-        beste = [dist(self.pos,enemy.pos),dist(self.pos,enemy.pos)]
-        los=[False,False]
+        beste = [inf(),inf()]
+        los=[enemy.pos in rayCast([pos,enemy.pos],grid,fireFunc,method="line") for i in range(2)]
+
         for pos in posbs:
             error = absol(dist(pos["pos"],enemy.pos)-optimal_range)
-            for i in [0,1]:
-                bl=bool(i)
-                do=False
-                if (not bl)==pos["LOS"]:#los, not los
-                    #attack
-                    if cond==los[i]:
-                        los[i]=(not bl)
-                        do=True
-                    elif error<beste[i]:#and we already have los position possibility
-                        do=True
 
-                elif bl==los[i] and error<beste[i]:#not los and not found, los and found (and more optimal position)
-                    do=True
+            if pos["los"]:
+                if not los[0]:
+                    los[0]=True
+                if error<beste[0]:
+                    beste[0]=error
+                    bests[0]=pos["pos"]
 
-                if do:
-                    beste[i]=error
-                    bests[i]=pos["pos"]
+                if los[1] and error<beste[1]:
+                    beste[1]=error
+                    bests[1]=pos["pos"]
+
+            else:
+                if los[1]:
+                    los[1]=False
+                if error<beste[1]:
+                    beste[1]=error
+                    bests[1]=pos["pos"]
 
         best=bests[chosen]
+
+        if (chosen==0 and los[0]==False):#can't move into LOS, plan
+            path=tryPathFind(self.move_max,moveFunc,cg.grid,self.pos,)#find least error and LOS spot
+            return ["move",best]
+        #do the same for escaping
+        
         if (mode!="kite" or self.pos==best) and los and max(self.wps[0][1]["range"],self.wps[1][1]["range"])>=dist(self.pos,enemy.pos) and min(self.wps[0][3],self.wps[1][3])<=0:
             #if we can fire, do it (unless kiting and not at best pos)
             if not self.wps[0][3]>0:
