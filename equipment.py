@@ -31,7 +31,7 @@ WEAPONS = {
         "damage": 65,
         "range": 2,
         "use_time_speed": .8,
-        "cooldown": 1,
+        "cooldown": 2,
     },
     "Knife": {
         "damage": 40,
@@ -43,27 +43,27 @@ WEAPONS = {
         "damage": 60,
         "range": 3,
         "use_time_speed": .7,
-        "cooldown": 1,
+        "cooldown": 2,
     },
 
     "Burst Rifle": {
         "damage": 50,
         "range": 5,
         "use_time_speed": .7,
-        "cooldown": 3,
+        "cooldown": 6,
     },
     "Sniper Rifle": {
         "damage": 60,
         "range": 10,
         "use_time_speed": 1.2,
-        "cooldown": 4,
+        "cooldown": 8,
     },
 
     "Pistol": {
         "damage": 30,
         "range": 4,
         "use_time_speed": .5,
-        "cooldown": 2,
+        "cooldown": 4,
     },
     "SMG": {
         "damage": 10,
@@ -76,19 +76,19 @@ WEAPONS = {
         "damage": 100,
         "range": 5,
         "use_time_speed": 1.1,
-        "cooldown": 10,
+        "cooldown": 20,
     },
     "Railgun": {
         "damage": 150,
         "range": 20,
         "use_time_speed": 1.5,
-        "cooldown": 15,
+        "cooldown": 30,
     },
     "Shotgun": {
         "damage": 90,
         "range": 3,
         "use_time_speed": .9,
-        "cooldown": 4,
+        "cooldown": 8,
     },
 }
 
