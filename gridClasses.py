@@ -118,47 +118,42 @@ class Unit:
         #assault : gets to the average between it's two weapon ranges to the enemy
         #   and running away when fully on cooldown.
         #kite : stays at max range, prioritising moving over firing
-        #angry : pathfinds to the player and then fires until it can't. no retreating.
-        sr = [self.wps[0][1]["range"],self.wps[1][1]["range"]]
-        sd = [self.wps[0][1]["damage"],self.wps[1][1]["damage"]]
-        er = [enemy.wps[0][1]["range"],enemy.wps[1][1]["range"]]
-        ed = [enemy.wps[0][1]["damage"],enemy.wps[1][1]["damage"]]
-        optimal_range=0
-        checks=[False,False,False,False,False]
+        #angry : pathfinds to the player and then fires or waits. no retreating.
 
-        if sr[0]>er[0]:
-            checks[0]=True#our first weapon has more range than enemy
-        if sr[1]>er[1]:
-            checks[1]=True#our second weapon has more range than enemy
-        if sd[0]>ed[0]:
-            checks[2]=True#our first weapon has more damage than enemy
-        if sd[1]>ed[1]:
-            checks[3]=True#our second weapon has more  damage than enemy
-        if sd[1]>sd[0]:
-            checks[4]=True#our first weapon has more range
+        optimal_range=0
+        sr=[self.wps[0][1]["range"],self.wps[1][1]["range"]]
+        cf=[self.wps[0][3]>0,self.wps[1][3]>0]
+        checks={
+            "s0r>e0r": sr[0]>enemy.wps[0][1]["range"],
+            "s1r>e1r": sr[1]>enemy.wps[1][1]["range"],
+
+            "s0d>e0d": self.wps[0][1]["damage"]>enemy.wps[0][1]["damage"],
+            "s1d>e1d": self.wps[1][1]["damage"]>enemy.wps[1][1]["damage"],
+
+            "s0r>s1r": sr[0]>sr[1],
+        }
 
         if mode=="angry":
-            optimal_range=2
+            optimal_range=1
+
+        #if we will be vulnerable, stay out of their range!
+    elif (cf[0] and cf[1] and (self.wps[0][3]-self.act_time>0 or self.wps[1][3]-self.act_time>0)):
+            optimal_range=max(enemy.wps[0][1]["range"],enemy.wps[1][1]["range"])+1
+
         elif mode=="kite":
-            optimal_range=max(self.wps[0][1]["range"],self.wps[1][1]["range"])
+            optimal_range=max(self.wps[0][1]["range"],self.wps[1][1]["range"])-.4#why not
         else:#dam and assault have dynamic ranges
-            if checks[0]:#more range in weapon 1 orand and in weapon 2
-                optimal_range=sr[0]
-                if checks[4] and checks[1]:
+            if (not checks["s0r>e0r"]) and (not checks["s1r>e1r"]):#enemy has more range, compare damage
+                if checks["s0d>e0d"] and cf[0]:
+                    optimal_range=sr[0]
+                else:
                     optimal_range=sr[1]
-            elif checks[1]:#more range in weapon 2
-                optimal_range=sr[1]
 
-            elif checks[2]:#pure damage face-off
+            elif checks["s0r>s1r"] and cf[0]:
                 optimal_range=sr[0]
-                if checks[4] and checks[3]:
-                    optimal_range=sr[1]
-            elif checks[3]:
-                optimal_range=sr[1]
 
-            #if we will be vulnerable, stay out of their range!
-            if (self.wps[0][3]>0 and self.wps[0][3]>0 and (self.wps[0][3]-self.act_time>0 or self.wps[1][3]-self.act_time>0)):
-                optimal_range=max(enemy.wps[0][1]["range"],enemy.wps[1][1]["range"])+1
+            else:#oh no scenario (or just w1 better)
+                optimal_range=sr[1]
 
         moves = pathGrid(self.move_max,moveFunc,grid,self.pos)
         posbs = self.evalPositions(enemy,moves,fireFunc,grid)
