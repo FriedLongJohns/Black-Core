@@ -1,7 +1,7 @@
 from random import randint
 from helpers import *
 from equipment import *
-from gridGeo import pathGrid,dist,rayCast
+from gridGeo import pathGrid,dist,rayCast,tryPathFind
 import re
 from classtypes import vec2,inf
 # dex = [re.compile("\{name\}"),re.compile("\{pos\}"),re.compile("\{kind\}"),re.compile("\{health\}")]
@@ -52,7 +52,7 @@ class Unit:
 
         self.aimode = aimode
         if aimode=="rand":
-            self.aimode=["dam","assault","kite","angry"][randint(0,3)]
+            self.aimode=["assault","kite","angry"][randint(0,2)]
 
     # def aiDynamicMove(player=None)
     def __equals__(self,other):
@@ -114,53 +114,54 @@ class Unit:
         if mode=="self":
             md=self.aimode
         else:
-            assert mode in ["dam","assault","kite","angry"]
-        #dam : gets to the range where it has more potential damage compared to the enemy, attempting to kite if possible
-        #assault : gets to the average between it's two weapon ranges to the enemy
-        #   and running away when fully on cooldown.
-        #kite : stays at max range, prioritising moving over firing
+            assert mode in ["assault","kite","angry"]
+        #assault : goto most possible weapon damage range or run away
+        #kite : stay at max range, prioritize moving over firing
         #angry : pathfinds to the player and then fires or waits. no retreating.
+
 
         optimal_range=0
         sr=[self.wps[0][1]["range"],self.wps[1][1]["range"]]
-        cf=[self.wps[0][3]>0,self.wps[1][3]>0]
-        checks={
-            "s0r>e0r": sr[0]>enemy.wps[0][1]["range"],
-            "s1r>e1r": sr[1]>enemy.wps[1][1]["range"],
+        cf=[self.wps[0][3]<=0,self.wps[1][3]<=0]
 
-            "s0d>e0d": self.wps[0][1]["damage"]>enemy.wps[0][1]["damage"],
-            "s1d>e1d": self.wps[1][1]["damage"]>enemy.wps[1][1]["damage"],
+        cf_dam = [-1,0]
+        cf_range = [-1,0]
+        for i in cf:
+            if i==True:
+                if self.wps[cf_dam[0]][1]["damage"]<self.wps[i][1]["damage"] and self.wps[i][3]<=0:
+                    cf_dam = [i,self.wps[i][1]["damage"]]
+                if self.wps[cf_range[0]][1]["range"]<self.wps[i][1]["range"] and self.wps[i][3]<=0:
+                    cf_range = [i,self.wps[i][1]["range"]]
 
-            "s0r>s1r": sr[0]>sr[1],
-        }
+        ecf=[enemy.wps[0][3]<=0,enemy.wps[1][3]<=0]
+        ecf_dam = 0
+        ecf_range = 0
+        for i in cf:
+            if i==True:
+                ecf_dam = max(ecf_dam,self.wps[i][1]["damage"])
+                ecf_range = max(ecf_range,self.wps[i][1]["range"])
 
+
+        chosen=0
         if mode=="angry":
-            optimal_range=1
+            optimal_range=0
 
-        #if we will be vulnerable, stay out of their range!
-    elif (cf[0] and cf[1] and (self.wps[0][3]-self.act_time>0 or self.wps[1][3]-self.act_time>0)):
-            optimal_range=max(enemy.wps[0][1]["range"],enemy.wps[1][1]["range"])+1
+        #if not anrgy, not able to fire, and either not kiting or out of enemy range if kiting, retreat
+        elif cf_dam==-1 and (mode!="kite" or dist(self.pos,enemy.pos)<ecf_range):
+                optimal_range=inf()
+                chosen=1
 
         elif mode=="kite":
-            optimal_range=max(self.wps[0][1]["range"],self.wps[1][1]["range"])-.4#why not
-        else:#dam and assault have dynamic ranges
-            if (not checks["s0r>e0r"]) and (not checks["s1r>e1r"]):#enemy has more range, compare damage
-                if checks["s0d>e0d"] and cf[0]:
-                    optimal_range=sr[0]
-                else:
-                    optimal_range=sr[1]
+            optimal_range=self.wps[cf_range[0]][1]["range"]-.5#stay just in range
 
-            elif checks["s0r>s1r"] and cf[0]:
-                optimal_range=sr[0]
-
-            else:#oh no scenario (or just w1 better)
-                optimal_range=sr[1]
+        else:#assault
+            optimal_range = self.wps[cf_dam[0]][1]["range"]-.5
 
         moves = pathGrid(self.move_max,moveFunc,grid,self.pos)
         posbs = self.evalPositions(enemy,moves,fireFunc,grid)
         bests = [self.pos,self.pos]#attack,retreat
         beste = [inf(),inf()]
-        los=[enemy.pos in rayCast([pos,enemy.pos],grid,fireFunc,method="line") for i in range(2)]
+        los=[enemy.pos in rayCast([self.pos,enemy.pos],grid,fireFunc,method="line") for i in range(2)]
 
         for pos in posbs:
             error = absol(dist(pos["pos"],enemy.pos)-optimal_range)
@@ -185,20 +186,49 @@ class Unit:
 
         best=bests[chosen]
 
-        if (chosen==0 and los[0]==False):#can't move into LOS, plan
-            path=tryPathFind(self.move_max,moveFunc,cg.grid,self.pos,)#find least error and LOS spot
-            return ["move",best]
-        #do the same for escaping
 
-        if (mode!="kite" or self.pos==best) and los and max(self.wps[0][1]["range"],self.wps[1][1]["range"])>=dist(self.pos,enemy.pos) and min(self.wps[0][3],self.wps[1][3])<=0:
-            #if we can fire, do it (unless kiting and not at best pos)
-            if not self.wps[0][3]>0:
-                if not self.wps[1][3]>0 and checks[4] and self.wps[0][1]["range"]>=dist(self.pos,enemy.pos):
-                    return ["fire",0]
-                elif self.wps[0][1]["range"]>=dist(self.pos,enemy.pos):#if not in range, wait
-                    return ["fire",1]
-            elif not self.wps[1][3]>0 and self.wps[1][1]["range"]>=dist(self.pos,enemy.pos):
-                return ["fire",1]
-            return ["wait"]#wait .1 time, basically until it needs (or can) do something
+        if (chosen==0 and los[0]==False):#can't move into LOS, plan ahead to touch them (too lazy for smart planning)
+            path=tryPathFind(100,moveFunc,cg.grid,self.pos)
+            return ["move",path[self.move_max-1]]
+
+        elif (chosen==1 and los[1]==True):#do the same for escaping
+            point=vec2(0,0)
+            for p in lineGrid(self.pos,self.pos+5*(self.pos-enemy.pos)):
+                if moveFunc(p[0],p[1]):
+                    path=tryPathFind(100,moveFunc,cg.grid,p)
+                    return ["move",path[self.move_max-1]]
+            return ["wait"]
+
+        has_los=enemy.pos in rayCast([pos,enemy.pos],grid,fireFunc,method="line")
+        diste=dist(self.pos,enemy.pos)
+
+        # if mode=="kite":
+        #     if -1<dist(self.pos,enemy.pos)-optimal_range<1 and has_los:
+        #         return ["fire",cf_dam[0]]
+        #     else:
+        #         return ["move",best]
+        # elif mode=="assault":
+        #     if has_los and cf_dam[0]!=-1 and self.wps[cf_dam[0]][1]["range"]<=dist(self.pos,enemy.pos):
+        #         return ["fire",cf_dam[0]]
+        #     else:
+        #         return ["move",best]
+        # else:
+        #     if has_los and cf_dam[0]!=-1 and self.wps[cf_dam[0]][1]["range"]<=dist(self.pos,enemy.pos):
+        #         return ["fire",cf_dam[0]]
+        #     else:
+        #         return ["wait"]
+
+        #compression
+        if has_los:
+            if mode=="kite" and -1<dist(self.pos,enemy.pos)-optimal_range<1:
+                if self.wps[cf_range[0]][1]["range"]<=dist(self.pos,enemy.pos):
+                    return ["fire",cf_range[0]]
+                else:
+                    return ["wait"]
+            elif cf_dam[0]!=-1 and self.wps[cf_dam[0]][1]["range"]<=dist(self.pos,enemy.pos):
+                return ["fire",cf_dam[0]]
         else:
-            return ["move",best]
+            if mode=="angry":
+                return ["wait"]
+            else:
+                return ["move", best]
