@@ -646,6 +646,7 @@ if __name__ == "__main__":
                             "  The cursor will always start on the position of the player,",
                             "and will have an \"O\" or \"X\" displayed.",
                             "  Enemies are \"*\" icons. They will shoot at the player.",
+                            "  Allies are \"+\" and will (try) to shoot enemies. You can still shoot at them though."
                             "  # are walls. Do not try to break a wall. They do not break.",
                         ]
                         stdscr.clear()
