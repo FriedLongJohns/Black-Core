@@ -26,3 +26,5 @@ I hope you enjoy it.
 OS X and Linux: .exec file located in /dist
 
 Windows: You'll have to copy the repository and run from terminal on windows, sorry :(
+
+"Stable" Branches are subject to deletion, be wary!
