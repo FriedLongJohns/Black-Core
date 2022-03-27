@@ -238,5 +238,6 @@ def explore_step(curr,grid,canGoFunc):
     curr.children=[]
     for p in poss:
         if (curr.parent==None or p!=curr.parent.pos) and (-1<p[0]<len(grid[0]) and -1<p[1]<len(grid)) and canGoFunc(p[0],p[1]):
-            curr.addChild(pos=(p[0],p[1]))
+            if not ((p[0],p[1]) in curr.getPath()):
+                curr.addChild(pos=(p[0],p[1]))
     return curr.children
