@@ -188,18 +188,18 @@ class Unit:
 
 
         if (chosen==0 and los[0]==False):#can't move into LOS, plan ahead to touch them (too lazy for smart planning)
-            path=tryPathFind(100,moveFunc,cg.grid,self.pos)
+            path=tryPathFind(100,moveFunc,grid,self.pos)
             return ["move",path[self.move_max-1]]
 
         elif (chosen==1 and los[1]==True):#do the same for escaping
             point=vec2(0,0)
             for p in lineGrid(self.pos,self.pos+5*(self.pos-enemy.pos)):
                 if moveFunc(p[0],p[1]):
-                    path=tryPathFind(100,moveFunc,cg.grid,p)
+                    path=tryPathFind(100,moveFunc,grid,p)
                     return ["move",path[self.move_max-1]]
             return ["wait"]
 
-        has_los=enemy.pos in rayCast([pos,enemy.pos],grid,fireFunc,method="line")
+        has_los=enemy.pos in rayCast([pos["pos"],enemy.pos],grid,fireFunc,method="line")
         diste=dist(self.pos,enemy.pos)
 
         # if mode=="kite":
