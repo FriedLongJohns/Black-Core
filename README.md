@@ -11,7 +11,7 @@ And the only reward for doing so is knowing you did it.
 
 It's that YOU, through your work and time, beat a little game in a big world.
 
-The entire game is played with only number, q, WASD, arrow, and enter keys. All of it.
+The entire game is played with only number keys, q, WASD, arrow, and enter keys. All of it.
 
 The game itself is quite simple: Choose equipment, then venture out into a randomized map with enemies and an objective to complete.
 
