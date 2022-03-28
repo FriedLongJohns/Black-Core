@@ -1,7 +1,7 @@
 class vec2():
     def __init__(self,x,y=None):
         if y==None:
-            if type(x) in [list,tuple]:
+            if type(x) in [list,tuple,vec2]:
                 self.pos=[x[0],x[1]]
             else:
                 self.pos=[x,x]
@@ -90,8 +90,9 @@ class vec2():
         self.reload()
 
     def __eq__(self,value):
-        assert isinstance(value, (vec2,list,tuple))
-        return self[0]==value[0] and self[1]==value[1]
+        if isinstance(value, (vec2,list,tuple)):
+            return self[0]==value[0] and self[1]==value[1]
+        return False
 
     def __round__(self):
         return vec2(round(self.x), round(self.y))
