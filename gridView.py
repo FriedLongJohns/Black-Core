@@ -94,7 +94,6 @@ class cursedcam():
                     pch = str(vec2(x,y))
                     if pch in self.color_overrides.keys():
                         colr = self.color_overrides[pch]
-                        # filePrint("[cam] pos: {} color: {}".format((x,y),colr))
                     if pch in self.cell_overrides.keys():
                         dicell = self.cell_overrides[pch]
                     self.scr.addch(y-self.pos[1]+self.outOffset[1],(x-self.pos[0]+self.outOffset[0])*2,dicell,curses.color_pair(colr))
