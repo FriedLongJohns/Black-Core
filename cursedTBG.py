@@ -7,6 +7,7 @@ from time import sleep
 from classtypes import inf
 import os
 
+
 try:
     open(os.getcwd()+"/compiling_notes.txt","r").close()
     print("Running from file, will not clear log")
@@ -67,13 +68,15 @@ if __name__ == "__main__":
             for unit in units:
                 if unit.kind=="enemy":
                     unit.displayColor=3
+                    filePrint("Enemy stats:")
+                    filePrint(str(vars(unit)))
                 elif unit.kind=="ally":
                     unit.displayColor=5
             units.append(player)
 
             #helper funcs
-            def cangf(x,y):
-                if cg.grid[y][x][0]=="." and (not vec2(x,y) in [unit.pos for unit in units]):
+            def cangf(x,y,overrides=[]):
+                if (cg.grid[y][x][0]=="." and (not vec2(x,y) in [unit.pos for unit in units])) or vec2(x,y) in overrides:
                     return True
                 return False
             def canff(x,y):
@@ -92,18 +95,17 @@ if __name__ == "__main__":
 
             def render(clear=True,color=1,cell=1):#0: don't show 1: show if not overriding 2: force show
                 for un in units:
-                    if cell==2 or (cell==1 and not str(un.pos) in list(cam.cell_overrides.keys())):
+                    if cell==2 or (cell==1 and not str(vec2(un.pos)) in list(cam.cell_overrides.keys())):
                         cam.cell_overrides[str(un.pos)]=un.displayChar
-                    if color==2 or (color==1 and not str(un.pos) in list(cam.color_overrides.keys())):
+                    if color==2 or (color==1 and not str(vec2(un.pos)) in list(cam.color_overrides.keys())):
                         cam.color_overrides[str(un.pos)]=un.displayColor
                 list_tex.push()
                 cam.push()
                 cursor_tex.push()
                 stdscr.refresh()
-                if clear:
+                if clear==True:
                     cam.cell_overrides={}
                     cam.color_overrides={}
-
             list_tex.addText("GAME START")
             list_tex.addText(tex)
             cursor_tex.text[0]="cursoring: nothing"
@@ -177,25 +179,28 @@ if __name__ == "__main__":
                         if state==1:
                             time=player.act_time
                             player.wait_time=time*1.5#player moves twice as fast as enemies, to make it fair
-                            loine={}
-                            for pos in tryPathFind(player.move_max,cangf,cg.grid,player.pos,cusp):
-                                loine[str(pos)]=4
+
+                            path=tryPathFind(player.move_max,cangf,cg.grid,player.pos,cusp)
+                            for i in range(len(path)):
+                                pos=path[i]
                                 player.pos=pos
-                                for key in loine.keys():
-                                    cam.color_overrides[key]=loine[key]
+                                for key in path[0:i+1]:
+                                    cam.color_overrides[str(key)]=4
                                 render()
                                 sleep(.1)
+
                             player.pos=cusp
+                            sleep(.3)
                             render()
                         elif state in [2,3] and player.wps[state-2][3]<=0:
                             time=player.wps[state-2][2]#multiply acted wait time by 2 or they will be able to act again (wt=time,-time=0)
                             player.wait_time=time*1.5
                             player.wps[state-2][3]=player.wps[state-2][1]["cooldown"]/2
-                            loine={}
-                            for pos in lineGrid([player.pos,cusp]):
-                                loine[str(pos)]=3
-                                for key in loine.keys():
-                                    cam.color_overrides[key]=loine[key]
+                            path = lineGrid([player.pos,cusp])
+                            for i in range(len(path)):
+                                pos=path[i]
+                                for key in path[0:i+1]:
+                                    cam.color_overrides[str(key)]=3
                                 render()
                                 sleep(.05)
                             render()
@@ -249,6 +254,8 @@ if __name__ == "__main__":
                                     target=un.get_enemy(targets)
                                     action=un.think(target,canff,cangf,cg.grid)
 
+                                filePrint("action: "+str(action))
+
                                 if action[0]=="fire":
                                     time=un.wps[action[1]][2]
                                     un.wait_time=un.wps[action[1]][2]*2
@@ -259,14 +266,16 @@ if __name__ == "__main__":
                                             cam.color_overrides[str(pos)]=1
                                         render()
                                         sleep(.1)
-                                        loine={}
-                                        for pos in lineGrid([un.pos,target.pos]):
-                                            loine[str(pos)]=3
-                                            for key in loine.keys():
-                                                cam.color_overrides[key]=loine[key]
+
+                                        path=lineGrid([un.pos,target.pos])
+                                        for i in range(len(path)):
+                                            pos=path[i]
+                                            for key in path[0:i+1]:
+                                                cam.color_overrides[str(key)]=3
                                             render()
                                             sleep(.05)
                                         render()
+
                                         list_tex.addText(target.damage(un.wps[action[1]][1]["damage"],un))
                                     else:
                                         list_tex.addText(target.damage(un.wps[action[1]][1]["damage"],un))
@@ -305,11 +314,12 @@ if __name__ == "__main__":
                                     un.wait_time=time*2
                                     ca=cam_area()
                                     if between2d(action[1],ca[0],ca[1]):
-                                        for pos in tryPathFind(un.move_max,cangf,cg.grid,un.pos,action[1]):
+                                        path=tryPathFind(un.move_max,cangf,cg.grid,un.pos,action[1])
+                                        for i in range(len(path)):
+                                            pos=path[i]
                                             un.pos=pos
-                                            loine[str(pos)]=4
-                                            for key in loine.keys():
-                                                cam.color_overrides[key]=loine[key]
+                                            for key in path[0:i+1]:
+                                                cam.color_overrides[str(key)]=4
                                             render()
                                             sleep(.1)
                                         un.pos=action[1]
@@ -603,8 +613,8 @@ if __name__ == "__main__":
                             "Not those who get dopamine from slowly gaining power or wealth, the game gives you everything you need to finish it.",
                             "And the only reward for doing so is knowing you did it.",
                             "It's that YOU, through your work and time, beat a little game in a big world.",
-                            "The entire game is played with only number, q, WASD, arrow, and enter keys. All of it.",
-                            "The game itself is quite simple: Choose equipment, then venture out into a randomized map with enemies do destroy in it.",
+                            "The entire game is played with only number keys, q, WASD, arrow, and enter keys. All of it.",
+                            "The game itself is quite simple: Choose equipment, then venture out into a randomized map with enemies and an objective to complete.",
                             "There might be many more enemies than players, but the player moves much quicker than the enemies.",
                             "Every action in the game takes time, so if you're quick you might be able to attack the enemy then run away before it can do anything, and vice versa for a slow unit.",
                             "On the more technical side of things, I very much had fun with pathfinding for the first time - although not so much with good AI, and I'll admit I've reworked the math functions many, many times to get them to work correctly.",
