@@ -153,7 +153,7 @@ def rayCircle(sp,radius,grid,checkFunc,method="check"):#raysquare, anyone?
     return points
 
 class PathTree:
-    def __init__(self,pos=(0,0),children=[],parent=None,name="anon"):
+    def __init__(self,pos=vec2(0,0),children=[],parent=None,name="anon"):
         self.parent=parent
         self.pos=pos
         self.children=children
@@ -176,7 +176,7 @@ class PathTree:
                 tree[1].append(child.getTree())
         return tree
 
-    def addChild(self,pos=(0,0),children=[],name="anon"):
+    def addChild(self,pos=vec2(0,0),children=[],name="anon"):
         child=PathTree(pos=pos,children=mapl(children),parent=self,name=name)
         self.children.append(child)
         return child
@@ -214,30 +214,29 @@ class PathTree:
             return self
         return self.children[path[0]].getChildAt(path[1:])
 
-def tryPathFind(steps,canGoFunc,grid,startPos,endPos):
+def tryPathFind(steps,canGoFunc,grid,startPos,endPos,overrides=[]):
     assert steps>0
-    root=PathTree(pos=(startPos[0],startPos[1]),name="root")
+    root=PathTree(pos=vec2(startPos),name="root")
     queue=explore_step(root,grid,canGoFunc)
     nq=[]
     while steps>0:
         for c in queue:
             if c.pos[0]==endPos[0] and c.pos[1]==endPos[1]:
-                f=c.getPath()
-                f = [vec2(i[0],i[1]) for i in f]
-                return [f[-1-i] for i in range(len(f))]
+                f = c.getPath()
+                f = [(i[0],i[1]) for i in f]
+                return [vec2(f[-1-i]) for i in range(len(f))]
             else:
-                nq+=explore_step(c,grid,canGoFunc)
+                nq+=explore_step(c,grid,canGoFunc,overrides=overrides)
         steps-=1
         queue=mapl(nq)
         nq=[]
-    return startPos
+    return [vec2(startPos)]
 
-def explore_step(curr,grid,canGoFunc):
+def explore_step(curr,grid,canGoFunc,overrides=[]):
     ps = list(curr.pos)
     poss=[[ps[0]+i[0],ps[1]+i[1]] for i in [[-1,0],[1,0],[0,1],[0,-1]]]
     curr.children=[]
     for p in poss:
-        if (curr.parent==None or p!=curr.parent.pos) and (-1<p[0]<len(grid[0]) and -1<p[1]<len(grid)) and canGoFunc(p[0],p[1]):
-            if not ((p[0],p[1]) in curr.getPath()):
-                curr.addChild(pos=(p[0],p[1]))
+        if (curr.parent==None or p!=curr.parent.pos) and (-1<p[0]<len(grid[0]) and -1<p[1]<len(grid)) and canGoFunc(p[0],p[1],overrides=overrides) and not (p in curr.getPath()):
+            curr.addChild(pos=(p[0],p[1]))
     return curr.children
