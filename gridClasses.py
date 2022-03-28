@@ -110,6 +110,7 @@ class Unit:
         return out
 
     def think(self,enemy,fireFunc,moveFunc,grid,mode="self"):
+        filePrint("think() on "+str(self.id))
         md=mode
         if mode=="self":
             md=self.aimode
@@ -122,7 +123,7 @@ class Unit:
         optimal_range=0
         sr=[self.wps[0][1]["range"],self.wps[1][1]["range"]]
         cf=[self.wps[0][3]<=0,self.wps[1][3]<=0]
-        filePrint("cf "+str(cf))
+
         cf_dam = [-1,0]
         cf_range = [-1,0]
         if cf[0]:
@@ -133,8 +134,6 @@ class Unit:
                 cf_dam = [1,self.wps[1][1]["damage"]]
             if self.wps[cf_range[0]][1]["range"]<self.wps[1][1]["range"]:
                 cf_range = [1,self.wps[1][1]["range"]]
-
-        filePrint("cf_dam"+str(cf_dam))
 
         ecf=[enemy.wps[0][3]<=0,enemy.wps[1][3]<=0]
         ecf_dam = 0

@@ -254,7 +254,7 @@ if __name__ == "__main__":
                                     target=un.get_enemy(targets)
                                     action=un.think(target,canff,cangf,cg.grid)
 
-                                filePrint("action: "+str(action))
+                                filePrint("action: "+str([str(i) for i in action]))
 
                                 if action[0]=="fire":
                                     time=un.wps[action[1]][2]
