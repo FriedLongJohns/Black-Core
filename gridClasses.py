@@ -119,19 +119,22 @@ class Unit:
         #kite : stay at max range, prioritize moving over firing
         #angry : pathfinds to the player and then fires or waits. no retreating.
 
-
         optimal_range=0
         sr=[self.wps[0][1]["range"],self.wps[1][1]["range"]]
         cf=[self.wps[0][3]<=0,self.wps[1][3]<=0]
-
+        filePrint("cf "+str(cf))
         cf_dam = [-1,0]
         cf_range = [-1,0]
-        for i in cf:
-            if i==True:
-                if self.wps[cf_dam[0]][1]["damage"]<self.wps[i][1]["damage"] and self.wps[i][3]<=0:
-                    cf_dam = [i,self.wps[i][1]["damage"]]
-                if self.wps[cf_range[0]][1]["range"]<self.wps[i][1]["range"] and self.wps[i][3]<=0:
-                    cf_range = [i,self.wps[i][1]["range"]]
+        if cf[0]:
+            cf_dam=[0,self.wps[0][1]["damage"]]
+            cf_range=[0,self.wps[0][1]["range"]]
+        if cf[1]:
+            if self.wps[cf_dam[0]][1]["damage"]<self.wps[1][1]["damage"]:
+                cf_dam = [1,self.wps[1][1]["damage"]]
+            if self.wps[cf_range[0]][1]["range"]<self.wps[1][1]["range"]:
+                cf_range = [1,self.wps[1][1]["range"]]
+
+        filePrint("cf_dam"+str(cf_dam))
 
         ecf=[enemy.wps[0][3]<=0,enemy.wps[1][3]<=0]
         ecf_dam = 0
@@ -151,11 +154,8 @@ class Unit:
                 optimal_range=inf()
                 chosen=1
 
-        elif mode=="kite":
-            optimal_range=self.wps[cf_range[0]][1]["range"]-.5#stay just in range
-
-        else:#assault
-            optimal_range = self.wps[cf_dam[0]][1]["range"]-.5
+        elif mode !="angry":
+            optimal_range=self.wps[cf_range[0]][1]["range"]-1#stay just in range
 
         moves = pathGrid(self.move_max,moveFunc,grid,self.pos)
         posbs = self.evalPositions(enemy,moves,fireFunc,grid)
@@ -186,49 +186,69 @@ class Unit:
 
         best=bests[chosen]
 
+        kPathSteps=10
 
         if (chosen==0 and los[0]==False):#can't move into LOS, plan ahead to touch them (too lazy for smart planning)
-            path=tryPathFind(100,moveFunc,grid,self.pos)
-            return ["move",path[self.move_max-1]]
+            filePrint("touch planning")
+            path=tryPathFind(kPathSteps,moveFunc,grid,self.pos,enemy.pos,overrides=[enemy.pos])
+            stt=min(self.move_max,len(path))-1
+            if vec2(path[stt])==enemy.pos:
+                stt-=1
+            return ["move",path[stt]]#-1 - (min()-1) = -1-min()+1 = -min()
 
         elif (chosen==1 and los[1]==True):#do the same for escaping
             point=vec2(0,0)
             for p in lineGrid(self.pos,self.pos+5*(self.pos-enemy.pos)):
                 if moveFunc(p[0],p[1]):
-                    path=tryPathFind(100,moveFunc,grid,p)
+                    path=tryPathFind(kPathSteps,moveFunc,grid,p)
+                    filePrint("escape action")
                     return ["move",path[self.move_max-1]]
+            filePrint("return action escape impossible, wait")
             return ["wait"]
 
-        has_los=enemy.pos in rayCast([pos["pos"],enemy.pos],grid,fireFunc,method="line")
+        has_los=enemy.pos in rayCast([self.pos,enemy.pos],grid,fireFunc,method="line")
         diste=dist(self.pos,enemy.pos)
+        filePrint("(currently) has los: "+str(has_los))
 
-        # if mode=="kite":
-        #     if -1<dist(self.pos,enemy.pos)-optimal_range<1 and has_los:
-        #         return ["fire",cf_dam[0]]
-        #     else:
-        #         return ["move",best]
-        # elif mode=="assault":
-        #     if has_los and cf_dam[0]!=-1 and self.wps[cf_dam[0]][1]["range"]<=dist(self.pos,enemy.pos):
-        #         return ["fire",cf_dam[0]]
-        #     else:
-        #         return ["move",best]
-        # else:
-        #     if has_los and cf_dam[0]!=-1 and self.wps[cf_dam[0]][1]["range"]<=dist(self.pos,enemy.pos):
-        #         return ["fire",cf_dam[0]]
-        #     else:
-        #         return ["wait"]
-
-        #compression
+        #compression D:
         if has_los:
-            if mode=="kite" and -1<dist(self.pos,enemy.pos)-optimal_range<1:
-                if self.wps[cf_range[0]][1]["range"]<=dist(self.pos,enemy.pos):
-                    return ["fire",cf_range[0]]
+            if cf_dam[0]!=-1:
+                filePrint("can fire")
+                if mode=="kite":
+                    fileprint("mode=kite")
+                    if -2<dist(self.pos,enemy.pos)-optimal_range<2:
+                        filePrint("rangeError <±2")
+                        if self.wps[cf_range[0]][1]["range"]>=dist(self.pos,enemy.pos):
+                            filePrint("inrange,firing")
+                            return ["fire",cf_range[0]]
+                        else:
+                            filePrint("not inrange, wait")
+                            return ["wait"]
+                    else:
+                        filePrint("rangeError>±2, moving")
+                        return ["move", best]
                 else:
-                    return ["wait"]
-            elif cf_dam[0]!=-1 and self.wps[cf_dam[0]][1]["range"]<=dist(self.pos,enemy.pos):
-                return ["fire",cf_dam[0]]
+                    filePrint("mode=assault or angry")
+                    if self.wps[cf_dam[0]][1]["range"]>=dist(self.pos,enemy.pos):
+                        filePrint("damage in range, attack")
+                        return ["fire",cf_dam[0]]
+                    elif self.wps[cf_range[0]][1]["range"]>=dist(self.pos,enemy.pos):
+                        filePrint("max inrange,firing")
+                        return ["fire",cf_range[0]]
+                    else:
+                        filePrint("out of range, moving")
+                        return ["move", best]
+
+            elif dist(self.pos,bests[chosen])>1.5:
+                filePrint("needs to move, moving")
+                return ["move", best]
+            else:
+                filePrint("nothing to do, wait")
+                return ["wait"]
         else:
             if mode=="angry":
+                filePrint("angry and nolos, wait")
                 return ["wait"]
             else:
+                filePrint("not angry and nolos, move best")
                 return ["move", best]
