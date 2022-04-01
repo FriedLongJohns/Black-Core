@@ -49,8 +49,9 @@ if __name__ == "__main__":
                 return [[cam.pos[0],cam.pos[1]],[cam.pos[0]+cam.viewSize[0],cam.pos[1]+cam.viewSize[1]]]
 
             cam=cursedcam(camsize,stdscr,cg,outOffset=uip)
-            cursor_tex=cursedtext([[uip[0]*2,uip[1]+11],[200+uip[0]*2-1,11+uip[1]]],stdscr,rolling=False,text=[])
-            list_tex=cursedtext([[uip[0]*2,uip[1]+13],[200+uip[0]*2-1,20+uip[1]]],stdscr,rolling=True,text=[])
+            cam.pos=[0,0]
+            cursor_tex=cursedtext([[uip[0]*2,uip[1]+11],[200+uip[0]*2-1,12+uip[1]]],stdscr,rolling=False,text=[])
+            list_tex=cursedtext([[uip[0]*2,uip[1]+14],[200+uip[0]*2-1,21+uip[1]]],stdscr,rolling=True,text=[])
 
 
             #unit and unit func setup
@@ -66,10 +67,9 @@ if __name__ == "__main__":
                 displayColor=2
             )
             for unit in units:
+                filePrint("Unit stats: hp: {} move_max: {} dam_mult: {} act_time: {} weapons: {} & {} pos: {} kind: {} name: {} aimode: {}".format(unit.health,unit.move_max,unit.damage_multiplier,unit.act_time,unit.wps[0][0],unit.wps[1][0],str(unit.pos),unit.kind,unit.name,unit.aimode))
                 if unit.kind=="enemy":
                     unit.displayColor=3
-                    filePrint("Enemy stats:")
-                    filePrint(str(vars(unit)))
                 elif unit.kind=="ally":
                     unit.displayColor=5
             units.append(player)
@@ -109,6 +109,7 @@ if __name__ == "__main__":
             list_tex.addText("GAME START")
             list_tex.addText(tex)
             cursor_tex.text[0]="cursoring: nothing"
+            cursor_tex.text[1]="Unit acting: Player"
             cam.color_overrides[str(wcp())]=1
 
             render()
@@ -225,32 +226,35 @@ if __name__ == "__main__":
 
                         while player.wait_time>0:
                             todo=mapl(units)
-                            un=player
-                            m=player.wait_time
-                            for i in todo:
-                                if i.wait_time<m:
-                                    un=i
-                                    if i.wait_time<=0:
-                                        m=0
-                                        break
-                                    m=i.wait_time
+                            un=None
+                            minwt=inf()
+                            anyCanMove=False
+                            for tdu in todo:
+                                if tdu.wait_time<minwt:
+                                    un=tdu
+                                    minwt=tdu.wait_time
+                                    if tdu.wait_time<=0:
+                                        anyCanMove=True
 
-                            for u in units:
-                                u.wait_time-=m
-                                u.wps[0][3]-=m
-                                u.wps[1][3]-=m
+                            if anyCanMove:
+                                for u in units:
+                                    u.wait_time-=minwt
+                                    u.wps[0][3]-=minwt
+                                    u.wps[1][3]-=minwt
+                                    # filePrint(["wait times",u.name,u.wait_time,u.wps[0][3],u.wps[1][3]])
 
                             if un==player:
                                 break
 
                             else:
+                                cursor_tex.text[1]="Unit acting: "+un.name
                                 action=["wait"]
                                 targets=[]
                                 for other in units:
-                                    if other!=un and (other.kind in ["ally","player"] and un.kind=="enemy") or (other.kind=="enemy" and un.kind=="ally"):
+                                    if other!=un and (other.kind!="enemy" and un.kind=="enemy") or (other.kind=="enemy" and un.kind=="ally"):
                                         targets.append(other)
 
-                                if targets:#if no targets [], use else case and wait
+                                if targets:#if no targets ([]), use else case and wait
                                     target=un.get_enemy(targets)
                                     action=un.think(target,canff,cangf,cg.grid)
 
@@ -261,7 +265,7 @@ if __name__ == "__main__":
                                     un.wait_time=un.wps[action[1]][2]*2
                                     un.wps[action[1]][3]=un.wps[action[1]][1]["cooldown"]
                                     ca=cam_area()
-                                    if between2d(target.pos,ca[0],ca[1]):
+                                    if between2d(target.pos,ca[0],ca[1]) or between2d(un.pos,ca[0],ca[1]):
                                         for pos in rayCircle(un.pos,un.wps[action[1]][1]["range"],cg.grid,canff):
                                             cam.color_overrides[str(pos)]=1
                                         render()
@@ -313,7 +317,7 @@ if __name__ == "__main__":
                                     time=un.act_time
                                     un.wait_time=time*2
                                     ca=cam_area()
-                                    if between2d(action[1],ca[0],ca[1]):
+                                    if between2d(action[1],ca[0],ca[1]) or between2d(un.pos,ca[0],ca[1]):
                                         path=tryPathFind(un.move_max,cangf,cg.grid,un.pos,action[1])
                                         for i in range(len(path)):
                                             pos=path[i]
@@ -336,6 +340,7 @@ if __name__ == "__main__":
                                 player.wps[0][3]-=time
                                 player.wps[1][3]-=time
                                 del todo[0]
+                        cursor_tex.text[1]="Unit acting: Player"
                     else:
                         list_tex.addText("Cannot act there!")
 
@@ -395,8 +400,9 @@ if __name__ == "__main__":
                     render()
 
         def gear():
-            rtex=cursedtext([[22+uip[0]*2,uip[1]],[70+uip[0]*2-1,11+uip[1]]],stdscr,rolling=False)#right
-            mtex=cursedtext([[uip[0],uip[1]],[19+uip[0]*2-1,11+uip[1]]],stdscr,rolling=False)#middle
+            itex=cursedtext([[22+uip[0]*2,uip[1]],[70+uip[0]*2-1,11+uip[1]]],stdscr,rolling=False)#right info text
+            ltex=cursedtext([[uip[0],uip[1]],[19+uip[0]*2-1,7+uip[1]]],stdscr,rolling=False)#middle/left loadout text
+            # ptex=cursedtext([[uip[0],uip[1]],[19+uip[0]*2-1,11+uip[1]]],stdscr,rolling=False)#bottom gear picture text
             pos=[pGear[0],0]
 
             def geardex(index):
@@ -412,18 +418,21 @@ if __name__ == "__main__":
                 return list(dic.keys())[index]
 
             def render():
-                rtex.text=["" for i in rtex.text]
+                itex.text=["" for i in itex.text]
 
                 eq={}
                 name=""
                 names=[keydex(geardex(g),pGear[g]) for g in range(4)]
                 if pos[1]==0:
-                    eq = FRAMES[names[0]],
+                    eq = FRAMES[names[0]]
+                    itex.text[0]="[FRAME]"
                 elif pos[1]==3:
-                    eq = ARMORS[names[3]],
+                    eq = ARMORS[names[3]]
+                    itex.text[0]="[ARMOR]"
                 else:
-                    eq = WEAPONS[names[pos[1]]],
-                eq=eq[0]
+                    eq = WEAPONS[names[pos[1]]]
+                    itex.text[0]="[WEAPON]"
+                #eq=eq[0] ??
 
                 i=1
                 for k in list(eq.keys()):
@@ -438,22 +447,21 @@ if __name__ == "__main__":
                     nc[0]=nc[0][1:]
 
                     for l in range(len(nc)):
-                        rtex.text[i]=int(l==0)*(k+": ")+nc[l]
+                        itex.text[i+1]=int(l==0)*(k+": ")+nc[l]
                         i+=1
 
                 for l in range(len(names)):
                     if l==pos[1]:
-
-                        mtex.text[l+1]="-"+names[l]+"-"
+                        ltex.text[l+1]="-"+names[l]+"-"
                     else:
-                        mtex.text[l+1]=names[l]
-                rtex.push()
-                mtex.push()
+                        ltex.text[l+1]=names[l]
+                itex.push()
+                ltex.push()
 
             # stdscr.clear()
-            mtex.text[0]="EQUIPMENT"
-            mtex.text[-2]="Arrow keys to swap gear"
-            mtex.text[-1]="Press enter to confirm loadout"
+            ltex.text[0]="EQUIPMENT"
+            ltex.text[-2]="Arrow keys to swap gear"
+            ltex.text[-1]="Enter to confirm loadout"
             render()
             while True:
                 key=stdscr.getkey()
@@ -656,7 +664,7 @@ if __name__ == "__main__":
                             "  The cursor will always start on the position of the player,",
                             "and will have an \"O\" or \"X\" displayed.",
                             "  Enemies are \"*\" icons. They will shoot at the player.",
-                            "  Allies are \"+\" and will (try) to shoot enemies. You can still shoot at them though."
+                            "  Allies are \"+\" and will (try) to shoot enemies. You can still shoot at them though.",
                             "  # are walls. Do not try to break a wall. They do not break.",
                         ]
                         stdscr.clear()
