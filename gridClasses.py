@@ -110,7 +110,7 @@ class Unit:
         return out
 
     def think(self,enemy,fireFunc,moveFunc,grid,mode="self"):
-        filePrint("think() on "+str(self.id))
+        filePrint("think() on "+str(self.name))
         md=mode
         if mode=="self":
             md=self.aimode
