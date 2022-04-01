@@ -1,0 +1,14 @@
+Scale of pain required to make: 0-5
+
+
+1: Enemy stat displayed when cursored
+2: Figure out how to do RGB colors instead of just default ones.
+2: Nicer map tiles
+3: Custom missions
+3: Faster math/logic functions
+3: Weapon/armor/frame art
+4: Faster pathfinding
+4: Even better AI
+4: Level generation with rooms of different shapes and sizes
+5: Sound!
+6: Change to actual graphics
