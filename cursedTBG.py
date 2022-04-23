@@ -51,7 +51,7 @@ if __name__ == "__main__":
             cam=cursedcam(camsize,stdscr,cg,outOffset=uip)
             cam.pos=[0,0]
             cursor_tex=cursedtext([[uip[0]*2,uip[1]+11],[200+uip[0]*2-1,12+uip[1]]],stdscr,rolling=False,text=[])
-            list_tex=cursedtext([[uip[0]*2,uip[1]+14],[200+uip[0]*2-1,21+uip[1]]],stdscr,rolling=True,text=[])
+            list_tex=cursedtext([[uip[0]*2,uip[1]+15],[200+uip[0]*2-1,22+uip[1]]],stdscr,rolling=True,text=[])
 
 
             #unit and unit func setup
@@ -225,6 +225,8 @@ if __name__ == "__main__":
                             un.wps[1][3]-=time
 
                         while player.wait_time>0:
+                            cursor_tex.text[1]="Unit acting: ?"
+                            render(clear=False)
                             todo=mapl(units)
                             un=None
                             minwt=inf()
@@ -241,13 +243,14 @@ if __name__ == "__main__":
                                     u.wait_time-=minwt
                                     u.wps[0][3]-=minwt
                                     u.wps[1][3]-=minwt
-                                    # filePrint(["wait times",u.name,u.wait_time,u.wps[0][3],u.wps[1][3]])
+                                    # filePrint(["wait times",u.name,u.wait_time,u.wps[0][3],u.wps[1][3]])                                  
 
                             if un==player:
                                 break
 
                             else:
                                 cursor_tex.text[1]="Unit acting: "+un.name
+                                render(clear=False)
                                 action=["wait"]
                                 targets=[]
                                 for other in units:
